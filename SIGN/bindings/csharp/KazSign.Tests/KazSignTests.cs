@@ -69,14 +69,14 @@ namespace Antrapol.Kaz.Sign.Tests
             var version = _signer.GetVersion();
             Assert.NotNull(version);
             Assert.NotEmpty(version);
-            Assert.Equal("2.1.0", version);
+            Assert.Equal("3.0.0", version);
         }
 
         [Fact]
         public void GetVersionNumber_ReturnsValidNumber()
         {
             var versionNumber = _signer.GetVersionNumber();
-            Assert.Equal(20100, versionNumber);
+            Assert.Equal(30000, versionNumber);
         }
 
         // ====================================================================
