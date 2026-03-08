@@ -66,11 +66,13 @@ NIST_API=$(INC_DIR)/kaz/nist_api.h
 
 # Test and benchmark files
 TEST_SRC=$(TEST_DIR)/test_kem.c
+TEST_WIRE_SRC=$(TEST_DIR)/test_kazwire.c
 BENCH_SRC=$(BENCH_DIR)/benchmark_kem.c
 KAT_SRC=$(TEST_DIR)/PQCgenKAT_kem.c
 
 # Output executables
 TEST_EXEC=$(BIN_DIR)/test_kem_$(LEVEL_SUFFIX)
+TEST_WIRE_EXEC=$(BIN_DIR)/test_kazwire
 BENCH_EXEC=$(BIN_DIR)/benchmark_kem_$(LEVEL_SUFFIX)
 KAT_EXEC=$(BIN_DIR)/PQCgenKAT_kem_$(LEVEL_SUFFIX)
 
@@ -78,7 +80,7 @@ KAT_EXEC=$(BIN_DIR)/PQCgenKAT_kem_$(LEVEL_SUFFIX)
 IMPL_NAME=OpenSSL (constant-time)
 
 # Phony targets
-.PHONY: all test benchmark kat clean clean-all help version
+.PHONY: all test test-wire benchmark kat clean clean-all help version
 .PHONY: test-all bench-all ci memcheck
 .PHONY: init
 
@@ -113,6 +115,14 @@ $(KAT_EXEC): $(KAT_SRC) $(KAZ_SRC) $(KAZ_HDR) $(NIST_WRAPPER) $(NIST_API)
 		$(INC) $(LINK)
 	@echo "✓ Built KAT generator v$(VERSION): $(KAT_EXEC) ($(IMPL_NAME), Level $(LEVEL))"
 
+# Build KazWire test suite (no compile-time level needed)
+$(TEST_WIRE_EXEC): $(TEST_WIRE_SRC) $(KAZ_SRC) $(KAZ_HDR)
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(CFLAGS) $(VERSION_FLAGS) -DKAZ_KEM_USE_OPENSSL -o $(TEST_WIRE_EXEC) \
+		$(TEST_WIRE_SRC) $(KAZ_SRC) \
+		$(INC) $(LINK)
+	@echo "Built KazWire test suite: $(TEST_WIRE_EXEC)"
+
 # Run tests
 test: $(TEST_EXEC)
 	@echo ""
@@ -122,6 +132,14 @@ test: $(TEST_EXEC)
 	@echo " Security Level: $(LEVEL)-bit"
 	@echo "=========================================="
 	@$(TEST_EXEC)
+
+# Run KazWire tests
+test-wire: $(TEST_WIRE_EXEC)
+	@echo ""
+	@echo "=========================================="
+	@echo " Running KazWire Test Suite"
+	@echo "=========================================="
+	@$(TEST_WIRE_EXEC)
 
 # Run benchmarks
 benchmark: $(BENCH_EXEC)
