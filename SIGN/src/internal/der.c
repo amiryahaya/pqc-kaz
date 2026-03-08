@@ -180,7 +180,7 @@ static size_t verify_key_algorithm_id(const unsigned char *in, size_t avail,
  *   SEQUENCE { OID }         -- AlgorithmIdentifier
  *   BIT STRING {             -- subjectPublicKey
  *     0x00                   -- unused bits
- *     raw_public_key_bytes
+ *     kazwire_encoded_bytes  -- KazWire header + raw public key
  *   }
  * }
  */
@@ -196,9 +196,10 @@ int kaz_sign_pubkey_to_der(kaz_sign_level_t level,
     if (!params) return KAZ_SIGN_ERROR_INVALID;
 
     size_t pk_bytes = params->public_key_bytes;
+    size_t wire_bytes = KAZ_WIRE_HEADER_LEN + pk_bytes;
 
-    /* BIT STRING content = 1 (unused-bits byte) + pk_bytes */
-    size_t bitstr_content_len = 1 + pk_bytes;
+    /* BIT STRING content = 1 (unused-bits byte) + wire_bytes */
+    size_t bitstr_content_len = 1 + wire_bytes;
     /* BIT STRING TLV: tag(1) + length_bytes + content */
     size_t bitstr_len_size = der_length_size(bitstr_content_len);
     size_t bitstr_tlv_len = 1 + bitstr_len_size + bitstr_content_len;
@@ -220,6 +221,12 @@ int kaz_sign_pubkey_to_der(kaz_sign_level_t level,
         return KAZ_SIGN_ERROR_BUFFER;
     }
 
+    /* KazWire-encode the public key into a stack buffer */
+    unsigned char wire_buf[KAZ_WIRE_HEADER_LEN + 128]; /* max pk is 118 bytes */
+    size_t wire_len = sizeof(wire_buf);
+    int rc = kaz_sign_pubkey_to_wire(level, pk, pk_bytes, wire_buf, &wire_len);
+    if (rc != KAZ_SIGN_SUCCESS) return rc;
+
     unsigned char *p = der;
 
     /* Outer SEQUENCE */
@@ -229,12 +236,12 @@ int kaz_sign_pubkey_to_der(kaz_sign_level_t level,
     /* AlgorithmIdentifier (public key OID) */
     p += write_key_algorithm_id(p, OID_PUBKEY, OID_PUBKEY_LEN, OID_PUBKEY_TLV);
 
-    /* BIT STRING */
+    /* BIT STRING wrapping KazWire-encoded public key */
     *p++ = 0x03;
     p += der_write_length(p, bitstr_content_len);
     *p++ = 0x00; /* unused bits */
-    memcpy(p, pk, pk_bytes);
-    p += pk_bytes;
+    memcpy(p, wire_buf, (size_t)wire_len);
+    p += wire_len;
 
     *derlen = (unsigned long long)(p - der);
     return KAZ_SIGN_SUCCESS;
@@ -255,6 +262,7 @@ int kaz_sign_pubkey_from_der(kaz_sign_level_t level,
     if (!params) return KAZ_SIGN_ERROR_INVALID;
 
     size_t pk_bytes = params->public_key_bytes;
+    size_t wire_bytes = KAZ_WIRE_HEADER_LEN + pk_bytes;
     const unsigned char *p = der;
     size_t remain = (size_t)derlen;
 
@@ -293,9 +301,16 @@ int kaz_sign_pubkey_from_der(kaz_sign_level_t level,
     p++; /* skip unused-bits byte */
 
     size_t key_len = bitstr_len - 1;
-    if (key_len != pk_bytes) return KAZ_SIGN_ERROR_DER;
+    if (key_len != wire_bytes) return KAZ_SIGN_ERROR_DER;
 
-    memcpy(pk, p, pk_bytes);
+    /* KazWire-decode: extract raw public key and verify level matches */
+    kaz_sign_level_t decoded_level;
+    size_t decoded_pk_len = pk_bytes;
+    int rc = kaz_sign_pubkey_from_wire(p, key_len,
+                                       &decoded_level, pk, &decoded_pk_len);
+    if (rc != KAZ_SIGN_SUCCESS) return KAZ_SIGN_ERROR_DER;
+    if (decoded_level != level) return KAZ_SIGN_ERROR_DER;
+
     return KAZ_SIGN_SUCCESS;
 }
 
@@ -307,7 +322,7 @@ int kaz_sign_pubkey_from_der(kaz_sign_level_t level,
  *   INTEGER 0                -- version
  *   SEQUENCE { OID }         -- AlgorithmIdentifier
  *   OCTET STRING {           -- privateKey
- *     raw_secret_key_bytes
+ *     kazwire_encoded_bytes  -- KazWire header + raw secret key
  *   }
  * }
  */
@@ -323,13 +338,14 @@ int kaz_sign_privkey_to_der(kaz_sign_level_t level,
     if (!params) return KAZ_SIGN_ERROR_INVALID;
 
     size_t sk_bytes = params->secret_key_bytes;
+    size_t wire_bytes = KAZ_WIRE_HEADER_LEN + sk_bytes;
 
     /* INTEGER 0: tag(1) + length(1) + value(1) = 3 bytes */
     size_t int_tlv_len = 3;
 
-    /* OCTET STRING content = sk_bytes */
-    size_t oct_len_size = der_length_size(sk_bytes);
-    size_t oct_tlv_len = 1 + oct_len_size + sk_bytes;
+    /* OCTET STRING content = wire_bytes (KazWire header + raw key) */
+    size_t oct_len_size = der_length_size(wire_bytes);
+    size_t oct_tlv_len = 1 + oct_len_size + wire_bytes;
 
     /* Outer SEQUENCE content = version INTEGER + AlgID + OCTET STRING */
     size_t seq_content_len = int_tlv_len + ALGID_PRIVKEY_LEN + oct_tlv_len;
@@ -348,6 +364,12 @@ int kaz_sign_privkey_to_der(kaz_sign_level_t level,
         return KAZ_SIGN_ERROR_BUFFER;
     }
 
+    /* KazWire-encode the private key into a stack buffer */
+    unsigned char wire_buf[KAZ_WIRE_HEADER_LEN + 64]; /* sk is always 64 bytes */
+    size_t wire_len = sizeof(wire_buf);
+    int rc = kaz_sign_privkey_to_wire(level, sk, sk_bytes, wire_buf, &wire_len);
+    if (rc != KAZ_SIGN_SUCCESS) return rc;
+
     unsigned char *p = der;
 
     /* Outer SEQUENCE */
@@ -362,11 +384,14 @@ int kaz_sign_privkey_to_der(kaz_sign_level_t level,
     /* AlgorithmIdentifier (private key OID) */
     p += write_key_algorithm_id(p, OID_PRIVKEY, OID_PRIVKEY_LEN, OID_PRIVKEY_TLV);
 
-    /* OCTET STRING */
+    /* OCTET STRING wrapping KazWire-encoded private key */
     *p++ = 0x04;
-    p += der_write_length(p, sk_bytes);
-    memcpy(p, sk, sk_bytes);
-    p += sk_bytes;
+    p += der_write_length(p, wire_bytes);
+    memcpy(p, wire_buf, (size_t)wire_len);
+    p += wire_len;
+
+    /* Securely zero the wire buffer containing private key material */
+    kaz_secure_zero(wire_buf, sizeof(wire_buf));
 
     *derlen = (unsigned long long)(p - der);
     return KAZ_SIGN_SUCCESS;
@@ -387,6 +412,7 @@ int kaz_sign_privkey_from_der(kaz_sign_level_t level,
     if (!params) return KAZ_SIGN_ERROR_INVALID;
 
     size_t sk_bytes = params->secret_key_bytes;
+    size_t wire_bytes = KAZ_WIRE_HEADER_LEN + sk_bytes;
     const unsigned char *p = der;
     size_t remain = (size_t)derlen;
 
@@ -424,9 +450,15 @@ int kaz_sign_privkey_from_der(kaz_sign_level_t level,
     p += consumed; remain -= consumed;
 
     if (oct_len > remain) return KAZ_SIGN_ERROR_DER;
-    if (oct_len != sk_bytes) return KAZ_SIGN_ERROR_DER;
+    if (oct_len != wire_bytes) return KAZ_SIGN_ERROR_DER;
 
-    memcpy(sk, p, sk_bytes);
+    /* KazWire-decode: extract raw private key and verify level matches */
+    kaz_sign_level_t decoded_level;
+    size_t decoded_sk_len = sk_bytes;
+    int rc = kaz_sign_privkey_from_wire(p, oct_len,
+                                        &decoded_level, sk, &decoded_sk_len);
+    if (rc != KAZ_SIGN_SUCCESS) return KAZ_SIGN_ERROR_DER;
+    if (decoded_level != level) return KAZ_SIGN_ERROR_DER;
 
     return KAZ_SIGN_SUCCESS;
 }
