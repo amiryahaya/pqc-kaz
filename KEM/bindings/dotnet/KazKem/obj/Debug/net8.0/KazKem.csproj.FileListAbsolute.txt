@@ -1,0 +1,11 @@
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/bin/Debug/net8.0/KazKem.deps.json
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/bin/Debug/net8.0/KazKem.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/bin/Debug/net8.0/KazKem.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/obj/Debug/net8.0/KazKem.GeneratedMSBuildEditorConfig.editorconfig
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/obj/Debug/net8.0/KazKem.AssemblyInfoInputs.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/obj/Debug/net8.0/KazKem.AssemblyInfo.cs
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/obj/Debug/net8.0/KazKem.csproj.CoreCompileInputs.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/obj/Debug/net8.0/KazKem.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/obj/Debug/net8.0/refint/KazKem.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/obj/Debug/net8.0/KazKem.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/obj/Debug/net8.0/ref/KazKem.dll

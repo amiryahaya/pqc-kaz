@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PqcIdentity.Certificate.Application</name>
+    </assembly>
+    <members>
+        <member name="T:PqcIdentity.Certificate.Application.Interfaces.ICertificateIssuanceService">
+            <summary>
+            Service for issuing X.509 certificates from CSRs using KAZ-SIGN-256.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.ICertificateIssuanceService.IssueCertificateAsync(PqcIdentity.Certificate.Application.Interfaces.CertificateIssuanceRequest,System.Threading.CancellationToken)">
+            <summary>
+            Issues a certificate from a CSR.
+            </summary>
+            <param name="request">Certificate issuance request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Issued certificate result</returns>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.ICertificateIssuanceService.ValidateCsrAsync(System.Byte[],System.Threading.CancellationToken)">
+            <summary>
+            Validates a CSR and extracts its information.
+            </summary>
+            <param name="csrDer">CSR in DER format</param>
+            <param name="ct">Cancellation token</param>
+            <returns>CSR validation result with extracted info</returns>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.ICertificateIssuanceService.VerifyCertificateChainAsync(System.Byte[],System.Threading.CancellationToken)">
+            <summary>
+            Verifies a certificate chain.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Certificate.Application.Interfaces.CertificateIssuanceRequest">
+            <summary>
+            Request to issue a certificate.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.CertificateIssuanceRequest.#ctor(System.Byte[],PqcIdentity.Certificate.Domain.Enums.CertificateType,System.String,System.TimeSpan,System.Nullable{System.Guid},System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Request to issue a certificate.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Certificate.Application.Interfaces.CsrValidationResult">
+            <summary>
+            Result of CSR validation.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.CsrValidationResult.#ctor(System.Boolean,System.String,System.Byte[],System.String,PqcIdentity.Certificate.Domain.Enums.SignatureAlgorithm,System.String)">
+            <summary>
+            Result of CSR validation.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Certificate.Application.Interfaces.IssuedCertificateDto">
+            <summary>
+            Result of certificate issuance.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.IssuedCertificateDto.#ctor(System.Guid,System.String,System.Byte[],System.String,System.String,System.String,System.DateTimeOffset,System.DateTimeOffset,System.String)">
+            <summary>
+            Result of certificate issuance.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Certificate.Application.Interfaces.ICsrParser">
+            <summary>
+            Service for parsing and validating Certificate Signing Requests (CSRs).
+            Uses ASN.1/DER parsing for structure and native P/Invoke for KAZ-SIGN-256 verification.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.ICsrParser.Parse(System.Byte[])">
+            <summary>
+            Parses a CSR from DER format and extracts its contents.
+            </summary>
+            <param name="csrDer">CSR in DER format</param>
+            <returns>Parsed CSR data</returns>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.ICsrParser.VerifySignatureAsync(System.Byte[],System.Threading.CancellationToken)">
+            <summary>
+            Verifies the self-signature of a CSR using KAZ-SIGN-256.
+            </summary>
+            <param name="csrDer">CSR in DER format</param>
+            <param name="ct">Cancellation token</param>
+            <returns>True if signature is valid</returns>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.ICsrParser.ValidateAsync(System.Byte[],System.Threading.CancellationToken)">
+            <summary>
+            Validates that the CSR meets all requirements.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr">
+            <summary>
+            Parsed CSR data.
+            </summary>
+            <param name="Version">Version (should be 0 for v1)</param>
+            <param name="SubjectDn">Subject Distinguished Name</param>
+            <param name="PublicKey">Public key bytes</param>
+            <param name="PublicKeyFingerprint">SHA-256 fingerprint of public key</param>
+            <param name="SignatureAlgorithmOid">Signature algorithm OID</param>
+            <param name="SignatureAlgorithm">Signature algorithm enum</param>
+            <param name="Signature">The signature bytes</param>
+            <param name="TbsData">The To-Be-Signed (TBS) portion for verification</param>
+            <param name="Subject">Individual subject attributes</param>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.#ctor(System.Int32,System.String,System.Byte[],System.String,System.String,PqcIdentity.Certificate.Domain.Enums.SignatureAlgorithm,System.Byte[],System.Byte[],PqcIdentity.Certificate.Application.Interfaces.ParsedSubject)">
+            <summary>
+            Parsed CSR data.
+            </summary>
+            <param name="Version">Version (should be 0 for v1)</param>
+            <param name="SubjectDn">Subject Distinguished Name</param>
+            <param name="PublicKey">Public key bytes</param>
+            <param name="PublicKeyFingerprint">SHA-256 fingerprint of public key</param>
+            <param name="SignatureAlgorithmOid">Signature algorithm OID</param>
+            <param name="SignatureAlgorithm">Signature algorithm enum</param>
+            <param name="Signature">The signature bytes</param>
+            <param name="TbsData">The To-Be-Signed (TBS) portion for verification</param>
+            <param name="Subject">Individual subject attributes</param>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.Version">
+            <summary>Version (should be 0 for v1)</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.SubjectDn">
+            <summary>Subject Distinguished Name</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.PublicKey">
+            <summary>Public key bytes</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.PublicKeyFingerprint">
+            <summary>SHA-256 fingerprint of public key</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.SignatureAlgorithmOid">
+            <summary>Signature algorithm OID</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.SignatureAlgorithm">
+            <summary>Signature algorithm enum</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.Signature">
+            <summary>The signature bytes</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.TbsData">
+            <summary>The To-Be-Signed (TBS) portion for verification</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedCsr.Subject">
+            <summary>Individual subject attributes</summary>
+        </member>
+        <member name="T:PqcIdentity.Certificate.Application.Interfaces.ParsedSubject">
+            <summary>
+            Parsed subject DN attributes.
+            </summary>
+            <param name="CommonName">Common Name (CN)</param>
+            <param name="SerialNumber">Serial Number (MyKad number)</param>
+            <param name="Country">Country code</param>
+            <param name="Organization">Organization name</param>
+            <param name="EmailAddress">Email address</param>
+        </member>
+        <member name="M:PqcIdentity.Certificate.Application.Interfaces.ParsedSubject.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Parsed subject DN attributes.
+            </summary>
+            <param name="CommonName">Common Name (CN)</param>
+            <param name="SerialNumber">Serial Number (MyKad number)</param>
+            <param name="Country">Country code</param>
+            <param name="Organization">Organization name</param>
+            <param name="EmailAddress">Email address</param>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedSubject.CommonName">
+            <summary>Common Name (CN)</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedSubject.SerialNumber">
+            <summary>Serial Number (MyKad number)</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedSubject.Country">
+            <summary>Country code</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedSubject.Organization">
+            <summary>Organization name</summary>
+        </member>
+        <member name="P:PqcIdentity.Certificate.Application.Interfaces.ParsedSubject.EmailAddress">
+            <summary>Email address</summary>
+        </member>
+    </members>
+</doc>

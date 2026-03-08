@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Antrapol.IdP.Admin.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Antrapol.IdP.Admin.Domain.Entities.AuditLog">
+            <summary>
+            Represents an audit log entry.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Admin.Domain.Enums.AuditAction">
+            <summary>
+            Represents the type of audit action.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Admin.Domain.Enums.AuditSeverity">
+            <summary>
+            Represents the severity level of an audit event.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Admin.Domain.Interfaces.IAuditLogRepository">
+            <summary>
+            Repository interface for AuditLog entity.
+            </summary>
+        </member>
+    </members>
+</doc>

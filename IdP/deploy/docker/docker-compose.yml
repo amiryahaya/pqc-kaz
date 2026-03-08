@@ -1,0 +1,92 @@
+# PQC Identity Platform - Core Infrastructure
+# Usage: docker-compose up -d
+# Stop: docker-compose down
+# Reset: docker-compose down -v (removes volumes)
+
+name: idp-dev
+
+services:
+  # =============================================================================
+  # PostgreSQL 18 - Primary Database
+  # =============================================================================
+  postgres:
+    image: postgres:17-alpine
+    container_name: idp-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-idp}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-idp_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-idp_platform}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-scripts/postgres:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-idp} -d ${POSTGRES_DB:-idp_platform}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - idp-network
+
+  # =============================================================================
+  # Redis 7 - Cache & Session Storage
+  # =============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: idp-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    command: >
+      redis-server
+      --appendonly yes
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - idp-network
+
+  # =============================================================================
+  # SoftHSM2 - Development HSM (PKCS#11)
+  # =============================================================================
+  softhsm:
+    build:
+      context: ./softhsm
+      dockerfile: Dockerfile
+    container_name: idp-softhsm
+    restart: unless-stopped
+    volumes:
+      - softhsm-data:/var/lib/softhsm/tokens
+      - ./config/softhsm:/etc/softhsm:ro
+    environment:
+      SOFTHSM2_CONF: /etc/softhsm/softhsm2.conf
+    networks:
+      - idp-network
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  idp-network:
+    name: idp-network
+    driver: bridge
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  postgres-data:
+    name: idp-postgres-data
+  redis-data:
+    name: idp-redis-data
+  softhsm-data:
+    name: idp-softhsm-data

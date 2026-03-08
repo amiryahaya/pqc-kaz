@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Antrapol.IdP.Admin.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Antrapol.IdP.Admin.Application\Antrapol.IdP.Admin.Application.csproj" />
+  </ItemGroup>
+
+</Project>

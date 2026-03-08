@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Antrapol.IdP.Crypto.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Antrapol.IdP.SharedKernel\Antrapol.IdP.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>

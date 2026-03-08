@@ -1,0 +1,3 @@
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/.cxx/RelWithDebInfo/5n5f363u/arm64-v8a/CMakeFiles/kazkem.dir
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/.cxx/RelWithDebInfo/5n5f363u/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/.cxx/RelWithDebInfo/5n5f363u/arm64-v8a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Antrapol.IdP.Admin.Domain/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Admin.Domain.dll": {}
+        }
+      },
+      "Antrapol.IdP.SharedKernel/1.0.0": {
+        "runtime": {
+          "Antrapol.IdP.SharedKernel.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Antrapol.IdP.Admin.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.SharedKernel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

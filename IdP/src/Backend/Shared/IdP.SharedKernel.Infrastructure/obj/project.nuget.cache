@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "DBsSG5LBM0o=",
+  "success": true,
+  "projectFilePath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/IdP.SharedKernel.Infrastructure/IdP.SharedKernel.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.netcore.app.ref/9.0.11/microsoft.netcore.app.ref.9.0.11.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.11/microsoft.aspnetcore.app.ref.9.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}

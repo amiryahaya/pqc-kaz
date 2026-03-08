@@ -1,0 +1,15 @@
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/bin/Debug/net9.0/IdP.Certificate.Domain.deps.json
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/bin/Debug/net9.0/IdP.Certificate.Domain.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/bin/Debug/net9.0/IdP.Certificate.Domain.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/bin/Debug/net9.0/IdP.SharedKernel.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/bin/Debug/net9.0/IdP.SharedKernel.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/IdP.Certificate.Domain.csproj.AssemblyReference.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/IdP.Certificate.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/IdP.Certificate.Domain.AssemblyInfoInputs.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/IdP.Certificate.Domain.AssemblyInfo.cs
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/IdP.Certificate.Domain.csproj.CoreCompileInputs.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/IdP.Cert.ECD4AED8.Up2Date
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/IdP.Certificate.Domain.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/refint/IdP.Certificate.Domain.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/IdP.Certificate.Domain.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Domain/obj/Debug/net9.0/ref/IdP.Certificate.Domain.dll

@@ -1,0 +1,62 @@
+# Grafana Data Sources Provisioning
+# Docs: https://grafana.com/docs/grafana/latest/administration/provisioning/#data-sources
+
+apiVersion: 1
+
+datasources:
+  # =============================================================================
+  # Prometheus - Metrics
+  # =============================================================================
+  - name: Prometheus
+    type: prometheus
+    uid: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false
+    jsonData:
+      timeInterval: "15s"
+      httpMethod: POST
+      manageAlerts: true
+      prometheusType: Prometheus
+
+  # =============================================================================
+  # Jaeger - Traces
+  # =============================================================================
+  - name: Jaeger
+    type: jaeger
+    uid: jaeger
+    access: proxy
+    url: http://jaeger:16686
+    editable: false
+    jsonData:
+      tracesToLogsV2:
+        datasourceUid: 'seq'
+        spanStartTimeShift: '-1h'
+        spanEndTimeShift: '1h'
+        filterByTraceID: true
+        filterBySpanID: true
+
+  # =============================================================================
+  # Seq - Logs (via Loki-compatible API or direct)
+  # =============================================================================
+  # Note: Seq doesn't have native Grafana support, but you can use:
+  # 1. Seq's API directly via JSON API datasource
+  # 2. Forward logs to Loki and use Loki datasource
+  # For now, we'll use Seq UI directly for logs
+
+  # =============================================================================
+  # Loki - Logs (Alternative to Seq)
+  # =============================================================================
+  # - name: Loki
+  #   type: loki
+  #   uid: loki
+  #   access: proxy
+  #   url: http://loki:3100
+  #   editable: false
+  #   jsonData:
+  #     derivedFields:
+  #       - datasourceUid: jaeger
+  #         matcherRegex: "traceId=(\\w+)"
+  #         name: TraceID
+  #         url: "$${__value.raw}"

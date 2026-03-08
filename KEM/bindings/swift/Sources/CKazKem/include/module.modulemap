@@ -1,0 +1,4 @@
+module CKazKem {
+    header "kazkem.h"
+    export *
+}

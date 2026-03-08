@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "MjqwOtRCzTk=",
+  "success": true,
+  "projectFilePath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/dotnet/KazKem/KazKem.csproj",
+  "expectedPackageFiles": [
+    "/Users/amirrudinyahaya/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.22/microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.netcore.app.ref/8.0.22/microsoft.netcore.app.ref.8.0.22.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.11/microsoft.aspnetcore.app.ref.9.0.11.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.netcore.app.ref/9.0.11/microsoft.netcore.app.ref.9.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,9 @@
+com.antrapol.kaz.kem.test.kazkem-core-ktx-1.12.0-0 /Users/amirrudinyahaya/.gradle/caches/transforms-3/3ef88b49b9ddfb29f0a95b19fc7a9801/transformed/core-ktx-1.12.0/res
+com.antrapol.kaz.kem.test.kazkem-annotation-experimental-1.3.0-1 /Users/amirrudinyahaya/.gradle/caches/transforms-3/4814b376e479a9ff6fd7e4bda825a5c4/transformed/annotation-experimental-1.3.0/res
+com.antrapol.kaz.kem.test.kazkem-core-1.12.0-2 /Users/amirrudinyahaya/.gradle/caches/transforms-3/9e97f1ea15db2631a37a082d431e0426/transformed/core-1.12.0/res
+com.antrapol.kaz.kem.test.kazkem-lifecycle-runtime-2.3.1-3 /Users/amirrudinyahaya/.gradle/caches/transforms-3/dbe8e1c52339db94301b074bf99b9017/transformed/lifecycle-runtime-2.3.1/res
+com.antrapol.kaz.kem.test.kazkem-test-4 /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/generated/res/resValues/test/debug
+com.antrapol.kaz.kem.test.kazkem-mergeDebugUnitTestResources-5 /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/incremental/debugUnitTest/mergeDebugUnitTestResources/merged.dir
+com.antrapol.kaz.kem.test.kazkem-mergeDebugUnitTestResources-6 /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/incremental/debugUnitTest/mergeDebugUnitTestResources/stripped.dir
+com.antrapol.kaz.kem.test.kazkem-merged_res-7 /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/merged_res/debugUnitTest
+com.antrapol.kaz.kem.test.kazkem-packaged_res-8 /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/packaged_res/debug

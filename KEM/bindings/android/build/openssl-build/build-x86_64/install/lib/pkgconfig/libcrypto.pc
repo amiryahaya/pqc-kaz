@@ -1,0 +1,13 @@
+prefix=/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/scripts/../build/openssl-build/build-x86_64/install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+enginesdir=${libdir}/engines-3
+modulesdir=${libdir}/ossl-modules
+
+Name: OpenSSL-libcrypto
+Description: OpenSSL cryptography library
+Version: 3.2.0
+Libs: -L${libdir} -lcrypto
+Libs.private: -ldl -pthread 
+Cflags: -I${includedir}

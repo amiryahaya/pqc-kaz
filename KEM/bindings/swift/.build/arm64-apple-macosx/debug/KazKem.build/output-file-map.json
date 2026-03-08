@@ -1,0 +1,33 @@
+{
+  "": {
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/master.swiftdeps"
+  },
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KazKem.swift": {
+    "dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem.d",
+    "object": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem.swift.o",
+    "swiftmodule": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem~partial.swiftmodule",
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem.swiftdeps",
+    "diagnostics": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem.dia"
+  },
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KazKemError.swift": {
+    "dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError.d",
+    "object": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError.swift.o",
+    "swiftmodule": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError~partial.swiftmodule",
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError.swiftdeps",
+    "diagnostics": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError.dia"
+  },
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KeyPair.swift": {
+    "dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair.d",
+    "object": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair.swift.o",
+    "swiftmodule": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair~partial.swiftmodule",
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair.swiftdeps",
+    "diagnostics": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair.dia"
+  },
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/SecurityLevel.swift": {
+    "dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel.d",
+    "object": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel.swift.o",
+    "swiftmodule": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel~partial.swiftmodule",
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel.swiftdeps",
+    "diagnostics": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel.dia"
+  }
+}

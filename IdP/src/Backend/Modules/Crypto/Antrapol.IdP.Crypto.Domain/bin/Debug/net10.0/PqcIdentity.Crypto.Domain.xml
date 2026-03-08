@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PqcIdentity.Crypto.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:PqcIdentity.Crypto.Domain.Entities.CryptoKey">
+            <summary>
+            Represents a cryptographic key pair.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Enums.DefaultAlgorithms">
+            <summary>
+            Default algorithm configuration for the National Digital ID system.
+            These algorithms are fixed and cannot be changed by users.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.DefaultAlgorithms.Signature">
+            <summary>
+            Default signature algorithm: KAZ-SIGN-256 (Security Level 5).
+            This is the only signature algorithm used for National Digital ID.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.DefaultAlgorithms.KeyEncapsulation">
+            <summary>
+            Default key encapsulation algorithm: KAZ-KEM-256 (Security Level 5).
+            This is the only KEM algorithm used for secure key exchange.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.DefaultAlgorithms.SecurityLevel">
+            <summary>
+            Security level for all cryptographic operations.
+            Level 5 provides maximum quantum-resistant security (~AES-256 equivalent).
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm">
+            <summary>
+            Represents the cryptographic algorithm for keys.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.MlDsa65">
+            <summary>
+            ML-DSA-65 (FIPS 204) - Post-Quantum Digital Signature Algorithm.
+            Security Level 3 (~AES-192 equivalent).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.MlDsa87">
+            <summary>
+            ML-DSA-87 (FIPS 204) - Post-Quantum Digital Signature Algorithm.
+            Security Level 5 (~AES-256 equivalent).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.MlKem768">
+            <summary>
+            ML-KEM-768 (FIPS 203) - Post-Quantum Key Encapsulation Mechanism.
+            Security Level 3 (~AES-192 equivalent).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.MlKem1024">
+            <summary>
+            ML-KEM-1024 (FIPS 203) - Post-Quantum Key Encapsulation Mechanism.
+            Security Level 5 (~AES-256 equivalent).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.KazSign128">
+            <summary>
+            KAZ-SIGN-128 - Malaysian National Post-Quantum Signature Algorithm.
+            Security Level 1 (comparable to ML-DSA-44).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.KazSign192">
+            <summary>
+            KAZ-SIGN-192 - Malaysian National Post-Quantum Signature Algorithm.
+            Security Level 3 (comparable to ML-DSA-65).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.KazSign256">
+            <summary>
+            KAZ-SIGN-256 - Malaysian National Post-Quantum Signature Algorithm.
+            Security Level 5 (comparable to ML-DSA-87).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.KazKem128">
+            <summary>
+            KAZ-KEM-128 - Malaysian National Post-Quantum Key Encapsulation Mechanism.
+            Security Level 1 (comparable to ML-KEM-512).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.KazKem192">
+            <summary>
+            KAZ-KEM-192 - Malaysian National Post-Quantum Key Encapsulation Mechanism.
+            Security Level 3 (comparable to ML-KEM-768).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.KazKem256">
+            <summary>
+            KAZ-KEM-256 - Malaysian National Post-Quantum Key Encapsulation Mechanism.
+            Security Level 5 (comparable to ML-KEM-1024).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.EcdsaP256">
+            <summary>
+            ECDSA P-256 (Classical) - For hybrid signatures.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.EcdsaP384">
+            <summary>
+            ECDSA P-384 (Classical) - For hybrid signatures.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.EcdhP256">
+            <summary>
+            ECDH P-256 (Classical) - For hybrid key exchange.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm.EcdhP384">
+            <summary>
+            ECDH P-384 (Classical) - For hybrid key exchange.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Enums.KeyPurpose">
+            <summary>
+            Represents the purpose of a cryptographic key.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyPurpose.Signing">
+            <summary>
+            Key is used for digital signatures.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyPurpose.KeyEncapsulation">
+            <summary>
+            Key is used for key encapsulation/exchange.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyPurpose.DualUse">
+            <summary>
+            Key is used for both signing and key encapsulation.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Enums.KeyStatus">
+            <summary>
+            Represents the status of a cryptographic key.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyStatus.Active">
+            <summary>
+            Key is active and can be used.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyStatus.Disabled">
+            <summary>
+            Key is disabled (cannot be used but not destroyed).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyStatus.Compromised">
+            <summary>
+            Key is compromised and should not be trusted.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyStatus.Destroyed">
+            <summary>
+            Key has been securely destroyed.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Enums.KeyStorageType">
+            <summary>
+            Represents where the key is stored.
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyStorageType.Software">
+            <summary>
+            Key is stored in software (encrypted in database).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyStorageType.Hsm">
+            <summary>
+            Key is stored in HSM (PKCS#11).
+            </summary>
+        </member>
+        <member name="F:PqcIdentity.Crypto.Domain.Enums.KeyStorageType.CloudKms">
+            <summary>
+            Key is stored in cloud KMS.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Interfaces.ICryptoKeyRepository">
+            <summary>
+            Repository interface for CryptoKey aggregate.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Interfaces.ICryptoProvider">
+            <summary>
+            Interface for cryptographic operations provider.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.ICryptoProvider.GenerateKeyPairAsync(PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Generates a new key pair for the specified algorithm.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.ICryptoProvider.SignAsync(System.Byte[],System.Byte[],PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Signs data using the specified private key.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.ICryptoProvider.VerifyAsync(System.Byte[],System.Byte[],System.Byte[],PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Verifies a signature using the specified public key.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.ICryptoProvider.EncapsulateAsync(System.Byte[],PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Encapsulates a shared secret using the specified public key (KEM).
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.ICryptoProvider.DecapsulateAsync(System.Byte[],System.Byte[],PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Decapsulates a shared secret using the specified private key (KEM).
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.ICryptoProvider.ComputeFingerprint(System.Byte[])">
+            <summary>
+            Computes the fingerprint of a public key.
+            </summary>
+        </member>
+        <member name="P:PqcIdentity.Crypto.Domain.Interfaces.ICryptoProvider.SupportedAlgorithms">
+            <summary>
+            Gets the supported algorithms.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Interfaces.KeyPairResult">
+            <summary>
+            Result of key pair generation.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.KeyPairResult.#ctor(System.Byte[],System.Byte[])">
+            <summary>
+            Result of key pair generation.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Interfaces.EncapsulationResult">
+            <summary>
+            Result of key encapsulation.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.EncapsulationResult.#ctor(System.Byte[],System.Byte[])">
+            <summary>
+            Result of key encapsulation.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider">
+            <summary>
+            Interface for HSM (Hardware Security Module) operations via PKCS#11.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider.GenerateKeyPairAsync(System.String,PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Generates a key pair in the HSM.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider.SignAsync(System.String,System.Byte[],PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Signs data using a key stored in the HSM.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider.VerifyAsync(System.String,System.Byte[],System.Byte[],PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Verifies a signature using a key stored in the HSM.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider.EncapsulateAsync(System.String,PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Performs key encapsulation using a key stored in the HSM.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider.DecapsulateAsync(System.String,System.Byte[],PqcIdentity.Crypto.Domain.Enums.KeyAlgorithm,System.Threading.CancellationToken)">
+            <summary>
+            Performs key decapsulation using a key stored in the HSM.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider.DestroyKeyAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Destroys a key in the HSM.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider.KeyExistsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Checks if a key exists in the HSM.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.IHsmProvider.GetInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets information about the HSM.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Interfaces.HsmKeyResult">
+            <summary>
+            Result of HSM key generation.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.HsmKeyResult.#ctor(System.String,System.Byte[])">
+            <summary>
+            Result of HSM key generation.
+            </summary>
+        </member>
+        <member name="T:PqcIdentity.Crypto.Domain.Interfaces.HsmInfo">
+            <summary>
+            Information about the HSM.
+            </summary>
+        </member>
+        <member name="M:PqcIdentity.Crypto.Domain.Interfaces.HsmInfo.#ctor(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Information about the HSM.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,124 @@
+# Docker Compose for IdP Development Environment
+# Includes SoftHSM2, PostgreSQL, Redis
+
+version: '3.8'
+
+services:
+  # ============================================
+  # SoftHSM2 - Software HSM for Development
+  # ============================================
+  softhsm:
+    build:
+      context: ./softhsm
+      dockerfile: Dockerfile
+    container_name: idp-softhsm
+    environment:
+      - USER_PIN=1234
+      - SO_PIN=5678
+    volumes:
+      - softhsm-tokens:/var/lib/softhsm/tokens
+    networks:
+      - idp-network
+    healthcheck:
+      test: ["CMD", "softhsm2-util", "--show-slots"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ============================================
+  # PostgreSQL - Primary Database
+  # ============================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: idp-postgres
+    environment:
+      POSTGRES_USER: idp
+      POSTGRES_PASSWORD: idp_dev_password
+      POSTGRES_DB: idp_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - idp-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U idp -d idp_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # Redis - Cache and Session Store
+  # ============================================
+  redis:
+    image: redis:7-alpine
+    container_name: idp-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - idp-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ============================================
+  # MailHog - Email Testing (SMTP)
+  # ============================================
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: idp-mailhog
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Web UI
+    networks:
+      - idp-network
+
+  # ============================================
+  # IdP API (when running in Docker)
+  # ============================================
+  # Uncomment when ready to run API in Docker
+  # api:
+  #   build:
+  #     context: ../../
+  #     dockerfile: deploy/docker/api/Dockerfile
+  #   container_name: idp-api
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ConnectionStrings__DefaultConnection=Host=postgres;Database=idp_db;Username=idp;Password=idp_dev_password
+  #     - Redis__ConnectionString=redis:6379
+  #     - Hsm__Provider=Pkcs11
+  #     - Hsm__Pkcs11__LibraryPath=/usr/lib/softhsm/libsofthsm2.so
+  #     - Hsm__Pkcs11__TokenLabel=idp-tenant-ca
+  #     - Hsm__Pkcs11__Pin=1234
+  #     - Email__SmtpHost=mailhog
+  #     - Email__SmtpPort=1025
+  #   ports:
+  #     - "5000:8080"
+  #   depends_on:
+  #     softhsm:
+  #       condition: service_healthy
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   volumes:
+  #     - softhsm-tokens:/var/lib/softhsm/tokens:ro
+  #   networks:
+  #     - idp-network
+
+networks:
+  idp-network:
+    driver: bridge
+
+volumes:
+  softhsm-tokens:
+    driver: local
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local

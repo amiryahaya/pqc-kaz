@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Antrapol.IdP.Certificate.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Antrapol.IdP.Certificate.Domain.Entities.Certificate">
+            <summary>
+            Represents an X.509 certificate with PQC algorithms.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Certificate.Domain.Entities.Certificate.Reconstitute(System.Guid,System.Nullable{System.Guid},System.String,System.String,System.String,System.Nullable{System.Guid},Antrapol.IdP.Certificate.Domain.Enums.CertificateType,Antrapol.IdP.Certificate.Domain.Enums.CertificateStatus,Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm,System.Byte[],System.Byte[],System.String,System.DateTimeOffset,System.DateTimeOffset,System.Nullable{System.DateTimeOffset},System.Nullable{Antrapol.IdP.Certificate.Domain.Enums.RevocationReason},System.Nullable{System.Guid},System.DateTimeOffset,System.Nullable{System.Guid},System.Nullable{System.DateTimeOffset},System.Nullable{System.Guid},System.Int32)">
+            <summary>
+            Reconstitutes a Certificate entity from persistence.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Certificate.Domain.Enums.DefaultCertificateAlgorithms">
+            <summary>
+            Default certificate algorithm configuration for the National Digital ID system.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.DefaultCertificateAlgorithms.Signature">
+            <summary>
+            Default signature algorithm for certificates: KAZ-SIGN-256 (Security Level 5).
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.DefaultCertificateAlgorithms.SecurityLevel">
+            <summary>
+            Security level for all certificate operations.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Certificate.Domain.Enums.CertificateStatus">
+            <summary>
+            Represents the status of a certificate.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateStatus.Pending">
+            <summary>
+            Certificate is pending issuance.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateStatus.Active">
+            <summary>
+            Certificate is active and valid.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateStatus.Revoked">
+            <summary>
+            Certificate has been revoked.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateStatus.Expired">
+            <summary>
+            Certificate has expired.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateStatus.Suspended">
+            <summary>
+            Certificate has been suspended (temporary).
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Certificate.Domain.Enums.CertificateType">
+            <summary>
+            Represents the type of certificate.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateType.RootCa">
+            <summary>
+            Root CA certificate.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateType.IntermediateCa">
+            <summary>
+            Intermediate CA certificate.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateType.EndEntitySigning">
+            <summary>
+            End-entity certificate for signing.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.CertificateType.EndEntityEncryption">
+            <summary>
+            End-entity certificate for encryption/key exchange.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm">
+            <summary>
+            Represents the algorithm used for the certificate.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.MlDsa65">
+            <summary>
+            ML-DSA-65 (FIPS 204) - Post-Quantum Digital Signature.
+            Security Level 3 (AES-192 equivalent).
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.MlDsa87">
+            <summary>
+            ML-DSA-87 (FIPS 204) - Post-Quantum Digital Signature (higher security).
+            Security Level 5 (AES-256 equivalent).
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.KazSign128">
+            <summary>
+            KAZ-SIGN-128 - Malaysian National Post-Quantum Signature Algorithm.
+            Security Level 1 (comparable to ML-DSA-44).
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.KazSign192">
+            <summary>
+            KAZ-SIGN-192 - Malaysian National Post-Quantum Signature Algorithm.
+            Security Level 3 (comparable to ML-DSA-65).
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.KazSign256">
+            <summary>
+            KAZ-SIGN-256 - Malaysian National Post-Quantum Signature Algorithm.
+            Security Level 5 (comparable to ML-DSA-87).
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.HybridMlDsa65EcdsaP256">
+            <summary>
+            Hybrid: ML-DSA-65 + ECDSA P-256.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.HybridMlDsa87EcdsaP384">
+            <summary>
+            Hybrid: ML-DSA-87 + ECDSA P-384.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.HybridKazSign128EcdsaP256">
+            <summary>
+            Hybrid: KAZ-SIGN-128 + ECDSA P-256.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.HybridKazSign192EcdsaP384">
+            <summary>
+            Hybrid: KAZ-SIGN-192 + ECDSA P-384.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.HybridKazSign256EcdsaP384">
+            <summary>
+            Hybrid: KAZ-SIGN-256 + ECDSA P-384.
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.EcdsaP256">
+            <summary>
+            ECDSA with P-256 curve (classical, for backward compatibility).
+            </summary>
+        </member>
+        <member name="F:Antrapol.IdP.Certificate.Domain.Enums.SignatureAlgorithm.EcdsaP384">
+            <summary>
+            ECDSA with P-384 curve (classical, for backward compatibility).
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Certificate.Domain.Enums.RevocationReason">
+            <summary>
+            Represents the reason for certificate revocation.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Certificate.Domain.Interfaces.ICertificateRepository">
+            <summary>
+            Repository interface for Certificate aggregate.
+            </summary>
+        </member>
+    </members>
+</doc>

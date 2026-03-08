@@ -1,0 +1,102 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "IdP.Admin.Infrastructure/1.0.0": {
+        "dependencies": {
+          "IdP.Admin.Application": "1.0.0",
+          "IdP.SharedKernel.Infrastructure": "1.0.0"
+        },
+        "runtime": {
+          "IdP.Admin.Infrastructure.dll": {}
+        }
+      },
+      "IdP.Admin.Application/1.0.0": {
+        "dependencies": {
+          "IdP.Admin.Domain": "1.0.0",
+          "IdP.Common": "1.0.0"
+        },
+        "runtime": {
+          "IdP.Admin.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "IdP.Admin.Domain/1.0.0": {
+        "dependencies": {
+          "IdP.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "IdP.Admin.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "IdP.Common/1.0.0": {
+        "runtime": {
+          "IdP.Common.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "IdP.SharedKernel/1.0.0": {
+        "runtime": {
+          "IdP.SharedKernel.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "IdP.SharedKernel.Infrastructure/1.0.0": {
+        "dependencies": {
+          "IdP.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "IdP.SharedKernel.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "IdP.Admin.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IdP.Admin.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IdP.Admin.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IdP.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IdP.SharedKernel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IdP.SharedKernel.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

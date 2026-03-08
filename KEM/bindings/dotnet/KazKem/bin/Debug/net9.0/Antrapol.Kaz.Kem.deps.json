@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Antrapol.Kaz.Kem/2.1.0": {
+        "runtime": {
+          "Antrapol.Kaz.Kem.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Antrapol.Kaz.Kem/2.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/amirrudinyahaya/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/.cxx/RelWithDebInfo/5n5f363u/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/amirrudinyahaya/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/.cxx/RelWithDebInfo/5n5f363u/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "kazkem::@6890427a1f51a3e7e1df": {
+      "artifactName": "kazkem",
+      "abi": "x86_64",
+      "output": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/cxx/RelWithDebInfo/5n5f363u/obj/x86_64/libkazkem.so",
+      "runtimeFiles": []
+    }
+  }
+}

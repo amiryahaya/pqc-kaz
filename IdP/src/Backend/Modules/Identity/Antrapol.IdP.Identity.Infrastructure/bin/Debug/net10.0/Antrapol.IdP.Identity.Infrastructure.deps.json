@@ -1,0 +1,297 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Antrapol.IdP.Identity.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.Certificate.Application": "1.0.0",
+          "Antrapol.IdP.Certificate.Domain": "1.0.0",
+          "Antrapol.IdP.Crypto.Infrastructure": "1.0.0",
+          "Antrapol.IdP.Identity.Application": "1.0.0",
+          "Dapper": "2.1.66",
+          "Npgsql": "10.0.0",
+          "Antrapol.Kaz.Kem.Reference": "2.1.0.0",
+          "Antrapol.Kaz.Sign.Reference": "2.1.0.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Identity.Infrastructure.dll": {}
+        }
+      },
+      "Dapper/2.1.66": {
+        "runtime": {
+          "lib/net8.0/Dapper.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.66.48463"
+          }
+        }
+      },
+      "FluentValidation/11.11.0": {
+        "runtime": {
+          "lib/net8.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.11.0.0"
+          }
+        }
+      },
+      "Npgsql/10.0.0": {
+        "runtime": {
+          "lib/net10.0/Npgsql.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.0.0"
+          }
+        }
+      },
+      "Pkcs11Interop/5.3.0": {
+        "runtime": {
+          "lib/netstandard2.0/Pkcs11Interop.dll": {
+            "assemblyVersion": "5.3.0.0",
+            "fileVersion": "5.3.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.Certificate.Application/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.Certificate.Domain": "1.0.0",
+          "Antrapol.IdP.Common": "1.0.0",
+          "FluentValidation": "11.11.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Certificate.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.Certificate.Domain/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Certificate.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.Common/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.SharedKernel": "1.0.0",
+          "Dapper": "2.1.66",
+          "Npgsql": "10.0.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Common.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.Crypto.Application/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.Common": "1.0.0",
+          "Antrapol.IdP.Crypto.Domain": "1.0.0",
+          "FluentValidation": "11.11.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Crypto.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.Crypto.Domain/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Crypto.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.Crypto.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.Crypto.Application": "1.0.0",
+          "Antrapol.Kaz.Kem": "2.1.0",
+          "Antrapol.Kaz.Sign": "2.1.0",
+          "Dapper": "2.1.66",
+          "Npgsql": "10.0.0",
+          "Pkcs11Interop": "5.3.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Crypto.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.Identity.Application/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.Common": "1.0.0",
+          "Antrapol.IdP.Identity.Domain": "1.0.0",
+          "FluentValidation": "11.11.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Identity.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.Identity.Domain/1.0.0": {
+        "dependencies": {
+          "Antrapol.IdP.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "Antrapol.IdP.Identity.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.IdP.SharedKernel/1.0.0": {
+        "runtime": {
+          "Antrapol.IdP.SharedKernel.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Antrapol.Kaz.Kem/2.1.0": {
+        "runtime": {
+          "Antrapol.Kaz.Kem.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Antrapol.Kaz.Sign/2.1.0": {
+        "runtime": {
+          "Antrapol.Kaz.Sign.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Antrapol.Kaz.Kem.Reference/2.1.0.0": {
+        "runtime": {
+          "Antrapol.Kaz.Kem.dll": {
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.0.0"
+          }
+        }
+      },
+      "Antrapol.Kaz.Sign.Reference/2.1.0.0": {
+        "runtime": {
+          "Antrapol.Kaz.Sign.dll": {
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Antrapol.IdP.Identity.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dapper/2.1.66": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/q77jUgDOS+bzkmk3Vy9SiWMaetTw+NOoPAV0xPBsGVAyljd5S6P+4RUW7R3ZUGGr9lDRyPKgAMj2UAOwvqZYw==",
+      "path": "dapper/2.1.66",
+      "hashPath": "dapper.2.1.66.nupkg.sha512"
+    },
+    "FluentValidation/11.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cyIVdQBwSipxWG8MA3Rqox7iNbUNUTK5bfJi9tIdm4CAfH71Oo5ABLP4/QyrUwuakqpUEPGtE43BDddvEehuYw==",
+      "path": "fluentvalidation/11.11.0",
+      "hashPath": "fluentvalidation.11.11.0.nupkg.sha512"
+    },
+    "Npgsql/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xZAYhPOU2rUIFpV48xsqhCx9vXs6Y+0jX2LCoSEfDFYMw9jtAOUk3iQsCnDLrFIv9NT3JGMihn7nnuZsPKqJmA==",
+      "path": "npgsql/10.0.0",
+      "hashPath": "npgsql.10.0.0.nupkg.sha512"
+    },
+    "Pkcs11Interop/5.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NnnD5CheO5d0ZTP/clt7XCjUy+FraxZv0hVP0GWSvry8jH4IrLifta04M9cjITr0EzKshG4qnFu2pdZZfhjttA==",
+      "path": "pkcs11interop/5.3.0",
+      "hashPath": "pkcs11interop.5.3.0.nupkg.sha512"
+    },
+    "Antrapol.IdP.Certificate.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.Certificate.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.Crypto.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.Crypto.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.Crypto.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.Identity.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.Identity.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.IdP.SharedKernel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.Kaz.Kem/2.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.Kaz.Sign/2.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.Kaz.Kem.Reference/2.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antrapol.Kaz.Sign.Reference/2.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

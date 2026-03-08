@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/master.swiftdeps"
+  },
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Tests/KazKemTests/KazKemTests.swift": {
+    "dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests.d",
+    "object": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests.swift.o",
+    "swiftmodule": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests.swiftdeps",
+    "diagnostics": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests.dia"
+  }
+}

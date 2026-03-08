@@ -1,0 +1,481 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Application/Antrapol.IdP.Identity.Application.csproj": {}
+  },
+  "projects": {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Application/Antrapol.IdP.Identity.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Application/Antrapol.IdP.Identity.Application.csproj",
+        "projectName": "Antrapol.IdP.Identity.Application",
+        "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Application/Antrapol.IdP.Identity.Application.csproj",
+        "packagesPath": "/Users/amirrudinyahaya/.nuget/packages/",
+        "outputPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Application/obj/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/NuGet.Config",
+          "/Users/amirrudinyahaya/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net10.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net10.0": {
+            "targetAlias": "net10.0",
+            "projectReferences": {
+              "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Domain/Antrapol.IdP.Identity.Domain.csproj": {
+                "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Domain/Antrapol.IdP.Identity.Domain.csproj"
+              },
+              "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.Common/Antrapol.IdP.Common.csproj": {
+                "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.Common/Antrapol.IdP.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net10.0": {
+          "targetAlias": "net10.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.11.0, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "AspNetCore.HealthChecks.NpgSql": "9.0.0",
+            "AspNetCore.HealthChecks.Redis": "9.0.0",
+            "AspNetCore.HealthChecks.UI.Client": "9.0.0",
+            "Carter": "8.2.1",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "Dapper.Contrib": "2.0.78",
+            "FluentAssertions": "8.3.0",
+            "FluentValidation": "11.11.0",
+            "FluentValidation.AspNetCore": "11.3.0",
+            "FluentValidation.DependencyInjectionExtensions": "11.11.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.0",
+            "Microsoft.AspNetCore.OpenApi": "10.0.0",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "10.0.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "10.0.0",
+            "Npgsql.OpenTelemetry": "10.0.0",
+            "NSubstitute": "5.3.0",
+            "OpenTelemetry": "1.11.2",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.11.2",
+            "OpenTelemetry.Exporter.Prometheus.AspNetCore": "1.11.2-beta.1",
+            "OpenTelemetry.Extensions.Hosting": "1.11.2",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.11.1",
+            "OpenTelemetry.Instrumentation.Http": "1.11.1",
+            "OpenTelemetry.Instrumentation.Process": "0.5.0-beta.6",
+            "OpenTelemetry.Instrumentation.Runtime": "1.11.1",
+            "OpenTelemetry.Instrumentation.StackExchangeRedis": "1.10.0-beta.1",
+            "Pkcs11Interop": "5.3.0",
+            "Serilog.AspNetCore": "9.0.0",
+            "Serilog.Enrichers.Environment": "3.0.1",
+            "Serilog.Enrichers.Span": "3.1.0",
+            "Serilog.Enrichers.Thread": "4.0.0",
+            "Serilog.Expressions": "5.0.0",
+            "Serilog.Sinks.Console": "6.0.0",
+            "Serilog.Sinks.OpenTelemetry": "4.1.1",
+            "Serilog.Sinks.Seq": "9.0.0",
+            "StackExchange.Redis": "2.8.41",
+            "Swashbuckle.AspNetCore": "10.0.1",
+            "Swashbuckle.AspNetCore.Annotations": "10.0.1",
+            "System.IdentityModel.Tokens.Jwt": "8.8.0",
+            "Testcontainers.PostgreSql": "4.4.0",
+            "Testcontainers.Redis": "4.4.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.0"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Domain/Antrapol.IdP.Identity.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Domain/Antrapol.IdP.Identity.Domain.csproj",
+        "projectName": "Antrapol.IdP.Identity.Domain",
+        "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Domain/Antrapol.IdP.Identity.Domain.csproj",
+        "packagesPath": "/Users/amirrudinyahaya/.nuget/packages/",
+        "outputPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/Antrapol.IdP.Identity.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/NuGet.Config",
+          "/Users/amirrudinyahaya/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net10.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net10.0": {
+            "targetAlias": "net10.0",
+            "projectReferences": {
+              "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/Antrapol.IdP.SharedKernel.csproj": {
+                "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/Antrapol.IdP.SharedKernel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net10.0": {
+          "targetAlias": "net10.0",
+          "centralPackageVersions": {
+            "AspNetCore.HealthChecks.NpgSql": "9.0.0",
+            "AspNetCore.HealthChecks.Redis": "9.0.0",
+            "AspNetCore.HealthChecks.UI.Client": "9.0.0",
+            "Carter": "8.2.1",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "Dapper.Contrib": "2.0.78",
+            "FluentAssertions": "8.3.0",
+            "FluentValidation": "11.11.0",
+            "FluentValidation.AspNetCore": "11.3.0",
+            "FluentValidation.DependencyInjectionExtensions": "11.11.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.0",
+            "Microsoft.AspNetCore.OpenApi": "10.0.0",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "10.0.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "10.0.0",
+            "Npgsql.OpenTelemetry": "10.0.0",
+            "NSubstitute": "5.3.0",
+            "OpenTelemetry": "1.11.2",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.11.2",
+            "OpenTelemetry.Exporter.Prometheus.AspNetCore": "1.11.2-beta.1",
+            "OpenTelemetry.Extensions.Hosting": "1.11.2",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.11.1",
+            "OpenTelemetry.Instrumentation.Http": "1.11.1",
+            "OpenTelemetry.Instrumentation.Process": "0.5.0-beta.6",
+            "OpenTelemetry.Instrumentation.Runtime": "1.11.1",
+            "OpenTelemetry.Instrumentation.StackExchangeRedis": "1.10.0-beta.1",
+            "Pkcs11Interop": "5.3.0",
+            "Serilog.AspNetCore": "9.0.0",
+            "Serilog.Enrichers.Environment": "3.0.1",
+            "Serilog.Enrichers.Span": "3.1.0",
+            "Serilog.Enrichers.Thread": "4.0.0",
+            "Serilog.Expressions": "5.0.0",
+            "Serilog.Sinks.Console": "6.0.0",
+            "Serilog.Sinks.OpenTelemetry": "4.1.1",
+            "Serilog.Sinks.Seq": "9.0.0",
+            "StackExchange.Redis": "2.8.41",
+            "Swashbuckle.AspNetCore": "10.0.1",
+            "Swashbuckle.AspNetCore.Annotations": "10.0.1",
+            "System.IdentityModel.Tokens.Jwt": "8.8.0",
+            "Testcontainers.PostgreSql": "4.4.0",
+            "Testcontainers.Redis": "4.4.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.0"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.Common/Antrapol.IdP.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.Common/Antrapol.IdP.Common.csproj",
+        "projectName": "Antrapol.IdP.Common",
+        "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.Common/Antrapol.IdP.Common.csproj",
+        "packagesPath": "/Users/amirrudinyahaya/.nuget/packages/",
+        "outputPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.Common/obj/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/NuGet.Config",
+          "/Users/amirrudinyahaya/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net10.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net10.0": {
+            "targetAlias": "net10.0",
+            "projectReferences": {
+              "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/Antrapol.IdP.SharedKernel.csproj": {
+                "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/Antrapol.IdP.SharedKernel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net10.0": {
+          "targetAlias": "net10.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.66, )",
+              "versionCentrallyManaged": true
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[10.0.0, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "AspNetCore.HealthChecks.NpgSql": "9.0.0",
+            "AspNetCore.HealthChecks.Redis": "9.0.0",
+            "AspNetCore.HealthChecks.UI.Client": "9.0.0",
+            "Carter": "8.2.1",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "Dapper.Contrib": "2.0.78",
+            "FluentAssertions": "8.3.0",
+            "FluentValidation": "11.11.0",
+            "FluentValidation.AspNetCore": "11.3.0",
+            "FluentValidation.DependencyInjectionExtensions": "11.11.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.0",
+            "Microsoft.AspNetCore.OpenApi": "10.0.0",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "10.0.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "10.0.0",
+            "Npgsql.OpenTelemetry": "10.0.0",
+            "NSubstitute": "5.3.0",
+            "OpenTelemetry": "1.11.2",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.11.2",
+            "OpenTelemetry.Exporter.Prometheus.AspNetCore": "1.11.2-beta.1",
+            "OpenTelemetry.Extensions.Hosting": "1.11.2",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.11.1",
+            "OpenTelemetry.Instrumentation.Http": "1.11.1",
+            "OpenTelemetry.Instrumentation.Process": "0.5.0-beta.6",
+            "OpenTelemetry.Instrumentation.Runtime": "1.11.1",
+            "OpenTelemetry.Instrumentation.StackExchangeRedis": "1.10.0-beta.1",
+            "Pkcs11Interop": "5.3.0",
+            "Serilog.AspNetCore": "9.0.0",
+            "Serilog.Enrichers.Environment": "3.0.1",
+            "Serilog.Enrichers.Span": "3.1.0",
+            "Serilog.Enrichers.Thread": "4.0.0",
+            "Serilog.Expressions": "5.0.0",
+            "Serilog.Sinks.Console": "6.0.0",
+            "Serilog.Sinks.OpenTelemetry": "4.1.1",
+            "Serilog.Sinks.Seq": "9.0.0",
+            "StackExchange.Redis": "2.8.41",
+            "Swashbuckle.AspNetCore": "10.0.1",
+            "Swashbuckle.AspNetCore.Annotations": "10.0.1",
+            "System.IdentityModel.Tokens.Jwt": "8.8.0",
+            "Testcontainers.PostgreSql": "4.4.0",
+            "Testcontainers.Redis": "4.4.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.0"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/Antrapol.IdP.SharedKernel.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/Antrapol.IdP.SharedKernel.csproj",
+        "projectName": "Antrapol.IdP.SharedKernel",
+        "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/Antrapol.IdP.SharedKernel.csproj",
+        "packagesPath": "/Users/amirrudinyahaya/.nuget/packages/",
+        "outputPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/NuGet.Config",
+          "/Users/amirrudinyahaya/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net10.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net10.0": {
+            "targetAlias": "net10.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net10.0": {
+          "targetAlias": "net10.0",
+          "centralPackageVersions": {
+            "AspNetCore.HealthChecks.NpgSql": "9.0.0",
+            "AspNetCore.HealthChecks.Redis": "9.0.0",
+            "AspNetCore.HealthChecks.UI.Client": "9.0.0",
+            "Carter": "8.2.1",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "Dapper.Contrib": "2.0.78",
+            "FluentAssertions": "8.3.0",
+            "FluentValidation": "11.11.0",
+            "FluentValidation.AspNetCore": "11.3.0",
+            "FluentValidation.DependencyInjectionExtensions": "11.11.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.0",
+            "Microsoft.AspNetCore.OpenApi": "10.0.0",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "10.0.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "10.0.0",
+            "Npgsql.OpenTelemetry": "10.0.0",
+            "NSubstitute": "5.3.0",
+            "OpenTelemetry": "1.11.2",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.11.2",
+            "OpenTelemetry.Exporter.Prometheus.AspNetCore": "1.11.2-beta.1",
+            "OpenTelemetry.Extensions.Hosting": "1.11.2",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.11.1",
+            "OpenTelemetry.Instrumentation.Http": "1.11.1",
+            "OpenTelemetry.Instrumentation.Process": "0.5.0-beta.6",
+            "OpenTelemetry.Instrumentation.Runtime": "1.11.1",
+            "OpenTelemetry.Instrumentation.StackExchangeRedis": "1.10.0-beta.1",
+            "Pkcs11Interop": "5.3.0",
+            "Serilog.AspNetCore": "9.0.0",
+            "Serilog.Enrichers.Environment": "3.0.1",
+            "Serilog.Enrichers.Span": "3.1.0",
+            "Serilog.Enrichers.Thread": "4.0.0",
+            "Serilog.Expressions": "5.0.0",
+            "Serilog.Sinks.Console": "6.0.0",
+            "Serilog.Sinks.OpenTelemetry": "4.1.1",
+            "Serilog.Sinks.Seq": "9.0.0",
+            "StackExchange.Redis": "2.8.41",
+            "Swashbuckle.AspNetCore": "10.0.1",
+            "Swashbuckle.AspNetCore.Annotations": "10.0.1",
+            "System.IdentityModel.Tokens.Jwt": "8.8.0",
+            "Testcontainers.PostgreSql": "4.4.0",
+            "Testcontainers.Redis": "4.4.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.0"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

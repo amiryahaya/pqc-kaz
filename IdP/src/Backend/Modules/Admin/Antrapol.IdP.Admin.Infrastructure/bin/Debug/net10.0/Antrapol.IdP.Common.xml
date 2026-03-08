@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Antrapol.IdP.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Antrapol.IdP.Common.Data.DapperTypeHandlers">
+            <summary>
+            Dapper type handlers for custom types.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Data.DapperTypeHandlers.Register">
+            <summary>
+            Registers all custom type handlers with Dapper.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Common.Data.DateTimeOffsetHandler">
+            <summary>
+            Type handler for DateTimeOffset to handle PostgreSQL timestamptz.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Common.Data.GuidHandler">
+            <summary>
+            Type handler for Guid to ensure proper handling.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Common.Data.IDbConnectionFactory">
+            <summary>
+            Factory for creating database connections.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Data.IDbConnectionFactory.CreateConnectionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Creates a new database connection.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Common.Data.NpgsqlConnectionFactory">
+            <summary>
+            PostgreSQL connection factory using Npgsql.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Common.Extensions.ApplicationBuilderExtensions">
+            <summary>
+            Extension methods for IApplicationBuilder.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Extensions.ApplicationBuilderExtensions.UseExceptionHandling(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Adds the exception handling middleware to the pipeline.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Common.Extensions.ResultExtensions">
+            <summary>
+            Extension methods for converting Result types to HTTP responses using ProblemDetails.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Extensions.ResultExtensions.ToProblemResult(Antrapol.IdP.SharedKernel.Results.Result)">
+            <summary>
+            Converts a Result to an appropriate IResult for minimal API responses.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Extensions.ResultExtensions.ToProblemResult``1(Antrapol.IdP.SharedKernel.Results.Result{``0})">
+            <summary>
+            Converts a Result&lt;T&gt; to an appropriate IResult for minimal API responses.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Extensions.ResultExtensions.ToProblemResult``1(Antrapol.IdP.SharedKernel.Results.Result{``0},System.Func{``0,Microsoft.AspNetCore.Http.IResult})">
+            <summary>
+            Converts a Result&lt;T&gt; to an appropriate IResult with a custom success result factory.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Extensions.ResultExtensions.ToProblemResult(Antrapol.IdP.SharedKernel.Results.ValidationResult)">
+            <summary>
+            Converts a ValidationResult to an appropriate IResult with validation problem details.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Extensions.ResultExtensions.ToProblemResult``1(Antrapol.IdP.SharedKernel.Results.ValidationResult{``0})">
+            <summary>
+            Converts a ValidationResult&lt;T&gt; to an appropriate IResult with validation problem details.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Extensions.ResultExtensions.ToProblemResult(Antrapol.IdP.SharedKernel.Results.Error)">
+            <summary>
+            Converts an Error to an appropriate IResult using ProblemDetails.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Common.Extensions.ServiceCollectionExtensions">
+            <summary>
+            Extension methods for IServiceCollection.
+            </summary>
+        </member>
+        <member name="M:Antrapol.IdP.Common.Extensions.ServiceCollectionExtensions.AddDatabase(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            Adds the database connection factory with the specified connection string.
+            </summary>
+        </member>
+        <member name="T:Antrapol.IdP.Common.Middleware.ExceptionHandlingMiddleware">
+            <summary>
+            Global exception handling middleware that returns ProblemDetails responses.
+            </summary>
+        </member>
+    </members>
+</doc>

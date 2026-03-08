@@ -1,0 +1,3 @@
+module KazKem {
+    header "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/include/KazKem-Swift.h"
+}

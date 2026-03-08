@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PQC Identity - Android App Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A73E8;
+            --primary-dark: #1557B0;
+            --primary-light: #E8F0FE;
+            --secondary: #34A853;
+            --error: #EA4335;
+            --warning: #FBBC04;
+            --surface: #FFFFFF;
+            --background: #F8F9FA;
+            --on-surface: #202124;
+            --on-surface-variant: #5F6368;
+            --outline: #DADCE0;
+            --pqc-gradient: linear-gradient(135deg, #1A73E8 0%, #34A853 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .prototype-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            max-width: 1800px;
+        }
+
+        .screen-group {
+            margin-bottom: 40px;
+        }
+
+        .group-title {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .group-note {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding-left: 14px;
+            font-style: italic;
+        }
+
+        .screens-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 50px;
+            padding: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-bar-dark {
+            background: var(--primary);
+            color: white;
+        }
+
+        .notch {
+            width: 150px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .screen-content {
+            height: calc(100% - 44px);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .screen-label {
+            color: #aaa;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Common Components */
+        .app-bar {
+            height: 56px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 16px;
+        }
+
+        .app-bar-title {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--outline);
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--surface);
+            margin-bottom: 16px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+        }
+
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--surface);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid var(--outline);
+            padding-bottom: 20px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--on-surface-variant);
+            font-size: 12px;
+            gap: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .material-icons {
+            font-size: 24px;
+        }
+
+        /* Onboarding Styles */
+        .onboarding-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: var(--surface);
+        }
+
+        .onboarding-illustration {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-light);
+        }
+
+        .pqc-icon {
+            width: 200px;
+            height: 200px;
+            background: var(--pqc-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pqc-icon .material-icons {
+            font-size: 80px;
+            color: white;
+        }
+
+        .onboarding-text {
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .onboarding-title {
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--on-surface);
+            margin-bottom: 12px;
+        }
+
+        .onboarding-subtitle {
+            font-size: 16px;
+            color: var(--on-surface-variant);
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+
+        .page-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--outline);
+        }
+
+        .dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--primary);
+        }
+
+        /* Registration Styles */
+        .form-container {
+            padding: 24px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: var(--on-surface-variant);
+            margin-bottom: 24px;
+        }
+
+        .input-label {
+            font-size: 14px;
+            color: var(--on-surface-variant);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .otp-container {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 32px 0;
+        }
+
+        .otp-input {
+            width: 48px;
+            height: 56px;
+            border: 2px solid var(--outline);
+            border-radius: 12px;
+            font-size: 24px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .otp-input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .otp-input.filled {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        /* QR Scanner Styles */
+        .qr-scanner-view {
+            height: 100%;
+            background: #000;
+            position: relative;
+        }
+
+        .qr-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-frame {
+            width: 250px;
+            height: 250px;
+            border: 3px solid white;
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .qr-corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 4px solid var(--primary);
+        }
+
+        .qr-corner.top-left {
+            top: -3px;
+            left: -3px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 24px 0 0 0;
+        }
+
+        .qr-corner.top-right {
+            top: -3px;
+            right: -3px;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 24px 0 0;
+        }
+
+        .qr-corner.bottom-left {
+            bottom: -3px;
+            left: -3px;
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 24px;
+        }
+
+        .qr-corner.bottom-right {
+            bottom: -3px;
+            right: -3px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 24px 0;
+        }
+
+        .qr-instructions {
+            color: white;
+            text-align: center;
+            margin-top: 32px;
+            padding: 0 24px;
+        }
+
+        .qr-top-bar {
+            position: absolute;
+            top: 44px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 16px;
+            color: white;
+        }
+
+        /* Auth Confirmation */
+        .auth-confirm {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .auth-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 32px auto;
+        }
+
+        .auth-icon .material-icons {
+            font-size: 40px;
+            color: var(--primary);
+        }
+
+        .auth-details {
+            background: var(--background);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 24px 0;
+            text-align: left;
+        }
+
+        .auth-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--outline);
+        }
+
+        .auth-detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .auth-detail-label {
+            color: var(--on-surface-variant);
+            font-size: 14px;
+        }
+
+        .auth-detail-value {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* Device Card - Single Device */
+        .device-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .device-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .device-icon .material-icons {
+            color: var(--primary);
+        }
+
+        .device-info {
+            flex: 1;
+        }
+
+        .device-name {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .device-meta {
+            font-size: 12px;
+            color: var(--on-surface-variant);
+        }
+
+        .device-status {
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .device-status.active {
+            background: #E6F4EA;
+            color: var(--secondary);
+        }
+
+        .device-status.current {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* Certificate Card */
+        .cert-card {
+            background: var(--pqc-gradient);
+            border-radius: 16px;
+            padding: 24px;
+            color: white;
+            margin: 16px;
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .cert-type {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .cert-name {
+            font-size: 20px;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .cert-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+        }
+
+        .cert-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .cert-detail-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+        }
+
+        .cert-detail-value {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* Profile */
+        .profile-header {
+            background: var(--pqc-gradient);
+            padding: 60px 24px 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-avatar .material-icons {
+            font-size: 48px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .profile-email {
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        .profile-content {
+            margin-top: -40px;
+            padding: 0 16px;
+        }
+
+        .profile-stats {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 24px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--on-surface-variant);
+            margin-top: 4px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: var(--surface);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            gap: 16px;
+        }
+
+        .menu-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-icon .material-icons {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .menu-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .menu-arrow {
+            color: var(--on-surface-variant);
+        }
+
+        /* Success/Error States */
+        .success-screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            background: var(--surface);
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            background: #E6F4EA;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .success-icon .material-icons {
+            font-size: 60px;
+            color: var(--secondary);
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .success-message {
+            color: var(--on-surface-variant);
+            margin-bottom: 32px;
+        }
+
+        /* Warning States */
+        .warning-icon {
+            width: 120px;
+            height: 120px;
+            background: #FEF3E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .warning-icon .material-icons {
+            font-size: 60px;
+            color: var(--warning);
+        }
+
+        /* Biometric Prompt */
+        .biometric-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-radius: 24px 24px 0 0;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+        }
+
+        .fingerprint-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+        }
+
+        .fingerprint-icon .material-icons {
+            font-size: 64px;
+            color: var(--primary);
+        }
+
+        /* Algorithm Badge */
+        .algo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .algo-badge.kaz {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        /* Loading */
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--primary-light);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 32px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Key Generation Progress */
+        .keygen-progress {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .keygen-animation {
+            width: 150px;
+            height: 150px;
+            margin: 32px auto;
+            position: relative;
+        }
+
+        .keygen-ring {
+            position: absolute;
+            border: 3px solid transparent;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .keygen-ring:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            animation-duration: 2s;
+        }
+
+        .keygen-ring:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-top-color: var(--secondary);
+            animation-duration: 1.5s;
+            animation-direction: reverse;
+        }
+
+        .keygen-ring:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation-duration: 1s;
+        }
+
+        .keygen-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .keygen-center .material-icons {
+            font-size: 40px;
+            color: var(--primary);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--outline);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 24px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--pqc-gradient);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        /* Single Device Policy Banner */
+        .policy-banner {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            margin: 16px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .policy-banner-title {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .policy-banner-text {
+            font-size: 13px;
+            color: var(--on-surface-variant);
+        }
+    </style>
+</head>
+<body>
+    <div class="prototype-container">
+
+        <!-- ONBOARDING SECTION -->
+        <div class="screen-group">
+            <h2 class="group-title">1. Onboarding</h2>
+            <div class="screens-row">
+
+                <!-- Splash Screen -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="screen-content" style="background: var(--pqc-gradient); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <div style="text-align: center; color: white;">
+                                    <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.2); border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                                        <span class="material-icons" style="font-size: 48px;">security</span>
+                                    </div>
+                                    <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 8px;">PQC Identity</h1>
+                                    <p style="opacity: 0.8;">Post-Quantum Secure</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">1.1 Splash Screen</p>
+                </div>
+
+                <!-- Welcome Screen 1 -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content">
+                                <div class="onboarding-content">
+                                    <div class="onboarding-illustration">
+                                        <div class="pqc-icon">
+                                            <span class="material-icons">enhanced_encryption</span>
+                                        </div>
+                                    </div>
+                                    <div class="onboarding-text">
+                                        <h2 class="onboarding-title">Quantum-Safe Security</h2>
+                                        <p class="onboarding-subtitle">Your digital identity is protected by post-quantum cryptography, resistant to future quantum computer attacks.</p>
+                                        <div class="page-dots">
+                                            <div class="dot active"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                        <button class="btn-primary">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">1.2 Welcome - Security</p>
+                </div>
+
+                <!-- Welcome Screen 2 -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content">
+                                <div class="onboarding-content">
+                                    <div class="onboarding-illustration">
+                                        <div class="pqc-icon">
+                                            <span class="material-icons">qr_code_scanner</span>
+                                        </div>
+                                    </div>
+                                    <div class="onboarding-text">
+                                        <h2 class="onboarding-title">Passwordless Login</h2>
+                                        <p class="onboarding-subtitle">Sign in to any service by simply scanning a QR code. No passwords to remember or type.</p>
+                                        <div class="page-dots">
+                                            <div class="dot"></div>
+                                            <div class="dot active"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                        <button class="btn-primary">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">1.3 Welcome - QR Login</p>
+                </div>
+
+                <!-- Welcome Screen 3 - Single Device -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content">
+                                <div class="onboarding-content">
+                                    <div class="onboarding-illustration">
+                                        <div class="pqc-icon">
+                                            <span class="material-icons">smartphone</span>
+                                        </div>
+                                    </div>
+                                    <div class="onboarding-text">
+                                        <h2 class="onboarding-title">One Device, One Identity</h2>
+                                        <p class="onboarding-subtitle">Your identity is bound to this device only. This ensures maximum security - your private keys never leave your phone.</p>
+                                        <div class="page-dots">
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot active"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                        <button class="btn-primary">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">1.4 Welcome - Single Device</p>
+                </div>
+
+                <!-- Welcome Screen 4 - KAZ -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content">
+                                <div class="onboarding-content">
+                                    <div class="onboarding-illustration">
+                                        <div class="pqc-icon">
+                                            <span class="material-icons">verified_user</span>
+                                        </div>
+                                    </div>
+                                    <div class="onboarding-text">
+                                        <h2 class="onboarding-title">Malaysian PQC Standard</h2>
+                                        <p class="onboarding-subtitle">Built on KAZ-SIGN and KAZ-KEM algorithms - Malaysia's national post-quantum cryptography standard.</p>
+                                        <div class="page-dots">
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot active"></div>
+                                        </div>
+                                        <button class="btn-primary">Get Started</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">1.5 Welcome - KAZ Standard</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- REGISTRATION SECTION -->
+        <div class="screen-group">
+            <h2 class="group-title">2. Registration Flow</h2>
+            <div class="screens-row">
+
+                <!-- Profile Setup (Start of Registration) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div style="padding: 24px; padding-top: 48px;">
+                                    <h1 style="font-size: 28px; font-weight: 500; margin-bottom: 8px;">Create Your Identity</h1>
+                                    <p style="color: var(--on-surface-variant); margin-bottom: 32px;">Set up your National Digital ID</p>
+
+                                    <label class="input-label">Full Name (as per MyKad)</label>
+                                    <input type="text" class="input-field" placeholder="Your full name" value="Ahmad bin Abdullah">
+
+                                    <label class="input-label">MyKad Number</label>
+                                    <input type="text" class="input-field" placeholder="XXXXXX-XX-XXXX" value="880515-14-5678">
+
+                                    <label class="input-label">Email Address</label>
+                                    <input type="email" class="input-field" placeholder="name@example.com" value="ahmad@example.com">
+
+                                    <label class="input-label">Phone Number</label>
+                                    <input type="tel" class="input-field" placeholder="+60 12-345 6789" value="+60 12-345 6789">
+
+                                    <p style="font-size: 12px; color: var(--on-surface-variant); text-align: center; margin-top: 16px; line-height: 1.5;">
+                                        By continuing, you agree to our <span style="color: var(--primary);">Terms of Service</span> and <span style="color: var(--primary);">Privacy Policy</span>
+                                    </p>
+
+                                    <div style="margin-top: 16px;">
+                                        <button class="btn-primary">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.1 Profile Setup</p>
+                </div>
+
+                <!-- Email Verification -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="app-bar" style="background: transparent; color: var(--on-surface);">
+                                    <span class="material-icons">arrow_back</span>
+                                </div>
+                                <div class="form-container" style="text-align: center;">
+                                    <div style="width: 64px; height: 64px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                        <span class="material-icons" style="font-size: 32px; color: var(--primary);">email</span>
+                                    </div>
+                                    <h2 class="form-title">Verify your email</h2>
+                                    <p class="form-subtitle">Enter the 6-digit code sent to<br><strong>ahmad@example.com</strong></p>
+
+                                    <div class="otp-container">
+                                        <input type="text" class="otp-input filled" maxlength="1" value="4">
+                                        <input type="text" class="otp-input filled" maxlength="1" value="7">
+                                        <input type="text" class="otp-input filled" maxlength="1" value="2">
+                                        <input type="text" class="otp-input filled" maxlength="1" value="8">
+                                        <input type="text" class="otp-input" maxlength="1">
+                                        <input type="text" class="otp-input" maxlength="1">
+                                    </div>
+
+                                    <p style="color: var(--on-surface-variant); font-size: 14px;">
+                                        Didn't receive the code? <button class="btn-text">Resend</button>
+                                    </p>
+                                    <p style="color: var(--on-surface-variant); font-size: 12px; margin-top: 8px;">
+                                        Expires in 4:32
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.2 Email Verification</p>
+                </div>
+
+                <!-- Phone Verification -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="app-bar" style="background: transparent; color: var(--on-surface);">
+                                    <span class="material-icons">arrow_back</span>
+                                </div>
+                                <div class="form-container" style="text-align: center;">
+                                    <div style="width: 64px; height: 64px; background: #E8F5E9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                        <span class="material-icons" style="font-size: 32px; color: var(--secondary);">phone_android</span>
+                                    </div>
+                                    <h2 class="form-title">Verify your phone</h2>
+                                    <p class="form-subtitle">Enter the 6-digit code sent to<br><strong>+60 12-345 6789</strong></p>
+
+                                    <div class="otp-container">
+                                        <input type="text" class="otp-input filled" maxlength="1" value="9">
+                                        <input type="text" class="otp-input filled" maxlength="1" value="3">
+                                        <input type="text" class="otp-input filled" maxlength="1" value="5">
+                                        <input type="text" class="otp-input" maxlength="1">
+                                        <input type="text" class="otp-input" maxlength="1">
+                                        <input type="text" class="otp-input" maxlength="1">
+                                    </div>
+
+                                    <p style="color: var(--on-surface-variant); font-size: 14px;">
+                                        Didn't receive the code? <button class="btn-text">Resend SMS</button>
+                                    </p>
+                                    <p style="color: var(--on-surface-variant); font-size: 12px; margin-top: 8px;">
+                                        Expires in 4:45
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.3 Phone Verification</p>
+                </div>
+
+                <!-- Recovery Password Setup (Only password required - device key protected by biometric) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="app-bar" style="background: transparent; color: var(--on-surface);">
+                                    <span class="material-icons">arrow_back</span>
+                                </div>
+                                <div class="form-container">
+                                    <div style="width: 64px; height: 64px; background: var(--warning-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                        <span class="material-icons" style="font-size: 32px; color: var(--warning);">key</span>
+                                    </div>
+                                    <h2 class="form-title">Set Recovery Password</h2>
+                                    <p class="form-subtitle">This is the <strong>only password</strong> you need to remember. It's used to recover your identity if you lose your device.</p>
+
+                                    <div style="background: #FFF3E0; border-radius: 8px; padding: 12px; margin-bottom: 20px;">
+                                        <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                            <span class="material-icons" style="color: var(--warning); font-size: 20px;">warning</span>
+                                            <p style="font-size: 13px; color: #E65100; margin: 0;">This password cannot be recovered. If you forget it, you may lose access to your identity.</p>
+                                        </div>
+                                    </div>
+
+                                    <label class="input-label">Recovery Password</label>
+                                    <div style="position: relative;">
+                                        <input type="password" class="input-field" placeholder="Min 12 characters" value="••••••••••••••••">
+                                        <span class="material-icons" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--on-surface-variant);">visibility_off</span>
+                                    </div>
+
+                                    <label class="input-label">Confirm Recovery Password</label>
+                                    <div style="position: relative;">
+                                        <input type="password" class="input-field" placeholder="Confirm password" value="••••••••••••••••">
+                                        <span class="material-icons" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--on-surface-variant);">visibility_off</span>
+                                    </div>
+
+                                    <div style="margin-top: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                            <span class="material-icons" style="font-size: 16px; color: var(--secondary);">check_circle</span>
+                                            <span style="font-size: 12px; color: var(--on-surface-variant);">At least 12 characters</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                            <span class="material-icons" style="font-size: 16px; color: var(--secondary);">check_circle</span>
+                                            <span style="font-size: 12px; color: var(--on-surface-variant);">Contains uppercase & lowercase</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span class="material-icons" style="font-size: 16px; color: var(--secondary);">check_circle</span>
+                                            <span style="font-size: 12px; color: var(--on-surface-variant);">Contains numbers & symbols</span>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-top: 24px;">
+                                        <button class="btn-primary">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.4 Recovery Password</p>
+                </div>
+
+                <!-- Key Generation (Algorithm fixed to KAZ-SIGN-256) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="keygen-progress">
+                                    <h2 style="font-size: 20px; font-weight: 500; margin-top: 40px;">Generating Keys</h2>
+                                    <p style="color: var(--on-surface-variant); margin-top: 8px;">Creating your quantum-safe keypair</p>
+
+                                    <div class="keygen-animation">
+                                        <div class="keygen-ring"></div>
+                                        <div class="keygen-ring"></div>
+                                        <div class="keygen-ring"></div>
+                                        <div class="keygen-center">
+                                            <span class="material-icons">vpn_key</span>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: left; padding: 0 16px;">
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span>Generating entropy...</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span>Creating KAZ-SIGN-256 keypair...</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <div class="loading-spinner" style="width: 24px; height: 24px; margin: 0; border-width: 3px;"></div>
+                                            <span>Securing private key on device...</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; color: var(--on-surface-variant);">
+                                            <span class="material-icons">radio_button_unchecked</span>
+                                            <span>Registering with server...</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="progress-bar" style="margin-top: 32px;">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <p style="font-size: 12px; color: var(--on-surface-variant);">This may take a few seconds...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.5 Key Generation</p>
+                </div>
+
+                <!-- Certificate Issuance / Waiting -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="keygen-progress">
+                                    <h2 style="font-size: 20px; font-weight: 500; margin-top: 40px;">Issuing Certificate</h2>
+                                    <p style="color: var(--on-surface-variant); margin-top: 8px;">Requesting your digital identity certificate</p>
+
+                                    <div class="keygen-animation">
+                                        <div class="keygen-ring"></div>
+                                        <div class="keygen-ring"></div>
+                                        <div class="keygen-ring"></div>
+                                        <div class="keygen-center">
+                                            <span class="material-icons">verified</span>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: left; padding: 0 16px;">
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span>Keys generated successfully</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span>Secret sharing completed</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span>CSR submitted to server</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <div class="loading-spinner" style="width: 24px; height: 24px; margin: 0; border-width: 3px;"></div>
+                                            <span>Waiting for certificate issuance...</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; color: var(--on-surface-variant);">
+                                            <span class="material-icons">radio_button_unchecked</span>
+                                            <span>Binding certificate to device...</span>
+                                        </div>
+                                    </div>
+
+                                    <div style="background: var(--background); border-radius: 8px; padding: 12px; margin-top: 24px;">
+                                        <p style="font-size: 12px; color: var(--on-surface-variant); margin: 0;">
+                                            <span class="material-icons" style="font-size: 14px; vertical-align: middle;">info</span>
+                                            Tracking ID: <span style="font-family: monospace;">RTD-2024-ABC123</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.6 Certificate Issuance</p>
+                </div>
+
+                <!-- Biometric Setup (Required - protects device private key) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="form-container" style="text-align: center; padding-top: 40px;">
+                                    <div style="width: 100px; height: 100px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                                        <span class="material-icons" style="font-size: 48px; color: var(--primary);">fingerprint</span>
+                                    </div>
+
+                                    <h2 class="form-title">Secure Your Identity</h2>
+                                    <p class="form-subtitle">Your device private key will be protected by biometric authentication. This provides hardware-level security.</p>
+
+                                    <div style="background: #E8F5E9; border-radius: 12px; padding: 16px; margin: 20px 0; text-align: left;">
+                                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+                                            <span class="material-icons" style="color: var(--secondary); font-size: 20px;">shield</span>
+                                            <span style="font-size: 14px; font-weight: 500;">Hardware-backed security</span>
+                                        </div>
+                                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+                                            <span class="material-icons" style="color: var(--secondary); font-size: 20px;">speed</span>
+                                            <span style="font-size: 14px; font-weight: 500;">No password needed for signing</span>
+                                        </div>
+                                        <div style="display: flex; gap: 8px; align-items: center;">
+                                            <span class="material-icons" style="color: var(--secondary); font-size: 20px;">lock</span>
+                                            <span style="font-size: 14px; font-weight: 500;">Key protected by TEE/Secure Enclave</span>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-primary" style="margin-bottom: 12px;">
+                                        <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">fingerprint</span>
+                                        Enable Biometrics
+                                    </button>
+                                    <p style="font-size: 12px; color: var(--on-surface-variant);">Biometric is required for signing operations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.7 Biometric Setup</p>
+                </div>
+
+                <!-- Recovery Token Display (Critical!) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="form-container" style="text-align: center; padding-top: 24px;">
+                                    <div style="width: 80px; height: 80px; background: var(--error-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                        <span class="material-icons" style="font-size: 40px; color: var(--error);">security</span>
+                                    </div>
+
+                                    <h2 class="form-title">Save Your Recovery Token</h2>
+                                    <p class="form-subtitle">This token is required to recover your identity if you lose your device.</p>
+
+                                    <div style="background: #FFEBEE; border: 2px dashed var(--error); border-radius: 12px; padding: 16px; margin: 20px 0;">
+                                        <p style="font-size: 11px; color: var(--error); margin-bottom: 8px; font-weight: 600;">RECOVERY TOKEN</p>
+                                        <p style="font-family: monospace; font-size: 14px; word-break: break-all; line-height: 1.6; color: var(--on-surface);">
+                                            RT-KAZ-2024-ABCD-EFGH-IJKL-MNOP-QRST-UVWX-YZ12-3456
+                                        </p>
+                                    </div>
+
+                                    <div style="background: #FFF3E0; border-radius: 8px; padding: 12px; text-align: left; margin-bottom: 16px;">
+                                        <p style="font-size: 13px; color: #E65100; font-weight: 500; margin-bottom: 8px;">
+                                            <span class="material-icons" style="font-size: 16px; vertical-align: middle;">warning</span>
+                                            Important:
+                                        </p>
+                                        <ul style="font-size: 12px; color: #E65100; margin: 0; padding-left: 20px;">
+                                            <li>Write this down on paper</li>
+                                            <li>Store in a secure location</li>
+                                            <li>Never share with anyone</li>
+                                            <li>This token cannot be recovered</li>
+                                        </ul>
+                                    </div>
+
+                                    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                                        <button style="flex: 1; padding: 12px; border: 1px solid var(--outline); background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                            <span class="material-icons" style="font-size: 18px;">content_copy</span>
+                                            Copy
+                                        </button>
+                                        <button style="flex: 1; padding: 12px; border: 1px solid var(--outline); background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                            <span class="material-icons" style="font-size: 18px;">download</span>
+                                            Download
+                                        </button>
+                                    </div>
+
+                                    <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 20px;">
+                                        <input type="checkbox" id="confirm-saved" style="margin-top: 2px;">
+                                        <label for="confirm-saved" style="font-size: 13px; text-align: left; color: var(--on-surface-variant);">
+                                            I have saved my recovery token in a secure location
+                                        </label>
+                                    </div>
+
+                                    <button class="btn-primary">Continue</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.8 Recovery Token</p>
+                </div>
+
+                <!-- Registration Success -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content">
+                                <div class="success-screen">
+                                    <div class="success-icon">
+                                        <span class="material-icons">check</span>
+                                    </div>
+                                    <h2 class="success-title">You're all set!</h2>
+                                    <p class="success-message">Your quantum-safe digital identity has been created and bound to this device.</p>
+
+                                    <div style="background: var(--background); border-radius: 12px; padding: 16px; width: 100%; text-align: left; margin-bottom: 32px;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                            <span style="color: var(--on-surface-variant); font-size: 13px;">Algorithm</span>
+                                            <span class="algo-badge kaz">KAZ-SIGN-256</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                            <span style="color: var(--on-surface-variant); font-size: 13px;">Security Level</span>
+                                            <span style="font-weight: 500; font-size: 13px;">Level 5</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: var(--on-surface-variant); font-size: 13px;">Bound to</span>
+                                            <span style="font-weight: 500; font-size: 13px;">This Device Only</span>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-primary">Go to Dashboard</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">2.9 Registration Success</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- QR AUTHENTICATION SECTION -->
+        <div class="screen-group">
+            <h2 class="group-title">3. QR Authentication</h2>
+            <div class="screens-row">
+
+                <!-- Home/Dashboard -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar status-bar-dark">
+                                <span>9:41</span>
+                                <span style="color: white;">100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--background); padding-bottom: 80px;">
+                                <div style="background: var(--primary); padding: 24px; padding-bottom: 48px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; color: white;">
+                                        <div>
+                                            <p style="opacity: 0.8; font-size: 14px;">Welcome back</p>
+                                            <h2 style="font-size: 24px; font-weight: 500;">Ahmad</h2>
+                                        </div>
+                                        <div style="width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-icons">person</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="margin: -24px 16px 16px; background: var(--surface); border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                    <div style="text-align: center;">
+                                        <button style="width: 80px; height: 80px; background: var(--pqc-gradient); border: none; border-radius: 50%; cursor: pointer; margin-bottom: 12px;">
+                                            <span class="material-icons" style="font-size: 36px; color: white;">qr_code_scanner</span>
+                                        </button>
+                                        <p style="font-weight: 500;">Scan to Authenticate</p>
+                                        <p style="font-size: 13px; color: var(--on-surface-variant);">Tap to scan QR code</p>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 0 16px;">
+                                    <h3 style="font-size: 16px; margin-bottom: 12px;">Recent Activity</h3>
+
+                                    <div class="card" style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 40px; height: 40px; background: #E6F4EA; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-icons" style="color: var(--secondary); font-size: 20px;">check_circle</span>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <p style="font-weight: 500; font-size: 14px;">MyGov Portal</p>
+                                            <p style="font-size: 12px; color: var(--on-surface-variant);">2 minutes ago</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 40px; height: 40px; background: #E6F4EA; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-icons" style="color: var(--secondary); font-size: 20px;">check_circle</span>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <p style="font-weight: 500; font-size: 14px;">Bank ABC Online</p>
+                                            <p style="font-size: 12px; color: var(--on-surface-variant);">Yesterday, 3:45 PM</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bottom-nav">
+                                    <div class="nav-item active">
+                                        <span class="material-icons">home</span>
+                                        <span>Home</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="material-icons">qr_code_scanner</span>
+                                        <span>Scan</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="material-icons">person</span>
+                                        <span>Profile</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">3.1 Home Dashboard</p>
+                </div>
+
+                <!-- QR Scanner -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="screen-content">
+                                <div class="qr-scanner-view">
+                                    <div class="qr-top-bar">
+                                        <span class="material-icons">close</span>
+                                        <span class="material-icons">flash_on</span>
+                                    </div>
+                                    <div class="qr-overlay">
+                                        <div class="qr-frame">
+                                            <div class="qr-corner top-left"></div>
+                                            <div class="qr-corner top-right"></div>
+                                            <div class="qr-corner bottom-left"></div>
+                                            <div class="qr-corner bottom-right"></div>
+                                        </div>
+                                        <div class="qr-instructions">
+                                            <p style="font-size: 18px; font-weight: 500; margin-bottom: 8px;">Scan QR Code</p>
+                                            <p style="opacity: 0.7;">Position the QR code within the frame to authenticate</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">3.2 QR Scanner</p>
+                </div>
+
+                <!-- Auth Confirmation -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="auth-confirm">
+                                    <div class="auth-icon">
+                                        <span class="material-icons">login</span>
+                                    </div>
+
+                                    <h2 style="font-size: 20px; font-weight: 500;">Sign In Request</h2>
+                                    <p style="color: var(--on-surface-variant); margin-top: 8px;">A service is requesting to verify your identity</p>
+
+                                    <div class="auth-details">
+                                        <div class="auth-detail-row">
+                                            <span class="auth-detail-label">Service</span>
+                                            <span class="auth-detail-value">MyGov Portal</span>
+                                        </div>
+                                        <div class="auth-detail-row">
+                                            <span class="auth-detail-label">Location</span>
+                                            <span class="auth-detail-value">Kuala Lumpur, MY</span>
+                                        </div>
+                                        <div class="auth-detail-row">
+                                            <span class="auth-detail-label">Browser</span>
+                                            <span class="auth-detail-value">Chrome on Windows</span>
+                                        </div>
+                                        <div class="auth-detail-row">
+                                            <span class="auth-detail-label">Time</span>
+                                            <span class="auth-detail-value">Just now</span>
+                                        </div>
+                                        <div class="auth-detail-row">
+                                            <span class="auth-detail-label">Algorithm</span>
+                                            <span class="algo-badge kaz">KAZ-SIGN-256</span>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; gap: 12px; margin-top: 24px;">
+                                        <button class="btn-outline" style="flex: 1;">Deny</button>
+                                        <button class="btn-primary" style="flex: 1;">Approve</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">3.3 Auth Confirmation</p>
+                </div>
+
+                <!-- Biometric Prompt -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: rgba(0,0,0,0.5);">
+                                <div class="biometric-overlay">
+                                    <div class="fingerprint-icon">
+                                        <span class="material-icons">fingerprint</span>
+                                    </div>
+                                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 8px;">Confirm with Biometrics</h3>
+                                    <p style="color: var(--on-surface-variant); margin-bottom: 24px;">Touch the fingerprint sensor to sign</p>
+
+                                    <div style="background: var(--background); border-radius: 8px; padding: 12px; text-align: left; margin-bottom: 24px;">
+                                        <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                                            <span style="color: var(--on-surface-variant);">Signing with</span>
+                                            <span class="algo-badge kaz">KAZ-SIGN-256</span>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-text">Use PIN instead</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">3.4 Biometric Prompt</p>
+                </div>
+
+                <!-- Auth Success -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content">
+                                <div class="success-screen">
+                                    <div class="success-icon">
+                                        <span class="material-icons">check</span>
+                                    </div>
+                                    <h2 class="success-title">Signed In!</h2>
+                                    <p class="success-message">You have successfully authenticated to MyGov Portal</p>
+
+                                    <div style="background: var(--background); border-radius: 12px; padding: 16px; width: 100%; text-align: left;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="material-icons" style="color: var(--secondary);">verified</span>
+                                            <div>
+                                                <p style="font-weight: 500; font-size: 14px;">Quantum-Safe Signature</p>
+                                                <p style="font-size: 12px; color: var(--on-surface-variant);">Signed with KAZ-SIGN-256</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p style="font-size: 13px; color: var(--on-surface-variant); margin-top: 24px;">
+                                        You can close this screen and continue on your browser
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">3.5 Auth Success</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- DEVICE TRANSFER SECTION (Replaces Multi-Device) -->
+        <div class="screen-group">
+            <h2 class="group-title">4. Device Transfer</h2>
+            <p class="group-note">Single device policy: Identity can only exist on one device at a time</p>
+            <div class="screens-row">
+
+                <!-- Current Device View -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar status-bar-dark">
+                                <span>9:41</span>
+                                <span style="color: white;">100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--background);">
+                                <div class="app-bar">
+                                    <span class="material-icons">arrow_back</span>
+                                    <span class="app-bar-title">My Device</span>
+                                </div>
+
+                                <div class="policy-banner">
+                                    <div class="policy-banner-title">Single Device Policy</div>
+                                    <div class="policy-banner-text">Your identity is securely bound to this device only. To use on another device, you must transfer your identity.</div>
+                                </div>
+
+                                <div class="device-card">
+                                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                                        <div style="width: 64px; height: 64px; background: var(--primary-light); border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-icons" style="font-size: 32px; color: var(--primary);">smartphone</span>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 18px; font-weight: 500;">Samsung Galaxy S24</div>
+                                            <div style="font-size: 13px; color: var(--on-surface-variant);">Android 14</div>
+                                        </div>
+                                        <span class="device-status current">Active</span>
+                                    </div>
+
+                                    <div style="border-top: 1px solid var(--outline); padding-top: 16px;">
+                                        <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                            <span style="color: var(--on-surface-variant); font-size: 14px;">Registered</span>
+                                            <span style="font-weight: 500; font-size: 14px;">Dec 1, 2025</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                            <span style="color: var(--on-surface-variant); font-size: 14px;">Last Active</span>
+                                            <span style="font-weight: 500; font-size: 14px;">Just now</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                            <span style="color: var(--on-surface-variant); font-size: 14px;">Algorithm</span>
+                                            <span class="algo-badge kaz">KAZ-SIGN-256</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 0 16px;">
+                                    <div class="card">
+                                        <h3 style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 16px;">SECURITY STATUS</h3>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 8px 0;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span>Biometrics enabled</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 8px 0;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span>Hardware-backed keys</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 8px 0;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span>Device integrity verified</span>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-outline" style="margin-top: 16px;">
+                                        <span style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                            <span class="material-icons" style="font-size: 20px;">swap_horiz</span>
+                                            Transfer to New Device
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">4.1 Current Device</p>
+                </div>
+
+                <!-- Transfer Warning -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="app-bar" style="background: transparent; color: var(--on-surface);">
+                                    <span class="material-icons">close</span>
+                                </div>
+
+                                <div style="padding: 24px; text-align: center;">
+                                    <div class="warning-icon" style="margin: 24px auto;">
+                                        <span class="material-icons">warning</span>
+                                    </div>
+
+                                    <h2 style="font-size: 22px; font-weight: 500; margin-bottom: 12px;">Transfer Identity?</h2>
+                                    <p style="color: var(--on-surface-variant); margin-bottom: 24px; line-height: 1.6;">
+                                        This will <strong>permanently remove</strong> your identity from this device and transfer it to your new device.
+                                    </p>
+
+                                    <div style="background: #FEF3E0; border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 24px;">
+                                        <div style="display: flex; gap: 12px;">
+                                            <span class="material-icons" style="color: var(--warning);">info</span>
+                                            <div>
+                                                <p style="font-weight: 500; font-size: 14px; margin-bottom: 8px;">Important</p>
+                                                <ul style="font-size: 13px; color: var(--on-surface-variant); padding-left: 16px; margin: 0;">
+                                                    <li style="margin-bottom: 4px;">You will be signed out of all services</li>
+                                                    <li style="margin-bottom: 4px;">Your keys will be securely erased from this device</li>
+                                                    <li>This action cannot be undone</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-primary" style="margin-bottom: 12px;">Continue Transfer</button>
+                                    <button class="btn-text">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">4.2 Transfer Warning</p>
+                </div>
+
+                <!-- Transfer QR (Source Device) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar status-bar-dark">
+                                <span>9:41</span>
+                                <span style="color: white;">100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div class="app-bar">
+                                    <span class="material-icons">close</span>
+                                    <span class="app-bar-title">Transfer Identity</span>
+                                </div>
+
+                                <div style="padding: 24px; text-align: center;">
+                                    <h2 style="font-size: 20px; font-weight: 500; margin-bottom: 8px;">Scan from New Device</h2>
+                                    <p style="color: var(--on-surface-variant); margin-bottom: 24px;">Open PQC Identity on your new device and scan this QR code</p>
+
+                                    <div style="background: white; padding: 24px; border-radius: 16px; display: inline-block; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                        <div style="width: 200px; height: 200px; background: linear-gradient(45deg, #000 25%, transparent 25%), linear-gradient(-45deg, #000 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(-45deg, transparent 75%, #000 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;"></div>
+                                    </div>
+
+                                    <p style="font-size: 13px; color: var(--on-surface-variant);">
+                                        This code expires in <strong>4:58</strong>
+                                    </p>
+
+                                    <div style="margin-top: 24px; padding: 16px; background: var(--primary-light); border-radius: 12px; text-align: left;">
+                                        <div style="display: flex; gap: 12px;">
+                                            <span class="material-icons" style="color: var(--primary);">lock</span>
+                                            <div>
+                                                <p style="font-weight: 500; font-size: 14px; margin-bottom: 4px;">Secure Transfer</p>
+                                                <p style="font-size: 13px; color: var(--on-surface-variant);">Keys are encrypted with KAZ-KEM during transfer</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">4.3 Transfer QR (Old Device)</p>
+                </div>
+
+                <!-- Transfer Progress (Source) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--surface);">
+                                <div style="padding: 24px; text-align: center; padding-top: 60px;">
+                                    <div class="loading-spinner"></div>
+
+                                    <h2 style="font-size: 20px; font-weight: 500; margin-bottom: 8px;">Transferring Identity</h2>
+                                    <p style="color: var(--on-surface-variant); margin-bottom: 32px;">Please keep both devices nearby</p>
+
+                                    <div style="text-align: left; padding: 0 16px;">
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span style="font-size: 14px;">New device connected</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <span class="material-icons" style="color: var(--secondary);">check_circle</span>
+                                            <span style="font-size: 14px;">KAZ-KEM session established</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                            <div class="loading-spinner" style="width: 24px; height: 24px; margin: 0; border-width: 3px;"></div>
+                                            <span style="font-size: 14px;">Encrypting and transferring keys...</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; color: var(--on-surface-variant);">
+                                            <span class="material-icons">radio_button_unchecked</span>
+                                            <span style="font-size: 14px;">Securely erasing from this device</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="progress-bar" style="margin-top: 32px;">
+                                        <div class="progress-fill" style="width: 60%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">4.4 Transfer Progress</p>
+                </div>
+
+                <!-- Transfer Complete (Source - Identity Removed) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content">
+                                <div class="success-screen">
+                                    <div class="success-icon">
+                                        <span class="material-icons">check</span>
+                                    </div>
+                                    <h2 class="success-title">Transfer Complete</h2>
+                                    <p class="success-message">Your identity has been securely transferred to your new device.</p>
+
+                                    <div style="background: var(--background); border-radius: 12px; padding: 16px; width: 100%; text-align: left; margin-bottom: 24px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="material-icons" style="color: var(--secondary);">verified</span>
+                                            <div>
+                                                <p style="font-weight: 500; font-size: 14px;">Keys Securely Erased</p>
+                                                <p style="font-size: 12px; color: var(--on-surface-variant);">This device no longer has access to your identity</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p style="font-size: 13px; color: var(--on-surface-variant); margin-bottom: 24px;">
+                                        You can now use your new device to authenticate.
+                                    </p>
+
+                                    <button class="btn-primary">Close App</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">4.5 Transfer Complete (Old)</p>
+                </div>
+
+                <!-- New Device - Receive Transfer -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="screen-content">
+                                <div class="success-screen">
+                                    <div class="success-icon">
+                                        <span class="material-icons">check</span>
+                                    </div>
+                                    <h2 class="success-title">Identity Received!</h2>
+                                    <p class="success-message">Your identity has been securely transferred to this device.</p>
+
+                                    <div style="background: var(--background); border-radius: 12px; padding: 16px; width: 100%; text-align: left; margin-bottom: 32px;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                            <span style="color: var(--on-surface-variant); font-size: 13px;">Algorithm</span>
+                                            <span class="algo-badge kaz">KAZ-SIGN-256</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                            <span style="color: var(--on-surface-variant); font-size: 13px;">Security Level</span>
+                                            <span style="font-weight: 500; font-size: 13px;">Level 5</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: var(--on-surface-variant); font-size: 13px;">Bound to</span>
+                                            <span style="font-weight: 500; font-size: 13px;">This Device Only</span>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-primary">Go to Dashboard</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">4.6 Transfer Complete (New)</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CERTIFICATE & PROFILE SECTION -->
+        <div class="screen-group">
+            <h2 class="group-title">5. Certificate & Profile</h2>
+            <div class="screens-row">
+
+                <!-- Certificate View -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar status-bar-dark">
+                                <span>9:41</span>
+                                <span style="color: white;">100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--background); padding-bottom: 80px;">
+                                <div class="app-bar">
+                                    <span class="material-icons">arrow_back</span>
+                                    <span class="app-bar-title">My Certificate</span>
+                                    <span class="material-icons" style="margin-left: auto;">share</span>
+                                </div>
+
+                                <div class="cert-card">
+                                    <div class="cert-header">
+                                        <div>
+                                            <div class="cert-type">Digital Signing Certificate</div>
+                                            <div class="cert-name">Ahmad bin Abdullah</div>
+                                        </div>
+                                        <span class="cert-badge">Active</span>
+                                    </div>
+                                    <div class="cert-details">
+                                        <div>
+                                            <div class="cert-detail-label">Algorithm</div>
+                                            <div class="cert-detail-value">KAZ-SIGN-256</div>
+                                        </div>
+                                        <div>
+                                            <div class="cert-detail-label">Security Level</div>
+                                            <div class="cert-detail-value">Level 5</div>
+                                        </div>
+                                        <div>
+                                            <div class="cert-detail-label">Issued</div>
+                                            <div class="cert-detail-value">Dec 1, 2025</div>
+                                        </div>
+                                        <div>
+                                            <div class="cert-detail-label">Expires</div>
+                                            <div class="cert-detail-value">Dec 1, 2027</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 0 16px;">
+                                    <div class="card">
+                                        <h3 style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 16px;">CERTIFICATE DETAILS</h3>
+                                        <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--outline);">
+                                            <span style="color: var(--on-surface-variant); font-size: 14px;">Serial Number</span>
+                                            <span style="font-family: monospace; font-size: 12px;">A1B2C3...XYZ</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--outline);">
+                                            <span style="color: var(--on-surface-variant); font-size: 14px;">Issuer</span>
+                                            <span style="font-size: 14px;">PQC Identity CA</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                            <span style="color: var(--on-surface-variant); font-size: 14px;">Key Usage</span>
+                                            <span style="font-size: 14px;">Digital Signature</span>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; gap: 12px; margin-top: 16px;">
+                                        <button class="btn-outline" style="flex: 1;">Export</button>
+                                        <button class="btn-primary" style="flex: 1;">Renew</button>
+                                    </div>
+                                </div>
+
+                                <div class="bottom-nav">
+                                    <div class="nav-item">
+                                        <span class="material-icons">home</span>
+                                        <span>Home</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="material-icons">qr_code_scanner</span>
+                                        <span>Scan</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="material-icons">person</span>
+                                        <span>Profile</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">5.1 Certificate View</p>
+                </div>
+
+                <!-- Profile (Updated - Single Device) -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar status-bar-dark">
+                                <span>9:41</span>
+                                <span style="color: white;">100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--background); padding-bottom: 80px;">
+                                <div class="profile-header">
+                                    <div class="profile-avatar">
+                                        <span class="material-icons">person</span>
+                                    </div>
+                                    <div class="profile-name">Ahmad bin Abdullah</div>
+                                    <div class="profile-email">ahmad@example.com</div>
+                                </div>
+
+                                <div class="profile-content">
+                                    <div class="profile-stats">
+                                        <div class="stat-item">
+                                            <div class="stat-value">47</div>
+                                            <div class="stat-label">Sign-ins</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value">1</div>
+                                            <div class="stat-label">Device</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value">1</div>
+                                            <div class="stat-label">Certificate</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="menu-item">
+                                        <div class="menu-icon">
+                                            <span class="material-icons">verified_user</span>
+                                        </div>
+                                        <span class="menu-text">My Certificate</span>
+                                        <span class="material-icons menu-arrow">chevron_right</span>
+                                    </div>
+
+                                    <div class="menu-item">
+                                        <div class="menu-icon">
+                                            <span class="material-icons">smartphone</span>
+                                        </div>
+                                        <span class="menu-text">My Device</span>
+                                        <span class="material-icons menu-arrow">chevron_right</span>
+                                    </div>
+
+                                    <div class="menu-item">
+                                        <div class="menu-icon">
+                                            <span class="material-icons">history</span>
+                                        </div>
+                                        <span class="menu-text">Activity History</span>
+                                        <span class="material-icons menu-arrow">chevron_right</span>
+                                    </div>
+
+                                    <div class="menu-item">
+                                        <div class="menu-icon">
+                                            <span class="material-icons">security</span>
+                                        </div>
+                                        <span class="menu-text">Security Settings</span>
+                                        <span class="material-icons menu-arrow">chevron_right</span>
+                                    </div>
+
+                                    <div class="menu-item">
+                                        <div class="menu-icon">
+                                            <span class="material-icons">help</span>
+                                        </div>
+                                        <span class="menu-text">Help & Support</span>
+                                        <span class="material-icons menu-arrow">chevron_right</span>
+                                    </div>
+                                </div>
+
+                                <div class="bottom-nav">
+                                    <div class="nav-item">
+                                        <span class="material-icons">home</span>
+                                        <span>Home</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="material-icons">qr_code_scanner</span>
+                                        <span>Scan</span>
+                                    </div>
+                                    <div class="nav-item active">
+                                        <span class="material-icons">person</span>
+                                        <span>Profile</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">5.2 Profile</p>
+                </div>
+
+                <!-- Security Settings -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar status-bar-dark">
+                                <span>9:41</span>
+                                <span style="color: white;">100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--background);">
+                                <div class="app-bar">
+                                    <span class="material-icons">arrow_back</span>
+                                    <span class="app-bar-title">Security Settings</span>
+                                </div>
+
+                                <div style="padding: 16px;">
+                                    <div class="card">
+                                        <h3 style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 16px;">AUTHENTICATION</h3>
+
+                                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--outline);">
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <span class="material-icons" style="color: var(--primary);">fingerprint</span>
+                                                <span>Biometric Login</span>
+                                            </div>
+                                            <div style="width: 48px; height: 28px; background: var(--primary); border-radius: 14px; position: relative;">
+                                                <div style="width: 24px; height: 24px; background: white; border-radius: 50%; position: absolute; right: 2px; top: 2px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <span class="material-icons" style="color: var(--primary);">pin</span>
+                                                <span>Backup PIN</span>
+                                            </div>
+                                            <span class="material-icons" style="color: var(--on-surface-variant);">chevron_right</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <h3 style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 16px;">CRYPTOGRAPHY</h3>
+
+                                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--outline);">
+                                            <div>
+                                                <div style="font-weight: 500;">Signature Algorithm</div>
+                                                <div style="font-size: 12px; color: var(--on-surface-variant);">KAZ-SIGN-256 (Level 5)</div>
+                                            </div>
+                                            <span class="algo-badge kaz" style="font-size: 10px;">FIXED</span>
+                                        </div>
+
+                                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                                            <div>
+                                                <div style="font-weight: 500;">Key Encapsulation</div>
+                                                <div style="font-size: 12px; color: var(--on-surface-variant);">KAZ-KEM-256 (Level 5)</div>
+                                            </div>
+                                            <span class="algo-badge kaz" style="font-size: 10px;">FIXED</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <h3 style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 16px;">DEVICE & IDENTITY</h3>
+
+                                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--outline);">
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <span class="material-icons" style="color: var(--primary);">swap_horiz</span>
+                                                <span>Transfer to New Device</span>
+                                            </div>
+                                            <span class="material-icons" style="color: var(--on-surface-variant);">chevron_right</span>
+                                        </div>
+
+                                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <span class="material-icons" style="color: var(--error);">delete_forever</span>
+                                                <span style="color: var(--error);">Delete Identity</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">5.3 Security Settings</p>
+                </div>
+
+                <!-- Activity History -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="notch"></div>
+                            <div class="status-bar status-bar-dark">
+                                <span>9:41</span>
+                                <span style="color: white;">100%</span>
+                            </div>
+                            <div class="screen-content" style="background: var(--background);">
+                                <div class="app-bar">
+                                    <span class="material-icons">arrow_back</span>
+                                    <span class="app-bar-title">Activity History</span>
+                                    <span class="material-icons" style="margin-left: auto;">filter_list</span>
+                                </div>
+
+                                <div style="padding: 16px;">
+                                    <p style="font-size: 12px; color: var(--on-surface-variant); margin-bottom: 8px;">TODAY</p>
+
+                                    <div class="card" style="display: flex; gap: 12px;">
+                                        <div style="width: 40px; height: 40px; background: #E6F4EA; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-icons" style="color: var(--secondary); font-size: 20px;">check_circle</span>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <p style="font-weight: 500;">MyGov Portal</p>
+                                            <p style="font-size: 12px; color: var(--on-surface-variant);">Signed in successfully</p>
+                                            <p style="font-size: 11px; color: var(--on-surface-variant);">10:45 AM • Chrome on Windows</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="display: flex; gap: 12px;">
+                                        <div style="width: 40px; height: 40px; background: #E6F4EA; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-icons" style="color: var(--secondary); font-size: 20px;">check_circle</span>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <p style="font-weight: 500;">Bank ABC Online</p>
+                                            <p style="font-size: 12px; color: var(--on-surface-variant);">Transaction signed</p>
+                                            <p style="font-size: 11px; color: var(--on-surface-variant);">9:30 AM • Safari on macOS</p>
+                                        </div>
+                                    </div>
+
+                                    <p style="font-size: 12px; color: var(--on-surface-variant); margin: 16px 0 8px;">YESTERDAY</p>
+
+                                    <div class="card" style="display: flex; gap: 12px;">
+                                        <div style="width: 40px; height: 40px; background: #FEF3E0; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-icons" style="color: var(--warning); font-size: 20px;">block</span>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <p style="font-weight: 500;">Unknown Service</p>
+                                            <p style="font-size: 12px; color: var(--on-surface-variant);">Sign-in denied by user</p>
+                                            <p style="font-size: 11px; color: var(--on-surface-variant);">3:22 PM • Firefox on Linux</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="display: flex; gap: 12px;">
+                                        <div style="width: 40px; height: 40px; background: #E6F4EA; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-icons" style="color: var(--secondary); font-size: 20px;">check_circle</span>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <p style="font-weight: 500;">MyGov Portal</p>
+                                            <p style="font-size: 12px; color: var(--on-surface-variant);">Signed in successfully</p>
+                                            <p style="font-size: 11px; color: var(--on-surface-variant);">11:15 AM • Chrome on Windows</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-label">5.4 Activity History</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/bin/Debug/net10.0/Antrapol.IdP.SharedKernel.deps.json
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/bin/Debug/net10.0/Antrapol.IdP.SharedKernel.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/bin/Debug/net10.0/Antrapol.IdP.SharedKernel.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/bin/Debug/net10.0/Antrapol.IdP.SharedKernel.xml
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/Antrapol.IdP.SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/Antrapol.IdP.SharedKernel.AssemblyInfoInputs.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/Antrapol.IdP.SharedKernel.AssemblyInfo.cs
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/Antrapol.IdP.SharedKernel.csproj.CoreCompileInputs.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/Antrapol.IdP.SharedKernel.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/refint/Antrapol.IdP.SharedKernel.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/Antrapol.IdP.SharedKernel.xml
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/Antrapol.IdP.SharedKernel.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/Antrapol.IdP.SharedKernel/obj/Debug/net10.0/ref/Antrapol.IdP.SharedKernel.dll

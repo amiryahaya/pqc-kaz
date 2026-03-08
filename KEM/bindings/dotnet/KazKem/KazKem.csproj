@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <!-- Package Info -->
+    <PackageId>Antrapol.Kaz.Kem</PackageId>
+    <RootNamespace>Antrapol.Kaz.Kem</RootNamespace>
+    <AssemblyName>Antrapol.Kaz.Kem</AssemblyName>
+    <Version>2.1.0</Version>
+    <Authors>Antrapol</Authors>
+    <Company>Antrapol</Company>
+    <Description>KAZ-KEM Post-Quantum Key Encapsulation Mechanism for .NET</Description>
+    <Copyright>Copyright (c) 2025 Antrapol</Copyright>
+    <PackageTags>cryptography;post-quantum;kem;pqc;security;antrapol</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/pqc-kaz/pqc-kaz</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!-- Native library packaging -->
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <!-- Native library includes for NuGet package -->
+  <ItemGroup>
+    <None Include="runtimes\**\*" Pack="true" PackagePath="runtimes" />
+  </ItemGroup>
+
+  <!-- Reference System.Memory for Span support on older frameworks -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+  </ItemGroup>
+
+</Project>

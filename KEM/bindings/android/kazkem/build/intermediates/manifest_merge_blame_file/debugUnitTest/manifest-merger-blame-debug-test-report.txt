@@ -1,0 +1,43 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.antrapol.kaz.kem.test" >
+4
+5    <uses-sdk
+5-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:5:5-74
+6        android:minSdkVersion="24"
+6-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:5:15-41
+7        android:targetSdkVersion="24" />
+7-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:5:42-71
+8
+9    <instrumentation
+9-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:11:5-13:75
+10        android:name="android.test.InstrumentationTestRunner"
+10-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:11:22-75
+11        android:label="Tests for com.antrapol.kaz.kem.test"
+11-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:13:22-73
+12        android:targetPackage="com.antrapol.kaz.kem.test" />
+12-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:12:22-71
+13
+14    <permission
+14-->[androidx.core:core:1.12.0] /Users/amirrudinyahaya/.gradle/caches/transforms-3/9e97f1ea15db2631a37a082d431e0426/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+15        android:name="com.antrapol.kaz.kem.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+15-->[androidx.core:core:1.12.0] /Users/amirrudinyahaya/.gradle/caches/transforms-3/9e97f1ea15db2631a37a082d431e0426/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+16        android:protectionLevel="signature" />
+16-->[androidx.core:core:1.12.0] /Users/amirrudinyahaya/.gradle/caches/transforms-3/9e97f1ea15db2631a37a082d431e0426/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+17
+18    <uses-permission android:name="com.antrapol.kaz.kem.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+18-->[androidx.core:core:1.12.0] /Users/amirrudinyahaya/.gradle/caches/transforms-3/9e97f1ea15db2631a37a082d431e0426/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+18-->[androidx.core:core:1.12.0] /Users/amirrudinyahaya/.gradle/caches/transforms-3/9e97f1ea15db2631a37a082d431e0426/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+19
+20    <application
+20-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:7:5-9:19
+21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+21-->[androidx.core:core:1.12.0] /Users/amirrudinyahaya/.gradle/caches/transforms-3/9e97f1ea15db2631a37a082d431e0426/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+22        android:debuggable="true" >
+22-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:7:18-43
+23        <uses-library android:name="android.test.runner" />
+23-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:8:9-60
+23-->/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/tmp/manifest/test/debug/tempFile1ProcessTestManifest10780698435836155702.xml:8:23-57
+24    </application>
+25
+26</manifest>

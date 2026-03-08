@@ -1,0 +1,103 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFramework = net10.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.RootNamespace = PqcIdentity.Api
+build_property.RootNamespace = PqcIdentity.Api
+build_property.ProjectDir = /Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/PqcIdentity.Api/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/PqcIdentity.Api
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Admin/PqcIdentity.Admin.Api/bin/Debug/net10.0/PqcIdentity.Admin.Api.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Admin/PqcIdentity.Admin.Application/bin/Debug/net10.0/PqcIdentity.Admin.Application.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Admin/PqcIdentity.Admin.Domain/bin/Debug/net10.0/PqcIdentity.Admin.Domain.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Admin/PqcIdentity.Admin.Infrastructure/bin/Debug/net10.0/PqcIdentity.Admin.Infrastructure.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/PqcIdentity.Certificate.Api/bin/Debug/net10.0/PqcIdentity.Certificate.Api.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/PqcIdentity.Certificate.Application/bin/Debug/net10.0/PqcIdentity.Certificate.Application.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/PqcIdentity.Certificate.Domain/bin/Debug/net10.0/PqcIdentity.Certificate.Domain.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/PqcIdentity.Certificate.Infrastructure/bin/Debug/net10.0/PqcIdentity.Certificate.Infrastructure.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/PqcIdentity.Common/bin/Debug/net10.0/PqcIdentity.Common.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Crypto/PqcIdentity.Crypto.Api/bin/Debug/net10.0/PqcIdentity.Crypto.Api.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Crypto/PqcIdentity.Crypto.Application/bin/Debug/net10.0/PqcIdentity.Crypto.Application.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Crypto/PqcIdentity.Crypto.Domain/bin/Debug/net10.0/PqcIdentity.Crypto.Domain.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Crypto/PqcIdentity.Crypto.Infrastructure/bin/Debug/net10.0/PqcIdentity.Crypto.Infrastructure.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/PqcIdentity.Identity.Api/bin/Debug/net10.0/PqcIdentity.Identity.Api.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/PqcIdentity.Identity.Application/bin/Debug/net10.0/PqcIdentity.Identity.Application.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/PqcIdentity.Identity.Domain/bin/Debug/net10.0/PqcIdentity.Identity.Domain.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Identity/PqcIdentity.Identity.Infrastructure/bin/Debug/net10.0/PqcIdentity.Identity.Infrastructure.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/PqcIdentity.SharedKernel/bin/Debug/net10.0/PqcIdentity.SharedKernel.xml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 

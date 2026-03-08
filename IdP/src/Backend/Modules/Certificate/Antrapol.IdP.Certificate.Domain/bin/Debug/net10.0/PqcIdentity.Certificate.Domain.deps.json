@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "PqcIdentity.Certificate.Domain/1.0.0": {
+        "dependencies": {
+          "PqcIdentity.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "PqcIdentity.Certificate.Domain.dll": {}
+        }
+      },
+      "PqcIdentity.SharedKernel/1.0.0": {
+        "runtime": {
+          "PqcIdentity.SharedKernel.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PqcIdentity.Certificate.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PqcIdentity.SharedKernel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

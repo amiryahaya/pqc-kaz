@@ -1,0 +1,121 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "CKazKem-arm64-apple-macosx26.0-debug.module": ["<CKazKem-arm64-apple-macosx26.0-debug.module>"]
+  "KazKem-arm64-apple-macosx26.0-debug.module": ["<KazKem-arm64-apple-macosx26.0-debug.module>"]
+  "KazKemPackageTests-arm64-apple-macosx26.0-debug.module": ["<KazKemPackageTests-arm64-apple-macosx26.0-debug.module>"]
+  "KazKemPackageTests-arm64-apple-macosx26.0-debug.test": ["<KazKemPackageTests-arm64-apple-macosx26.0-debug.test>"]
+  "KazKemTests-arm64-apple-macosx26.0-debug.module": ["<KazKemTests-arm64-apple-macosx26.0-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<CKazKem-arm64-apple-macosx26.0-debug.module>","<KazKem-arm64-apple-macosx26.0-debug.module>"]
+  "test": ["<CKazKem-arm64-apple-macosx26.0-debug.module>","<KazKem-arm64-apple-macosx26.0-debug.module>","<KazKemPackageTests-arm64-apple-macosx26.0-debug.test>","<KazKemTests-arm64-apple-macosx26.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/CKazKem/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Tests/KazKemTests/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KazKem.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KazKemError.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KeyPair.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/SecurityLevel.swift"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/sources"]
+    description: "Write auxiliary file /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/sources"
+
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.derived/runner.swift"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/sources"]
+    description: "Write auxiliary file /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/sources"
+
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.derived/runner.swift":
+    tool: test-entry-point-tool
+    inputs: []
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.derived/runner.swift"]
+
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/runner.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests.swift.o"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.product/Objects.LinkFileList"
+
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Tests/KazKemTests/KazKemTests.swift"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/sources"]
+    description: "Write auxiliary file /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/sources"
+
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<CKazKem-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: []
+    outputs: ["<CKazKem-arm64-apple-macosx26.0-debug.module>"]
+
+  "<KazKem-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKem.swiftmodule"]
+    outputs: ["<KazKem-arm64-apple-macosx26.0-debug.module>"]
+
+  "<KazKemPackageTests-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/runner.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemPackageTests.swiftmodule"]
+    outputs: ["<KazKemPackageTests-arm64-apple-macosx26.0-debug.module>"]
+
+  "<KazKemPackageTests-arm64-apple-macosx26.0-debug.test>":
+    tool: phony
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.xctest/Contents/MacOS/KazKemPackageTests"]
+    outputs: ["<KazKemPackageTests-arm64-apple-macosx26.0-debug.test>"]
+
+  "<KazKemTests-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemTests.swiftmodule"]
+    outputs: ["<KazKemTests-arm64-apple-macosx26.0-debug.module>"]
+
+  "C.KazKem-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KazKem.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KazKemError.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/KeyPair.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/SecurityLevel.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/sources"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKem.swiftmodule"]
+    description: "Compiling Swift Module 'KazKem' (4 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","KazKem","-emit-dependencies","-emit-module","-emit-module-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKem.swiftmodule","-output-file-map","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/sources","-I","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx12.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j14","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-Xcc","-fmodule-map-file=/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/CKazKem/include/module.modulemap","-Xcc","-I","-Xcc","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/CKazKem/include","-module-cache-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/include/KazKem-Swift.h","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","swift"]
+
+  "C.KazKemPackageTests-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.derived/runner.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemTests.swiftmodule","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/sources"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/runner.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemPackageTests.swiftmodule"]
+    description: "Compiling Swift Module 'KazKemPackageTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","KazKemPackageTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemPackageTests.swiftmodule","-output-file-map","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/sources","-I","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx12.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-Xfrontend","-enable-cross-import-overlays","-j14","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-Xcc","-fmodule-map-file=/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/CKazKem/include/module.modulemap","-Xcc","-I","-Xcc","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/CKazKem/include","-module-cache-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/include/KazKemPackageTests-Swift.h","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","swift"]
+
+  "C.KazKemPackageTests-arm64-apple-macosx26.0-debug.test":
+    tool: shell
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKem.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KazKemError.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/KeyPair.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKem.build/SecurityLevel.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.build/runner.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.product/Objects.LinkFileList"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.xctest/Contents/MacOS/KazKemPackageTests"]
+    description: "Linking ./.build/arm64-apple-macosx/debug/KazKemPackageTests.xctest/Contents/MacOS/KazKemPackageTests"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug","-o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.xctest/Contents/MacOS/KazKemPackageTests","-module-name","KazKemPackageTests","-Xlinker","-no_warn_duplicate_libraries","-Xlinker","-bundle","-Xlinker","-rpath","-Xlinker","@loader_path/../../../","@/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemPackageTests.product/Objects.LinkFileList","-target","arm64-apple-macosx14.0","-lkazkem","-lcrypto","-L/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/lib","-L/usr/local/lib","-L/opt/homebrew/lib","-L/opt/homebrew/opt/openssl@3/lib","-Xlinker","-add_ast_path","-Xlinker","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKem.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemPackageTests.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemTests.swiftmodule","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.KazKemTests-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Tests/KazKemTests/KazKemTests.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKem.swiftmodule","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/sources"]
+    outputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/KazKemTests.swift.o","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemTests.swiftmodule"]
+    description: "Compiling Swift Module 'KazKemTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","KazKemTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazKemTests.swiftmodule","-output-file-map","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/KazKemTests.build/sources","-I","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-Xfrontend","-enable-cross-import-overlays","-j14","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-Xcc","-fmodule-map-file=/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/CKazKem/include/module.modulemap","-Xcc","-I","-Xcc","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/CKazKem/include","-module-cache-path","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","swift"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/CKazKem/","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Sources/KazKem/","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Tests/KazKemTests/","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Package.swift","/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/swift/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

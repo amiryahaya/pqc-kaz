@@ -1,0 +1,181 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "IdP.Certificate.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "IdP.Certificate.Domain": "1.0.0",
+          "IdP.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IdP.Certificate.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IdP.Certificate.Application.dll": {}
+        }
+      },
+      "IdP.Certificate.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "IdP.SharedKernel": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IdP.Certificate.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IdP.Certificate.Domain.dll": {}
+        }
+      },
+      "IdP.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/IdP.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IdP.Common.dll": {}
+        }
+      },
+      "IdP.SharedKernel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/IdP.SharedKernel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IdP.SharedKernel.dll": {}
+        }
+      },
+      "IdP.SharedKernel.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "IdP.SharedKernel": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IdP.SharedKernel.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IdP.SharedKernel.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "IdP.Certificate.Application/1.0.0": {
+      "type": "project",
+      "path": "../IdP.Certificate.Application/IdP.Certificate.Application.csproj",
+      "msbuildProject": "../IdP.Certificate.Application/IdP.Certificate.Application.csproj"
+    },
+    "IdP.Certificate.Domain/1.0.0": {
+      "type": "project",
+      "path": "../IdP.Certificate.Domain/IdP.Certificate.Domain.csproj",
+      "msbuildProject": "../IdP.Certificate.Domain/IdP.Certificate.Domain.csproj"
+    },
+    "IdP.Common/1.0.0": {
+      "type": "project",
+      "path": "../../../Shared/IdP.Common/IdP.Common.csproj",
+      "msbuildProject": "../../../Shared/IdP.Common/IdP.Common.csproj"
+    },
+    "IdP.SharedKernel/1.0.0": {
+      "type": "project",
+      "path": "../../../Shared/IdP.SharedKernel/IdP.SharedKernel.csproj",
+      "msbuildProject": "../../../Shared/IdP.SharedKernel/IdP.SharedKernel.csproj"
+    },
+    "IdP.SharedKernel.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../../../Shared/IdP.SharedKernel.Infrastructure/IdP.SharedKernel.Infrastructure.csproj",
+      "msbuildProject": "../../../Shared/IdP.SharedKernel.Infrastructure/IdP.SharedKernel.Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "IdP.Certificate.Application >= 1.0.0",
+      "IdP.SharedKernel.Infrastructure >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/amirrudinyahaya/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Infrastructure/IdP.Certificate.Infrastructure.csproj",
+      "projectName": "IdP.Certificate.Infrastructure",
+      "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Infrastructure/IdP.Certificate.Infrastructure.csproj",
+      "packagesPath": "/Users/amirrudinyahaya/.nuget/packages/",
+      "outputPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Infrastructure/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/amirrudinyahaya/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.pkg.github.com/touchpoint-intl/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Application/IdP.Certificate.Application.csproj": {
+              "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Modules/Certificate/IdP.Certificate.Application/IdP.Certificate.Application.csproj"
+            },
+            "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/IdP.SharedKernel.Infrastructure/IdP.SharedKernel.Infrastructure.csproj": {
+              "projectPath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/IdP/src/Backend/Shared/IdP.SharedKernel.Infrastructure/IdP.SharedKernel.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.100"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.11, 9.0.11]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.11, 9.0.11]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Antrapol.IdP.Crypto.Infrastructure</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Antrapol.IdP.Crypto.Application\Antrapol.IdP.Crypto.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- PKCS#11 interop for HSM/SoftHSM integration -->
+    <PackageReference Include="Pkcs11Interop" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Post-Quantum Cryptography (KAZ Algorithms) - Local Project References -->
+    <ProjectReference Include="..\..\..\..\..\..\SIGN\bindings\csharp\KazSign\KazSign.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\KEM\bindings\dotnet\KazKem\KazKem.csproj" />
+  </ItemGroup>
+
+  <!-- Native library references for liboqs will be added here -->
+  <ItemGroup>
+    <None Include="Native\runtimes\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
