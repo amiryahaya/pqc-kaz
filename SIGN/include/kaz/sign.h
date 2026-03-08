@@ -188,6 +188,26 @@ const kaz_sign_level_params_t *kaz_sign_get_level_params(kaz_sign_level_t level)
 #define KAZ_SIGN_BACKEND "OpenSSL (constant-time)"
 
 /* ============================================================================
+ * KazWire Encoding Constants (aligned with kaz-pqc-core-v2.0)
+ * ============================================================================ */
+#define KAZ_WIRE_MAGIC_HI      0x67
+#define KAZ_WIRE_MAGIC_LO      0x52
+#define KAZ_WIRE_VERSION       0x01
+
+#define KAZ_WIRE_SIGN_128      0x01
+#define KAZ_WIRE_SIGN_192      0x02
+#define KAZ_WIRE_SIGN_256      0x03
+
+#define KAZ_WIRE_TYPE_PRIV     0x01
+#define KAZ_WIRE_TYPE_PUB      0x02
+#define KAZ_WIRE_TYPE_SIG_DET  0x10
+#define KAZ_WIRE_TYPE_SIG_ATT  0x11
+
+#define KAZ_WIRE_HEADER_LEN    5
+#define KAZ_WIRE_PAYLOAD_MARKER 0x50
+#define KAZ_WIRE_PAYLOAD_VER    0x01
+
+/* ============================================================================
  * Error Codes
  * ============================================================================ */
 
@@ -728,6 +748,52 @@ int kaz_sign_load_p12(kaz_sign_level_t level,
                       unsigned char *pk,
                       unsigned char *cert,
                       unsigned long long *certlen);
+
+/* ============================================================================
+ * KazWire Encoding/Decoding API
+ * ============================================================================ */
+
+/**
+ * Encode a public key to KazWire format (5-byte header + raw key)
+ */
+int kaz_sign_pubkey_to_wire(kaz_sign_level_t level,
+                            const unsigned char *pk, size_t pk_len,
+                            unsigned char *out, size_t *out_len);
+
+/**
+ * Decode a public key from KazWire format
+ */
+int kaz_sign_pubkey_from_wire(const unsigned char *wire, size_t wire_len,
+                              kaz_sign_level_t *level,
+                              unsigned char *pk, size_t *pk_len);
+
+/**
+ * Encode a private key to KazWire format (5-byte header + raw key)
+ */
+int kaz_sign_privkey_to_wire(kaz_sign_level_t level,
+                             const unsigned char *sk, size_t sk_len,
+                             unsigned char *out, size_t *out_len);
+
+/**
+ * Decode a private key from KazWire format
+ */
+int kaz_sign_privkey_from_wire(const unsigned char *wire, size_t wire_len,
+                               kaz_sign_level_t *level,
+                               unsigned char *sk, size_t *sk_len);
+
+/**
+ * Encode a detached signature to KazWire format (5-byte header + raw sig)
+ */
+int kaz_sign_sig_to_wire(kaz_sign_level_t level,
+                         const unsigned char *sig, size_t sig_len,
+                         unsigned char *out, size_t *out_len);
+
+/**
+ * Decode a detached signature from KazWire format
+ */
+int kaz_sign_sig_from_wire(const unsigned char *wire, size_t wire_len,
+                           kaz_sign_level_t *level,
+                           unsigned char *sig, size_t *sig_len);
 
 #ifdef __cplusplus
 }

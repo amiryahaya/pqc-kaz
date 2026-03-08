@@ -1844,3 +1844,226 @@ cleanup:
 
     return ret;
 }
+
+/* ============================================================================
+ * KazWire Encoding/Decoding
+ * ============================================================================ */
+
+static int level_to_wire_alg(kaz_sign_level_t level) {
+    switch (level) {
+        case KAZ_LEVEL_128: return KAZ_WIRE_SIGN_128;
+        case KAZ_LEVEL_192: return KAZ_WIRE_SIGN_192;
+        case KAZ_LEVEL_256: return KAZ_WIRE_SIGN_256;
+        default: return -1;
+    }
+}
+
+static kaz_sign_level_t wire_alg_to_level(int alg) {
+    switch (alg) {
+        case KAZ_WIRE_SIGN_128: return KAZ_LEVEL_128;
+        case KAZ_WIRE_SIGN_192: return KAZ_LEVEL_192;
+        case KAZ_WIRE_SIGN_256: return KAZ_LEVEL_256;
+        default: return (kaz_sign_level_t)-1;
+    }
+}
+
+static void wire_write_header(unsigned char *out, int alg_id, int type_id) {
+    out[0] = KAZ_WIRE_MAGIC_HI;
+    out[1] = KAZ_WIRE_MAGIC_LO;
+    out[2] = (unsigned char)alg_id;
+    out[3] = (unsigned char)type_id;
+    out[4] = KAZ_WIRE_VERSION;
+}
+
+static int wire_validate_header(const unsigned char *wire, size_t wire_len,
+                                int expected_type, kaz_sign_level_t *level) {
+    if (wire_len < KAZ_WIRE_HEADER_LEN)
+        return KAZ_SIGN_ERROR_INVALID;
+    if (wire[0] != KAZ_WIRE_MAGIC_HI || wire[1] != KAZ_WIRE_MAGIC_LO)
+        return KAZ_SIGN_ERROR_INVALID;
+    if (wire[3] != (unsigned char)expected_type)
+        return KAZ_SIGN_ERROR_INVALID;
+    if (wire[4] != KAZ_WIRE_VERSION)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    kaz_sign_level_t lvl = wire_alg_to_level(wire[2]);
+    if ((int)lvl == -1)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    *level = lvl;
+    return KAZ_SIGN_SUCCESS;
+}
+
+int kaz_sign_pubkey_to_wire(kaz_sign_level_t level,
+                            const unsigned char *pk, size_t pk_len,
+                            unsigned char *out, size_t *out_len) {
+    if (!pk || !out_len)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    const kaz_sign_level_params_t *params = kaz_sign_get_level_params(level);
+    if (!params)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    if (pk_len != params->public_key_bytes)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    size_t needed = KAZ_WIRE_HEADER_LEN + params->public_key_bytes;
+
+    if (!out) {
+        *out_len = needed;
+        return KAZ_SIGN_SUCCESS;
+    }
+
+    if (*out_len < needed)
+        return KAZ_SIGN_ERROR_BUFFER;
+
+    int alg = level_to_wire_alg(level);
+    if (alg < 0)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    wire_write_header(out, alg, KAZ_WIRE_TYPE_PUB);
+    memcpy(out + KAZ_WIRE_HEADER_LEN, pk, params->public_key_bytes);
+    *out_len = needed;
+    return KAZ_SIGN_SUCCESS;
+}
+
+int kaz_sign_pubkey_from_wire(const unsigned char *wire, size_t wire_len,
+                              kaz_sign_level_t *level,
+                              unsigned char *pk, size_t *pk_len) {
+    if (!wire || !level || !pk || !pk_len)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    kaz_sign_level_t lvl;
+    int ret = wire_validate_header(wire, wire_len, KAZ_WIRE_TYPE_PUB, &lvl);
+    if (ret != KAZ_SIGN_SUCCESS)
+        return ret;
+
+    const kaz_sign_level_params_t *params = kaz_sign_get_level_params(lvl);
+    if (!params)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    size_t expected = KAZ_WIRE_HEADER_LEN + params->public_key_bytes;
+    if (wire_len != expected)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    *level = lvl;
+    *pk_len = params->public_key_bytes;
+    memcpy(pk, wire + KAZ_WIRE_HEADER_LEN, params->public_key_bytes);
+    return KAZ_SIGN_SUCCESS;
+}
+
+int kaz_sign_privkey_to_wire(kaz_sign_level_t level,
+                             const unsigned char *sk, size_t sk_len,
+                             unsigned char *out, size_t *out_len) {
+    if (!sk || !out_len)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    const kaz_sign_level_params_t *params = kaz_sign_get_level_params(level);
+    if (!params)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    if (sk_len != params->secret_key_bytes)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    size_t needed = KAZ_WIRE_HEADER_LEN + params->secret_key_bytes;
+
+    if (!out) {
+        *out_len = needed;
+        return KAZ_SIGN_SUCCESS;
+    }
+
+    if (*out_len < needed)
+        return KAZ_SIGN_ERROR_BUFFER;
+
+    int alg = level_to_wire_alg(level);
+    if (alg < 0)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    wire_write_header(out, alg, KAZ_WIRE_TYPE_PRIV);
+    memcpy(out + KAZ_WIRE_HEADER_LEN, sk, params->secret_key_bytes);
+    *out_len = needed;
+    return KAZ_SIGN_SUCCESS;
+}
+
+int kaz_sign_privkey_from_wire(const unsigned char *wire, size_t wire_len,
+                               kaz_sign_level_t *level,
+                               unsigned char *sk, size_t *sk_len) {
+    if (!wire || !level || !sk || !sk_len)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    kaz_sign_level_t lvl;
+    int ret = wire_validate_header(wire, wire_len, KAZ_WIRE_TYPE_PRIV, &lvl);
+    if (ret != KAZ_SIGN_SUCCESS)
+        return ret;
+
+    const kaz_sign_level_params_t *params = kaz_sign_get_level_params(lvl);
+    if (!params)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    size_t expected = KAZ_WIRE_HEADER_LEN + params->secret_key_bytes;
+    if (wire_len != expected)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    *level = lvl;
+    *sk_len = params->secret_key_bytes;
+    memcpy(sk, wire + KAZ_WIRE_HEADER_LEN, params->secret_key_bytes);
+    return KAZ_SIGN_SUCCESS;
+}
+
+int kaz_sign_sig_to_wire(kaz_sign_level_t level,
+                         const unsigned char *sig, size_t sig_len,
+                         unsigned char *out, size_t *out_len) {
+    if (!sig || !out_len)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    const kaz_sign_level_params_t *params = kaz_sign_get_level_params(level);
+    if (!params)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    if (sig_len != params->signature_overhead)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    size_t needed = KAZ_WIRE_HEADER_LEN + params->signature_overhead;
+
+    if (!out) {
+        *out_len = needed;
+        return KAZ_SIGN_SUCCESS;
+    }
+
+    if (*out_len < needed)
+        return KAZ_SIGN_ERROR_BUFFER;
+
+    int alg = level_to_wire_alg(level);
+    if (alg < 0)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    wire_write_header(out, alg, KAZ_WIRE_TYPE_SIG_DET);
+    memcpy(out + KAZ_WIRE_HEADER_LEN, sig, params->signature_overhead);
+    *out_len = needed;
+    return KAZ_SIGN_SUCCESS;
+}
+
+int kaz_sign_sig_from_wire(const unsigned char *wire, size_t wire_len,
+                           kaz_sign_level_t *level,
+                           unsigned char *sig, size_t *sig_len) {
+    if (!wire || !level || !sig || !sig_len)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    kaz_sign_level_t lvl;
+    int ret = wire_validate_header(wire, wire_len, KAZ_WIRE_TYPE_SIG_DET, &lvl);
+    if (ret != KAZ_SIGN_SUCCESS)
+        return ret;
+
+    const kaz_sign_level_params_t *params = kaz_sign_get_level_params(lvl);
+    if (!params)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    size_t expected = KAZ_WIRE_HEADER_LEN + params->signature_overhead;
+    if (wire_len != expected)
+        return KAZ_SIGN_ERROR_INVALID;
+
+    *level = lvl;
+    *sig_len = params->signature_overhead;
+    memcpy(sig, wire + KAZ_WIRE_HEADER_LEN, params->signature_overhead);
+    return KAZ_SIGN_SUCCESS;
+}

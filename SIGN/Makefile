@@ -105,7 +105,7 @@ LIB_OBJS = $(OBJ_DIR)/sign.o \
 # ============================================================================
 
 .PHONY: all test test-all test-verbose test-quick test-kdf \
-        test-sha3 test-detached test-der test-x509 test-p12 test-extensions ci \
+        test-sha3 test-detached test-der test-kazwire test-x509 test-p12 test-extensions ci \
         benchmark benchmark-csv \
         benchmark-full benchmark-all benchmark-supercop \
         kat kat-all kat-verify clean distclean dirs help \
@@ -184,6 +184,10 @@ $(BIN_DIR)/test_detached_$(LEVEL): $(TEST_DIR)/test_detached.c $(LIB_OBJS) | dir
 
 # Build DER test
 $(BIN_DIR)/test_der_$(LEVEL): $(TEST_DIR)/test_der.c $(LIB_OBJS) | dirs
+	$(CC) $(CFLAGS) $(INC) -o $@ $< $(LIB_OBJS) $(LDFLAGS) $(LIBS)
+
+# Build KazWire test
+$(BIN_DIR)/test_kazwire_$(LEVEL): $(TEST_DIR)/test_kazwire.c $(LIB_OBJS) | dirs
 	$(CC) $(CFLAGS) $(INC) -o $@ $< $(LIB_OBJS) $(LDFLAGS) $(LIBS)
 
 # Build X.509 test
@@ -271,6 +275,14 @@ test-der: $(BIN_DIR)/test_der_$(LEVEL)
 	@echo "Running KAZ-SIGN-$(LEVEL) DER Encoding Tests"
 	@echo "========================================"
 	@$(BIN_DIR)/test_der_$(LEVEL)
+
+# Run KazWire encoding tests
+test-kazwire: $(BIN_DIR)/test_kazwire_$(LEVEL)
+	@echo ""
+	@echo "========================================"
+	@echo "Running KAZ-SIGN-$(LEVEL) KazWire Encoding Tests"
+	@echo "========================================"
+	@$(BIN_DIR)/test_kazwire_$(LEVEL)
 
 # Run X.509 certificate tests
 test-x509: $(BIN_DIR)/test_x509_$(LEVEL)
