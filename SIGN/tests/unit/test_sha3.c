@@ -505,7 +505,7 @@ int main(void)
     printf("========================================================\n");
     printf("          KAZ-SIGN SHA3-256 Unit Tests\n");
     printf("========================================================\n");
-    printf("  Security Level: %d\n\n", KAZ_SIGN_SP_J);
+    printf("  Security Level: %d\n\n", KAZ_SECURITY_LEVEL);
 
     printf("----------------------------------------------------------\n");
     printf("  NIST Test Vectors\n");

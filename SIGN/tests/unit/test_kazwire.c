@@ -364,51 +364,51 @@ static void test_wire_sizes(void)
 {
     tests_run++;
 
-    /* Level 128: pubkey 5+54=59, privkey 5+32=37, sig 5+162=167 */
+    /* Level 128: pubkey 5+49=54, privkey 5+98=103, sig 5+57=62 */
     const kaz_sign_level_params_t *p128 = kaz_sign_get_level_params(KAZ_LEVEL_128);
     if (!p128) { TEST_FAIL("get_level_params 128"); return; }
-    if (KAZ_WIRE_HEADER_LEN + p128->public_key_bytes != 59) {
-        TEST_FAIL("level-128 pubkey wire size != 59");
+    if (KAZ_WIRE_HEADER_LEN + p128->public_key_bytes != 54) {
+        TEST_FAIL("level-128 pubkey wire size != 54");
         return;
     }
-    if (KAZ_WIRE_HEADER_LEN + p128->secret_key_bytes != 37) {
-        TEST_FAIL("level-128 privkey wire size != 37");
+    if (KAZ_WIRE_HEADER_LEN + p128->secret_key_bytes != 103) {
+        TEST_FAIL("level-128 privkey wire size != 103");
         return;
     }
-    if (KAZ_WIRE_HEADER_LEN + p128->signature_overhead != 167) {
-        TEST_FAIL("level-128 sig wire size != 167");
+    if (KAZ_WIRE_HEADER_LEN + p128->signature_overhead != 62) {
+        TEST_FAIL("level-128 sig wire size != 62");
         return;
     }
 
-    /* Level 192: pubkey 5+88=93, privkey 5+50=55, sig 5+264=269 */
+    /* Level 192: pubkey 5+73=78, privkey 5+146=151, sig 5+81=86 */
     const kaz_sign_level_params_t *p192 = kaz_sign_get_level_params(KAZ_LEVEL_192);
     if (!p192) { TEST_FAIL("get_level_params 192"); return; }
-    if (KAZ_WIRE_HEADER_LEN + p192->public_key_bytes != 93) {
-        TEST_FAIL("level-192 pubkey wire size != 93");
+    if (KAZ_WIRE_HEADER_LEN + p192->public_key_bytes != 78) {
+        TEST_FAIL("level-192 pubkey wire size != 78");
         return;
     }
-    if (KAZ_WIRE_HEADER_LEN + p192->secret_key_bytes != 55) {
-        TEST_FAIL("level-192 privkey wire size != 55");
+    if (KAZ_WIRE_HEADER_LEN + p192->secret_key_bytes != 151) {
+        TEST_FAIL("level-192 privkey wire size != 151");
         return;
     }
-    if (KAZ_WIRE_HEADER_LEN + p192->signature_overhead != 269) {
-        TEST_FAIL("level-192 sig wire size != 269");
+    if (KAZ_WIRE_HEADER_LEN + p192->signature_overhead != 86) {
+        TEST_FAIL("level-192 sig wire size != 86");
         return;
     }
 
-    /* Level 256: pubkey 5+118=123, privkey 5+64=69, sig 5+354=359 */
+    /* Level 256: pubkey 5+97=102, privkey 5+194=199, sig 5+105=110 */
     const kaz_sign_level_params_t *p256 = kaz_sign_get_level_params(KAZ_LEVEL_256);
     if (!p256) { TEST_FAIL("get_level_params 256"); return; }
-    if (KAZ_WIRE_HEADER_LEN + p256->public_key_bytes != 123) {
-        TEST_FAIL("level-256 pubkey wire size != 123");
+    if (KAZ_WIRE_HEADER_LEN + p256->public_key_bytes != 102) {
+        TEST_FAIL("level-256 pubkey wire size != 102");
         return;
     }
-    if (KAZ_WIRE_HEADER_LEN + p256->secret_key_bytes != 69) {
-        TEST_FAIL("level-256 privkey wire size != 69");
+    if (KAZ_WIRE_HEADER_LEN + p256->secret_key_bytes != 199) {
+        TEST_FAIL("level-256 privkey wire size != 199");
         return;
     }
-    if (KAZ_WIRE_HEADER_LEN + p256->signature_overhead != 359) {
-        TEST_FAIL("level-256 sig wire size != 359");
+    if (KAZ_WIRE_HEADER_LEN + p256->signature_overhead != 110) {
+        TEST_FAIL("level-256 sig wire size != 110");
         return;
     }
 
@@ -563,11 +563,11 @@ static void test_buffer_too_small(void)
 {
     tests_run++;
 
-    unsigned char pk[54] = {0};
+    unsigned char pk[49] = {0};
     unsigned char tiny[4];
     size_t tiny_len = sizeof(tiny);
 
-    int ret = kaz_sign_pubkey_to_wire(KAZ_LEVEL_128, pk, 54, tiny, &tiny_len);
+    int ret = kaz_sign_pubkey_to_wire(KAZ_LEVEL_128, pk, 49, tiny, &tiny_len);
     if (ret != KAZ_SIGN_ERROR_BUFFER) {
         char buf[128];
         snprintf(buf, sizeof(buf), "expected ERROR_BUFFER, got %d", ret);
@@ -582,12 +582,12 @@ static void test_size_query(void)
 {
     tests_run++;
 
-    unsigned char pk[54] = {0};
+    unsigned char pk[49] = {0};
     size_t needed = 0;
 
     /* Query size with NULL out */
-    int ret = kaz_sign_pubkey_to_wire(KAZ_LEVEL_128, pk, 54, NULL, &needed);
-    if (ret != KAZ_SIGN_SUCCESS || needed != 59) {
+    int ret = kaz_sign_pubkey_to_wire(KAZ_LEVEL_128, pk, 49, NULL, &needed);
+    if (ret != KAZ_SIGN_SUCCESS || needed != 54) {
         char buf[128];
         snprintf(buf, sizeof(buf), "size query failed: ret=%d needed=%zu", ret, needed);
         TEST_FAIL(buf);
@@ -607,7 +607,7 @@ int main(void)
     printf("========================================================\n");
     printf("          KAZ-SIGN KazWire Encoding Tests\n");
     printf("========================================================\n");
-    printf("  Security Level: %d\n\n", KAZ_SIGN_SP_J);
+    printf("  Security Level: %d\n\n", KAZ_SECURITY_LEVEL);
 
     printf("----------------------------------------------------------\n");
     printf("  Public Key Wire Round-Trip Tests\n");

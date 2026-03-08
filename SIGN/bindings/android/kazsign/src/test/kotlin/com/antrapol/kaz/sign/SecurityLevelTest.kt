@@ -37,17 +37,17 @@ class SecurityLevelTest {
 
     @Test
     fun `Level 128 has correct secret key size`() {
-        assertEquals(32, SecurityLevel.LEVEL_128.secretKeyBytes)
+        assertEquals(98, SecurityLevel.LEVEL_128.secretKeyBytes)
     }
 
     @Test
     fun `Level 128 has correct public key size`() {
-        assertEquals(54, SecurityLevel.LEVEL_128.publicKeyBytes)
+        assertEquals(49, SecurityLevel.LEVEL_128.publicKeyBytes)
     }
 
     @Test
     fun `Level 128 has correct signature overhead`() {
-        assertEquals(162, SecurityLevel.LEVEL_128.signatureOverhead)
+        assertEquals(57, SecurityLevel.LEVEL_128.signatureOverhead)
     }
 
     @Test
@@ -66,17 +66,17 @@ class SecurityLevelTest {
 
     @Test
     fun `Level 192 has correct secret key size`() {
-        assertEquals(50, SecurityLevel.LEVEL_192.secretKeyBytes)
+        assertEquals(146, SecurityLevel.LEVEL_192.secretKeyBytes)
     }
 
     @Test
     fun `Level 192 has correct public key size`() {
-        assertEquals(88, SecurityLevel.LEVEL_192.publicKeyBytes)
+        assertEquals(73, SecurityLevel.LEVEL_192.publicKeyBytes)
     }
 
     @Test
     fun `Level 192 has correct signature overhead`() {
-        assertEquals(264, SecurityLevel.LEVEL_192.signatureOverhead)
+        assertEquals(81, SecurityLevel.LEVEL_192.signatureOverhead)
     }
 
     @Test
@@ -95,17 +95,17 @@ class SecurityLevelTest {
 
     @Test
     fun `Level 256 has correct secret key size`() {
-        assertEquals(64, SecurityLevel.LEVEL_256.secretKeyBytes)
+        assertEquals(194, SecurityLevel.LEVEL_256.secretKeyBytes)
     }
 
     @Test
     fun `Level 256 has correct public key size`() {
-        assertEquals(118, SecurityLevel.LEVEL_256.publicKeyBytes)
+        assertEquals(97, SecurityLevel.LEVEL_256.publicKeyBytes)
     }
 
     @Test
     fun `Level 256 has correct signature overhead`() {
-        assertEquals(356, SecurityLevel.LEVEL_256.signatureOverhead)
+        assertEquals(105, SecurityLevel.LEVEL_256.signatureOverhead)
     }
 
     @Test

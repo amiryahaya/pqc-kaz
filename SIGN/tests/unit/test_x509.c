@@ -615,7 +615,7 @@ int main(void)
     printf("========================================================\n");
     printf("          KAZ-SIGN X.509 Certificate Tests\n");
     printf("========================================================\n");
-    printf("  Security Level: %d\n\n", KAZ_SIGN_SP_J);
+    printf("  Security Level: %d\n\n", KAZ_SECURITY_LEVEL);
 
     printf("----------------------------------------------------------\n");
     printf("  CSR Generation and Verification\n");

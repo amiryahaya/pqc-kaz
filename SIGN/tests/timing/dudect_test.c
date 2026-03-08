@@ -462,7 +462,7 @@ int main(int argc, char *argv[])
     printf("╔══════════════════════════════════════════════════════════════╗\n");
     printf("║        Dudect-style Timing Leakage Detection                 ║\n");
     printf("╠══════════════════════════════════════════════════════════════╣\n");
-    printf("║  Security Level: %-3d                                        ║\n", KAZ_SIGN_SP_J);
+    printf("║  Security Level: %-3d                                        ║\n", KAZ_SECURITY_LEVEL);
     printf("║  Measurements:   %-6zu per class                            ║\n", n_measurements);
     printf("║  Threshold:      %-4.1f (|t| < threshold = pass)              ║\n", DUDECT_THRESHOLD);
     printf("╚══════════════════════════════════════════════════════════════╝\n\n");

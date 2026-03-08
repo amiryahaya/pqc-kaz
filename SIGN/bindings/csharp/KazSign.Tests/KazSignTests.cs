@@ -117,25 +117,25 @@ namespace Antrapol.Kaz.Sign.Tests
         {
             int expectedSk = _level switch
             {
-                SecurityLevel.Level128 => 32,
-                SecurityLevel.Level192 => 50,
-                SecurityLevel.Level256 => 64,
+                SecurityLevel.Level128 => 98,
+                SecurityLevel.Level192 => 146,
+                SecurityLevel.Level256 => 194,
                 _ => 0
             };
 
             int expectedPk = _level switch
             {
-                SecurityLevel.Level128 => 54,
-                SecurityLevel.Level192 => 88,
-                SecurityLevel.Level256 => 118,
+                SecurityLevel.Level128 => 49,
+                SecurityLevel.Level192 => 73,
+                SecurityLevel.Level256 => 97,
                 _ => 0
             };
 
             int expectedOverhead = _level switch
             {
-                SecurityLevel.Level128 => 162,
-                SecurityLevel.Level192 => 264,
-                SecurityLevel.Level256 => 356,
+                SecurityLevel.Level128 => 57,
+                SecurityLevel.Level192 => 81,
+                SecurityLevel.Level256 => 105,
                 _ => 0
             };
 
@@ -589,25 +589,25 @@ namespace Antrapol.Kaz.Sign.Tests
         [Fact]
         public void KazSignParameters_GetSecretKeyBytes_ReturnsCorrectValues()
         {
-            Assert.Equal(32, KazSignParameters.GetSecretKeyBytes(SecurityLevel.Level128));
-            Assert.Equal(50, KazSignParameters.GetSecretKeyBytes(SecurityLevel.Level192));
-            Assert.Equal(64, KazSignParameters.GetSecretKeyBytes(SecurityLevel.Level256));
+            Assert.Equal(98, KazSignParameters.GetSecretKeyBytes(SecurityLevel.Level128));
+            Assert.Equal(146, KazSignParameters.GetSecretKeyBytes(SecurityLevel.Level192));
+            Assert.Equal(194, KazSignParameters.GetSecretKeyBytes(SecurityLevel.Level256));
         }
 
         [Fact]
         public void KazSignParameters_GetPublicKeyBytes_ReturnsCorrectValues()
         {
-            Assert.Equal(54, KazSignParameters.GetPublicKeyBytes(SecurityLevel.Level128));
-            Assert.Equal(88, KazSignParameters.GetPublicKeyBytes(SecurityLevel.Level192));
-            Assert.Equal(118, KazSignParameters.GetPublicKeyBytes(SecurityLevel.Level256));
+            Assert.Equal(49, KazSignParameters.GetPublicKeyBytes(SecurityLevel.Level128));
+            Assert.Equal(73, KazSignParameters.GetPublicKeyBytes(SecurityLevel.Level192));
+            Assert.Equal(97, KazSignParameters.GetPublicKeyBytes(SecurityLevel.Level256));
         }
 
         [Fact]
         public void KazSignParameters_GetSignatureOverhead_ReturnsCorrectValues()
         {
-            Assert.Equal(162, KazSignParameters.GetSignatureOverhead(SecurityLevel.Level128));
-            Assert.Equal(264, KazSignParameters.GetSignatureOverhead(SecurityLevel.Level192));
-            Assert.Equal(356, KazSignParameters.GetSignatureOverhead(SecurityLevel.Level256));
+            Assert.Equal(57, KazSignParameters.GetSignatureOverhead(SecurityLevel.Level128));
+            Assert.Equal(81, KazSignParameters.GetSignatureOverhead(SecurityLevel.Level192));
+            Assert.Equal(105, KazSignParameters.GetSignatureOverhead(SecurityLevel.Level256));
         }
 
         [Fact]

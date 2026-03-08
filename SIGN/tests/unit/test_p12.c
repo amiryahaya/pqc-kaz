@@ -624,7 +624,7 @@ int main(void)
     printf("========================================================\n");
     printf("          KAZ-SIGN PKCS#12 Keystore Tests\n");
     printf("========================================================\n");
-    printf("  Security Level: %d\n\n", KAZ_SIGN_SP_J);
+    printf("  Security Level: %d\n\n", KAZ_SECURITY_LEVEL);
 
     printf("----------------------------------------------------------\n");
     printf("  Round-Trip Tests (all levels)\n");

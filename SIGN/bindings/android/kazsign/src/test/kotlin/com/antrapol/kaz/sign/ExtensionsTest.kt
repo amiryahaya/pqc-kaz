@@ -272,8 +272,8 @@ class ExtensionsTest {
 
     @Test
     fun `roundtrip Level 128 key sizes`() {
-        val secretKey = ByteArray(32) { it.toByte() }
-        val publicKey = ByteArray(54) { it.toByte() }
+        val secretKey = ByteArray(98) { it.toByte() }
+        val publicKey = ByteArray(49) { it.toByte() }
 
         assertArrayEquals(secretKey, secretKey.toHexString().hexToByteArray())
         assertArrayEquals(publicKey, publicKey.toHexString().hexToByteArray())
@@ -281,8 +281,8 @@ class ExtensionsTest {
 
     @Test
     fun `roundtrip Level 192 key sizes`() {
-        val secretKey = ByteArray(50) { it.toByte() }
-        val publicKey = ByteArray(88) { it.toByte() }
+        val secretKey = ByteArray(146) { it.toByte() }
+        val publicKey = ByteArray(73) { it.toByte() }
 
         assertArrayEquals(secretKey, secretKey.toHexString().hexToByteArray())
         assertArrayEquals(publicKey, publicKey.toHexString().hexToByteArray())
@@ -290,8 +290,8 @@ class ExtensionsTest {
 
     @Test
     fun `roundtrip Level 256 key sizes`() {
-        val secretKey = ByteArray(64) { it.toByte() }
-        val publicKey = ByteArray(118) { it.toByte() }
+        val secretKey = ByteArray(194) { it.toByte() }
+        val publicKey = ByteArray(97) { it.toByte() }
 
         assertArrayEquals(secretKey, secretKey.toHexString().hexToByteArray())
         assertArrayEquals(publicKey, publicKey.toHexString().hexToByteArray())

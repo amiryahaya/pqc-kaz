@@ -22,26 +22,26 @@ import KazSignNative
 public enum SecurityLevel: Int, CaseIterable, Sendable {
     /// 128-bit security (SHA-256)
     case level128 = 128
-    /// 192-bit security (SHA-256)
+    /// 192-bit security (SHA-384)
     case level192 = 192
-    /// 256-bit security (SHA-256)
+    /// 256-bit security (SHA-512)
     case level256 = 256
 
     /// Secret key size in bytes
     public var secretKeyBytes: Int {
         switch self {
-        case .level128: return 32
-        case .level192: return 50
-        case .level256: return 64
+        case .level128: return 98
+        case .level192: return 146
+        case .level256: return 194
         }
     }
 
     /// Public key size in bytes
     public var publicKeyBytes: Int {
         switch self {
-        case .level128: return 54
-        case .level192: return 88
-        case .level256: return 118
+        case .level128: return 49
+        case .level192: return 73
+        case .level256: return 97
         }
     }
 
@@ -49,9 +49,9 @@ public enum SecurityLevel: Int, CaseIterable, Sendable {
     /// NOTE: These values must match KAZ_SIGN_SIGNATURE_OVERHEAD in kaz/sign.h
     public var signatureOverhead: Int {
         switch self {
-        case .level128: return 162  // S1(54) + S2(54) + S3(54)
-        case .level192: return 264  // S1(88) + S2(88) + S3(88)
-        case .level256: return 354  // S1(118) + S2(118) + S3(118)
+        case .level128: return 57   // v1(26) + v2(23) + hash(32) - 24
+        case .level192: return 81   // v1(34) + v2(39) + hash(48) - 40
+        case .level256: return 105  // v1(42) + v2(55) + hash(64) - 56
         }
     }
 
@@ -59,8 +59,8 @@ public enum SecurityLevel: Int, CaseIterable, Sendable {
     public var hashBytes: Int {
         switch self {
         case .level128: return 32  // SHA-256
-        case .level192: return 48  // SHA-256 (truncated)
-        case .level256: return 64  // SHA-256 (zero-padded)
+        case .level192: return 48  // SHA-384
+        case .level256: return 64  // SHA-512
         }
     }
 

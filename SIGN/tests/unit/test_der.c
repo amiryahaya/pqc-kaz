@@ -534,7 +534,7 @@ int main(void)
     printf("========================================================\n");
     printf("          KAZ-SIGN DER Encoding Tests\n");
     printf("========================================================\n");
-    printf("  Security Level: %d\n\n", KAZ_SIGN_SP_J);
+    printf("  Security Level: %d\n\n", KAZ_SECURITY_LEVEL);
 
     printf("----------------------------------------------------------\n");
     printf("  Public Key DER Round-Trip Tests\n");

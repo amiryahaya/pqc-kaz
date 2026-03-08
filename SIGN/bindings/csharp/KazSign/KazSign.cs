@@ -35,9 +35,9 @@ namespace Antrapol.Kaz.Sign
     {
         /// <summary>128-bit security (SHA-256)</summary>
         Level128 = 128,
-        /// <summary>192-bit security (SHA-256)</summary>
+        /// <summary>192-bit security (SHA-384)</summary>
         Level192 = 192,
-        /// <summary>256-bit security (SHA-256)</summary>
+        /// <summary>256-bit security (SHA-512)</summary>
         Level256 = 256
     }
 
@@ -77,18 +77,18 @@ namespace Antrapol.Kaz.Sign
         /// <summary>Get secret key size in bytes for the given security level</summary>
         public static int GetSecretKeyBytes(SecurityLevel level) => level switch
         {
-            SecurityLevel.Level128 => 32,
-            SecurityLevel.Level192 => 50,
-            SecurityLevel.Level256 => 64,
+            SecurityLevel.Level128 => 98,
+            SecurityLevel.Level192 => 146,
+            SecurityLevel.Level256 => 194,
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
 
         /// <summary>Get public key size in bytes for the given security level</summary>
         public static int GetPublicKeyBytes(SecurityLevel level) => level switch
         {
-            SecurityLevel.Level128 => 54,
-            SecurityLevel.Level192 => 88,
-            SecurityLevel.Level256 => 118,
+            SecurityLevel.Level128 => 49,
+            SecurityLevel.Level192 => 73,
+            SecurityLevel.Level256 => 97,
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
 
@@ -96,9 +96,9 @@ namespace Antrapol.Kaz.Sign
         /// <remarks>Values must match KAZ_SIGN_SIGNATURE_OVERHEAD in kaz/sign.h</remarks>
         public static int GetSignatureOverhead(SecurityLevel level) => level switch
         {
-            SecurityLevel.Level128 => 162,  // S1(54) + S2(54) + S3(54)
-            SecurityLevel.Level192 => 264,  // S1(88) + S2(88) + S3(88)
-            SecurityLevel.Level256 => 354,  // S1(118) + S2(118) + S3(118)
+            SecurityLevel.Level128 => 57,   // v1(26) + v2(23) + hash(32) - 24
+            SecurityLevel.Level192 => 81,   // v1(34) + v2(39) + hash(48) - 40
+            SecurityLevel.Level256 => 105,  // v1(42) + v2(55) + hash(64) - 56
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
 
@@ -106,8 +106,8 @@ namespace Antrapol.Kaz.Sign
         public static int GetHashBytes(SecurityLevel level) => level switch
         {
             SecurityLevel.Level128 => 32,  // SHA-256
-            SecurityLevel.Level192 => 48,  // SHA-256 (truncated)
-            SecurityLevel.Level256 => 64,  // SHA-256 (zero-padded)
+            SecurityLevel.Level192 => 48,  // SHA-384
+            SecurityLevel.Level256 => 64,  // SHA-512
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
     }

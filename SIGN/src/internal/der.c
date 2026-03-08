@@ -365,8 +365,8 @@ int kaz_sign_privkey_to_der(kaz_sign_level_t level,
         return KAZ_SIGN_ERROR_BUFFER;
     }
 
-    /* KazWire-encode the private key into a stack buffer (max sk is 64 bytes) */
-    unsigned char wire_buf[KAZ_WIRE_HEADER_LEN + 64];
+    /* KazWire-encode the private key into a stack buffer (max sk is 194 bytes) */
+    unsigned char wire_buf[KAZ_WIRE_HEADER_LEN + 200];
     size_t wire_len = sizeof(wire_buf);
     int rc = kaz_sign_privkey_to_wire(level, sk, sk_bytes, wire_buf, &wire_len);
     if (rc != KAZ_SIGN_SUCCESS) return rc;

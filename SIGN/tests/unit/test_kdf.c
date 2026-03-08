@@ -308,16 +308,16 @@ static void test_kdf_derive_secret_key(void)
     tests_run++;
 
     unsigned char seed[32];
-    unsigned char s_bytes[KAZ_SIGN_SBYTES];
-    unsigned char t_bytes[KAZ_SIGN_TBYTES];
+    unsigned char s_bytes[KAZ_SIGN_SKBYTES];
+    unsigned char t_bytes[KAZ_SIGN_V1BYTES];
 
     /* Fill seed with random-looking data */
     for (int i = 0; i < 32; i++) {
         seed[i] = (unsigned char)(i * 7 + 13);
     }
 
-    int ret = kaz_kdf_derive_secret_key(seed, 32, s_bytes, KAZ_SIGN_SBYTES,
-                                        t_bytes, KAZ_SIGN_TBYTES);
+    int ret = kaz_kdf_derive_secret_key(seed, 32, s_bytes, KAZ_SIGN_SKBYTES,
+                                        t_bytes, KAZ_SIGN_V1BYTES);
 
     if (ret != KAZ_KDF_SUCCESS) {
         TEST_FAIL("Derive secret key failed");
@@ -325,8 +325,8 @@ static void test_kdf_derive_secret_key(void)
     }
 
     /* Verify s and t are different */
-    if (memcmp(s_bytes, t_bytes, KAZ_SIGN_SBYTES < KAZ_SIGN_TBYTES ?
-               KAZ_SIGN_SBYTES : KAZ_SIGN_TBYTES) == 0) {
+    if (memcmp(s_bytes, t_bytes, KAZ_SIGN_SKBYTES < KAZ_SIGN_V1BYTES ?
+               KAZ_SIGN_SKBYTES : KAZ_SIGN_V1BYTES) == 0) {
         TEST_FAIL("s and t should be different");
         return;
     }
@@ -339,16 +339,16 @@ static void test_kdf_derive_secret_key_deterministic(void)
     tests_run++;
 
     unsigned char seed[32];
-    unsigned char s1[KAZ_SIGN_SBYTES], t1[KAZ_SIGN_TBYTES];
-    unsigned char s2[KAZ_SIGN_SBYTES], t2[KAZ_SIGN_TBYTES];
+    unsigned char s1[KAZ_SIGN_SKBYTES], t1[KAZ_SIGN_V1BYTES];
+    unsigned char s2[KAZ_SIGN_SKBYTES], t2[KAZ_SIGN_V1BYTES];
 
     memset(seed, 0x42, 32);
 
     /* Derive twice with same seed */
-    int ret1 = kaz_kdf_derive_secret_key(seed, 32, s1, KAZ_SIGN_SBYTES,
-                                         t1, KAZ_SIGN_TBYTES);
-    int ret2 = kaz_kdf_derive_secret_key(seed, 32, s2, KAZ_SIGN_SBYTES,
-                                         t2, KAZ_SIGN_TBYTES);
+    int ret1 = kaz_kdf_derive_secret_key(seed, 32, s1, KAZ_SIGN_SKBYTES,
+                                         t1, KAZ_SIGN_V1BYTES);
+    int ret2 = kaz_kdf_derive_secret_key(seed, 32, s2, KAZ_SIGN_SKBYTES,
+                                         t2, KAZ_SIGN_V1BYTES);
 
     if (ret1 != KAZ_KDF_SUCCESS || ret2 != KAZ_KDF_SUCCESS) {
         TEST_FAIL("Derivation failed");
@@ -356,8 +356,8 @@ static void test_kdf_derive_secret_key_deterministic(void)
     }
 
     /* Results should be identical */
-    if (memcmp(s1, s2, KAZ_SIGN_SBYTES) != 0 ||
-        memcmp(t1, t2, KAZ_SIGN_TBYTES) != 0) {
+    if (memcmp(s1, s2, KAZ_SIGN_SKBYTES) != 0 ||
+        memcmp(t1, t2, KAZ_SIGN_V1BYTES) != 0) {
         TEST_FAIL("KDF should be deterministic");
         return;
     }
@@ -562,7 +562,7 @@ int main(void)
     printf("╔══════════════════════════════════════════════════════════════╗\n");
     printf("║              KAZ-SIGN KDF Unit Tests                         ║\n");
     printf("╠══════════════════════════════════════════════════════════════╣\n");
-    printf("║  Security Level: %d                                         ║\n", KAZ_SIGN_SP_J);
+    printf("║  Security Level: %d                                         ║\n", KAZ_SECURITY_LEVEL);
     printf("╚══════════════════════════════════════════════════════════════╝\n\n");
 
     printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");

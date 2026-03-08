@@ -693,9 +693,9 @@ void test_sec_corrupted_signature_s2(void)
     TEST_PASS();
 }
 
-void test_sec_corrupted_signature_s3(void)
+void test_sec_corrupted_signature_s2_counter(void)
 {
-    TEST_START("Corrupted S3 component detection");
+    TEST_START("Corrupted S2 counter detection");
 
     unsigned char pk[KAZ_SIGN_PUBLICKEYBYTES];
     unsigned char sk[KAZ_SIGN_SECRETKEYBYTES];
@@ -712,11 +712,11 @@ void test_sec_corrupted_signature_s3(void)
     ret = kaz_sign_signature(sig, &siglen, msg, msglen, sk);
     ASSERT_EQ(ret, KAZ_SIGN_SUCCESS, "Signing failed");
 
-    /* Corrupt S3 component */
-    sig[KAZ_SIGN_S1BYTES + KAZ_SIGN_S2BYTES + KAZ_SIGN_S3BYTES / 2] ^= 0x01;
+    /* Corrupt last byte of S2 counter (8-byte big-endian counter) */
+    sig[KAZ_SIGN_S1BYTES + KAZ_SIGN_S2BYTES - 1] ^= 0x01;
 
     ret = kaz_sign_verify(recovered, &recovered_len, sig, siglen, pk);
-    ASSERT_EQ(ret, KAZ_SIGN_ERROR_VERIFY, "Should detect S3 corruption");
+    ASSERT_EQ(ret, KAZ_SIGN_ERROR_VERIFY, "Should detect S2 counter corruption");
 
     TEST_PASS();
 }
@@ -913,22 +913,22 @@ void test_runtime_level_params(void)
     ASSERT(params192 != NULL, "Level 192 params should exist");
     ASSERT(params256 != NULL, "Level 256 params should exist");
 
-    /* Verify level 128 */
+    /* Verify level 128: SK=98, PK=49, hash=32 */
     ASSERT_EQ(params128->level, 128, "Level 128 level mismatch");
-    ASSERT_EQ(params128->secret_key_bytes, 32, "Level 128 SK size mismatch");
-    ASSERT_EQ(params128->public_key_bytes, 54, "Level 128 PK size mismatch");
+    ASSERT_EQ(params128->secret_key_bytes, 98, "Level 128 SK size mismatch");
+    ASSERT_EQ(params128->public_key_bytes, 49, "Level 128 PK size mismatch");
     ASSERT_EQ(params128->hash_bytes, 32, "Level 128 hash size mismatch");
 
-    /* Verify level 192 */
+    /* Verify level 192: SK=146, PK=73, hash=48 */
     ASSERT_EQ(params192->level, 192, "Level 192 level mismatch");
-    ASSERT_EQ(params192->secret_key_bytes, 50, "Level 192 SK size mismatch");
-    ASSERT_EQ(params192->public_key_bytes, 88, "Level 192 PK size mismatch");
+    ASSERT_EQ(params192->secret_key_bytes, 146, "Level 192 SK size mismatch");
+    ASSERT_EQ(params192->public_key_bytes, 73, "Level 192 PK size mismatch");
     ASSERT_EQ(params192->hash_bytes, 48, "Level 192 hash size mismatch");
 
-    /* Verify level 256 */
+    /* Verify level 256: SK=194, PK=97, hash=64 */
     ASSERT_EQ(params256->level, 256, "Level 256 level mismatch");
-    ASSERT_EQ(params256->secret_key_bytes, 64, "Level 256 SK size mismatch");
-    ASSERT_EQ(params256->public_key_bytes, 118, "Level 256 PK size mismatch");
+    ASSERT_EQ(params256->secret_key_bytes, 194, "Level 256 SK size mismatch");
+    ASSERT_EQ(params256->public_key_bytes, 97, "Level 256 PK size mismatch");
     ASSERT_EQ(params256->hash_bytes, 64, "Level 256 hash size mismatch");
 
     /* Invalid level should return NULL */
@@ -963,10 +963,10 @@ void test_runtime_level_128_roundtrip(void)
     TEST_START("Runtime Level 128 sign/verify roundtrip");
 
     const kaz_sign_level_params_t *params = kaz_sign_get_level_params(KAZ_LEVEL_128);
-    unsigned char pk[64], sk[64];
+    unsigned char pk[128], sk[256];
     unsigned char msg[] = "Runtime level 128 test message";
     unsigned long long msglen = sizeof(msg) - 1;
-    unsigned char sig[256 + 100];
+    unsigned char sig[512 + 100];
     unsigned long long siglen;
     unsigned char recovered[100];
     unsigned long long recovered_len;
@@ -994,7 +994,7 @@ void test_runtime_level_192_roundtrip(void)
     TEST_START("Runtime Level 192 sign/verify roundtrip");
 
     const kaz_sign_level_params_t *params = kaz_sign_get_level_params(KAZ_LEVEL_192);
-    unsigned char pk[128], sk[64];
+    unsigned char pk[128], sk[256];
     unsigned char msg[] = "Runtime level 192 test message";
     unsigned long long msglen = sizeof(msg) - 1;
     unsigned char sig[512 + 100];
@@ -1025,7 +1025,7 @@ void test_runtime_level_256_roundtrip(void)
     TEST_START("Runtime Level 256 sign/verify roundtrip");
 
     const kaz_sign_level_params_t *params = kaz_sign_get_level_params(KAZ_LEVEL_256);
-    unsigned char pk[128], sk[72];
+    unsigned char pk[128], sk[256];
     unsigned char msg[] = "Runtime level 256 test message";
     unsigned long long msglen = sizeof(msg) - 1;
     unsigned char sig[512 + 100];
@@ -1056,8 +1056,8 @@ void test_runtime_cross_level_isolation(void)
     TEST_START("Cross-level security isolation");
 
     /* Generate key pairs at each level */
-    unsigned char pk128[64], sk128[64];
-    unsigned char pk256[128], sk256[72];
+    unsigned char pk128[128], sk128[256];
+    unsigned char pk256[128], sk256[256];
     unsigned char msg[] = "Cross level test";
     unsigned long long msglen = sizeof(msg) - 1;
     unsigned char sig128[256 + 50];
@@ -1259,7 +1259,7 @@ int main(int argc, char *argv[])
     test_sec_wrong_public_key();
     test_sec_corrupted_signature_s1();
     test_sec_corrupted_signature_s2();
-    test_sec_corrupted_signature_s3();
+    test_sec_corrupted_signature_s2_counter();
     test_sec_corrupted_message();
     test_sec_truncated_signature();
     test_sec_random_signature();
