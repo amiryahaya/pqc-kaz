@@ -7,10 +7,14 @@
  *
  * Uses manual TLV (tag-length-value) construction for portability.
  *
- * OIDs (private enterprise arc):
- *   KAZ-SIGN-128: 1.3.6.1.4.1.99999.1.1
- *   KAZ-SIGN-192: 1.3.6.1.4.1.99999.1.2
- *   KAZ-SIGN-256: 1.3.6.1.4.1.99999.1.3
+ * OIDs (private enterprise arc 62395):
+ *   Algorithm OIDs (for signatures/certificates):
+ *     KAZ-SIGN-128: 1.3.6.1.4.1.62395.1.2.1
+ *     KAZ-SIGN-192: 1.3.6.1.4.1.62395.1.2.2
+ *     KAZ-SIGN-256: 1.3.6.1.4.1.62395.1.2.3
+ *   Key OIDs (for SubjectPublicKeyInfo / PrivateKeyInfo):
+ *     Public key:  1.3.6.1.4.1.62395.1.1.2
+ *     Private key: 1.3.6.1.4.1.62395.1.1.1
  */
 
 #include <string.h>
@@ -22,49 +26,43 @@
  * OID Definitions
  * ============================================================================
  *
- * OID 1.3.6.1.4.1.99999.1.X
+ * Enterprise number 62395 (0xF3BB) in base-128 varint:
+ *   62395 / 128 = 487 remainder 59 -> 0x3B
+ *   487 / 128 = 3 remainder 103 -> 103 | 0x80 = 0xE7
+ *   3 -> 3 | 0x80 = 0x83
+ *   Result: 0x83, 0xE7, 0x3B
  *
- * BER/DER OID encoding:
- *   First two arcs combined: 1*40 + 3 = 43 = 0x2B
- *   6 -> 0x06
- *   1 -> 0x01
- *   4 -> 0x04
- *   1 -> 0x01
- *   99999 in base-128 varint:
- *     99999 = 0x1869F
- *     Split into 7-bit groups (from MSB): 0x06, 0x0D, 0x1F
- *     With continuation bits: 0x86, 0x8D, 0x1F
- *   1 -> 0x01
- *   X -> level-dependent final byte
+ * Key OIDs (fixed, no level byte):
+ *   Public key:  1.3.6.1.4.1.62395.1.1.2
+ *     Value: 2B 06 01 04 01 83 E7 3B 01 01 02  (11 bytes)
+ *     TLV:   06 0B 2B 06 01 04 01 83 E7 3B 01 01 02  (13 bytes)
  *
- * Full OID TLV (tag 0x06, length 0x0A = 10 value bytes):
- *   06 0A 2B 06 01 04 01 86 8D 1F 01 XX
+ *   Private key: 1.3.6.1.4.1.62395.1.1.1
+ *     Value: 2B 06 01 04 01 83 E7 3B 01 01 01  (11 bytes)
+ *     TLV:   06 0B 2B 06 01 04 01 83 E7 3B 01 01 01  (13 bytes)
  */
 
-/* OID value bytes (without tag+length), last byte is level-dependent */
-static const unsigned char OID_PREFIX[] = {
-    0x2B, 0x06, 0x01, 0x04, 0x01, 0x86, 0x8D, 0x1F, 0x01
+/* Public key OID value bytes (fixed) */
+static const unsigned char OID_PUBKEY[] = {
+    0x2B, 0x06, 0x01, 0x04, 0x01, 0x83, 0xE7, 0x3B, 0x01, 0x01, 0x02
 };
-#define OID_PREFIX_LEN  9
-#define OID_VALUE_LEN  10   /* OID_PREFIX_LEN + 1 byte for level */
-#define OID_TLV_LEN    12   /* tag(1) + length(1) + OID_VALUE_LEN */
+#define OID_PUBKEY_LEN    11   /* value bytes */
+#define OID_PUBKEY_TLV    13   /* tag(1) + length(1) + OID_PUBKEY_LEN */
+
+/* Private key OID value bytes (fixed) */
+static const unsigned char OID_PRIVKEY[] = {
+    0x2B, 0x06, 0x01, 0x04, 0x01, 0x83, 0xE7, 0x3B, 0x01, 0x01, 0x01
+};
+#define OID_PRIVKEY_LEN   11   /* value bytes */
+#define OID_PRIVKEY_TLV   13   /* tag(1) + length(1) + OID_PRIVKEY_LEN */
+
+/* AlgorithmIdentifier size for key OIDs: SEQUENCE tag(1) + len(1) + OID TLV */
+#define ALGID_PUBKEY_LEN  (2 + OID_PUBKEY_TLV)   /* 15 bytes */
+#define ALGID_PRIVKEY_LEN (2 + OID_PRIVKEY_TLV)   /* 15 bytes */
 
 /* ============================================================================
  * Internal helpers
  * ============================================================================ */
-
-/**
- * Get the OID final byte for a security level
- */
-static int oid_level_byte(kaz_sign_level_t level)
-{
-    switch (level) {
-        case KAZ_LEVEL_128: return 0x01;
-        case KAZ_LEVEL_192: return 0x02;
-        case KAZ_LEVEL_256: return 0x03;
-        default: return -1;
-    }
-}
 
 /**
  * Compute the number of bytes needed to DER-encode a length value.
@@ -132,52 +130,46 @@ static size_t der_read_length(const unsigned char *in, size_t avail, size_t *len
 }
 
 /**
- * Write the AlgorithmIdentifier SEQUENCE for a given level.
+ * Write the AlgorithmIdentifier SEQUENCE for a key OID (fixed, no level byte).
  * Format: SEQUENCE { OID }
  * Returns bytes written.
  */
-static size_t write_algorithm_id(unsigned char *out, kaz_sign_level_t level)
+static size_t write_key_algorithm_id(unsigned char *out,
+                                      const unsigned char *oid, size_t oid_len,
+                                      size_t oid_tlv_len)
 {
-    int lb = oid_level_byte(level);
-    if (lb < 0) return 0;
     /* SEQUENCE tag */
     out[0] = 0x30;
-    /* SEQUENCE length = OID_TLV_LEN */
-    out[1] = (unsigned char)OID_TLV_LEN;
+    /* SEQUENCE length = OID TLV length */
+    out[1] = (unsigned char)oid_tlv_len;
     /* OID tag */
     out[2] = 0x06;
     /* OID length */
-    out[3] = (unsigned char)OID_VALUE_LEN;
+    out[3] = (unsigned char)oid_len;
     /* OID value */
-    memcpy(out + 4, OID_PREFIX, OID_PREFIX_LEN);
-    out[4 + OID_PREFIX_LEN] = (unsigned char)lb;
+    memcpy(out + 4, oid, oid_len);
 
-    return 2 + OID_TLV_LEN; /* SEQUENCE tag+len + OID TLV */
+    return 2 + oid_tlv_len; /* SEQUENCE tag+len + OID TLV */
 }
 
-#define ALGID_LEN (2 + OID_TLV_LEN) /* 14 bytes */
-
 /**
- * Verify that the AlgorithmIdentifier at `in` matches the expected level.
- * Returns ALGID_LEN on success, 0 on mismatch.
+ * Verify that the AlgorithmIdentifier at `in` matches the expected key OID.
+ * Returns AlgID length on success, 0 on mismatch.
  */
-static size_t verify_algorithm_id(const unsigned char *in, size_t avail,
-                                   kaz_sign_level_t level)
+static size_t verify_key_algorithm_id(const unsigned char *in, size_t avail,
+                                       const unsigned char *oid, size_t oid_len,
+                                       size_t oid_tlv_len, size_t algid_len)
 {
-    int lb = oid_level_byte(level);
-    if (lb < 0) return 0;
-    if (avail < ALGID_LEN) return 0;
+    if (avail < algid_len) return 0;
 
     /* Check SEQUENCE tag + length */
-    if (in[0] != 0x30 || in[1] != OID_TLV_LEN) return 0;
+    if (in[0] != 0x30 || in[1] != (unsigned char)oid_tlv_len) return 0;
     /* Check OID tag + length */
-    if (in[2] != 0x06 || in[3] != OID_VALUE_LEN) return 0;
-    /* Check OID prefix */
-    if (memcmp(in + 4, OID_PREFIX, OID_PREFIX_LEN) != 0) return 0;
-    /* Check level byte */
-    if (in[4 + OID_PREFIX_LEN] != (unsigned char)lb) return 0;
+    if (in[2] != 0x06 || in[3] != (unsigned char)oid_len) return 0;
+    /* Check OID value */
+    if (memcmp(in + 4, oid, oid_len) != 0) return 0;
 
-    return ALGID_LEN;
+    return algid_len;
 }
 
 /* ============================================================================
@@ -212,7 +204,7 @@ int kaz_sign_pubkey_to_der(kaz_sign_level_t level,
     size_t bitstr_tlv_len = 1 + bitstr_len_size + bitstr_content_len;
 
     /* Outer SEQUENCE content = AlgID + BIT STRING TLV */
-    size_t seq_content_len = ALGID_LEN + bitstr_tlv_len;
+    size_t seq_content_len = ALGID_PUBKEY_LEN + bitstr_tlv_len;
     size_t seq_len_size = der_length_size(seq_content_len);
     size_t total_len = 1 + seq_len_size + seq_content_len;
 
@@ -234,8 +226,8 @@ int kaz_sign_pubkey_to_der(kaz_sign_level_t level,
     *p++ = 0x30;
     p += der_write_length(p, seq_content_len);
 
-    /* AlgorithmIdentifier */
-    p += write_algorithm_id(p, level);
+    /* AlgorithmIdentifier (public key OID) */
+    p += write_key_algorithm_id(p, OID_PUBKEY, OID_PUBKEY_LEN, OID_PUBKEY_TLV);
 
     /* BIT STRING */
     *p++ = 0x03;
@@ -279,8 +271,10 @@ int kaz_sign_pubkey_from_der(kaz_sign_level_t level,
     /* Limit remaining to sequence content */
     remain = seq_len;
 
-    /* AlgorithmIdentifier */
-    size_t aid_len = verify_algorithm_id(p, remain, level);
+    /* AlgorithmIdentifier (public key OID) */
+    size_t aid_len = verify_key_algorithm_id(p, remain,
+                                              OID_PUBKEY, OID_PUBKEY_LEN,
+                                              OID_PUBKEY_TLV, ALGID_PUBKEY_LEN);
     if (aid_len == 0) return KAZ_SIGN_ERROR_DER;
     p += aid_len; remain -= aid_len;
 
@@ -338,7 +332,7 @@ int kaz_sign_privkey_to_der(kaz_sign_level_t level,
     size_t oct_tlv_len = 1 + oct_len_size + sk_bytes;
 
     /* Outer SEQUENCE content = version INTEGER + AlgID + OCTET STRING */
-    size_t seq_content_len = int_tlv_len + ALGID_LEN + oct_tlv_len;
+    size_t seq_content_len = int_tlv_len + ALGID_PRIVKEY_LEN + oct_tlv_len;
     size_t seq_len_size = der_length_size(seq_content_len);
     size_t total_len = 1 + seq_len_size + seq_content_len;
 
@@ -365,8 +359,8 @@ int kaz_sign_privkey_to_der(kaz_sign_level_t level,
     *p++ = 0x01; /* length = 1 */
     *p++ = 0x00; /* value = 0 */
 
-    /* AlgorithmIdentifier */
-    p += write_algorithm_id(p, level);
+    /* AlgorithmIdentifier (private key OID) */
+    p += write_key_algorithm_id(p, OID_PRIVKEY, OID_PRIVKEY_LEN, OID_PRIVKEY_TLV);
 
     /* OCTET STRING */
     *p++ = 0x04;
@@ -413,8 +407,10 @@ int kaz_sign_privkey_from_der(kaz_sign_level_t level,
     if (p[0] != 0x02 || p[1] != 0x01 || p[2] != 0x00) return KAZ_SIGN_ERROR_DER;
     p += 3; remain -= 3;
 
-    /* AlgorithmIdentifier */
-    size_t aid_len = verify_algorithm_id(p, remain, level);
+    /* AlgorithmIdentifier (private key OID) */
+    size_t aid_len = verify_key_algorithm_id(p, remain,
+                                              OID_PRIVKEY, OID_PRIVKEY_LEN,
+                                              OID_PRIVKEY_TLV, ALGID_PRIVKEY_LEN);
     if (aid_len == 0) return KAZ_SIGN_ERROR_DER;
     p += aid_len; remain -= aid_len;
 
