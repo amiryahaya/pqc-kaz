@@ -226,6 +226,7 @@ int kaz_sign_pubkey_to_der(kaz_sign_level_t level,
     size_t wire_len = sizeof(wire_buf);
     int rc = kaz_sign_pubkey_to_wire(level, pk, pk_bytes, wire_buf, &wire_len);
     if (rc != KAZ_SIGN_SUCCESS) return rc;
+    if (wire_len != wire_bytes) return KAZ_SIGN_ERROR_DER;
 
     unsigned char *p = der;
 
@@ -298,7 +299,7 @@ int kaz_sign_pubkey_from_der(kaz_sign_level_t level,
     if (bitstr_len > remain) return KAZ_SIGN_ERROR_DER;
     /* First byte is unused-bits count, must be 0 */
     if (bitstr_len < 1 || p[0] != 0x00) return KAZ_SIGN_ERROR_DER;
-    p++; /* skip unused-bits byte */
+    p++; remain--; /* skip unused-bits byte */
 
     size_t key_len = bitstr_len - 1;
     if (key_len != wire_bytes) return KAZ_SIGN_ERROR_DER;
@@ -364,11 +365,12 @@ int kaz_sign_privkey_to_der(kaz_sign_level_t level,
         return KAZ_SIGN_ERROR_BUFFER;
     }
 
-    /* KazWire-encode the private key into a stack buffer */
-    unsigned char wire_buf[KAZ_WIRE_HEADER_LEN + 64]; /* sk is always 64 bytes */
+    /* KazWire-encode the private key into a stack buffer (max sk is 64 bytes) */
+    unsigned char wire_buf[KAZ_WIRE_HEADER_LEN + 64];
     size_t wire_len = sizeof(wire_buf);
     int rc = kaz_sign_privkey_to_wire(level, sk, sk_bytes, wire_buf, &wire_len);
     if (rc != KAZ_SIGN_SUCCESS) return rc;
+    if (wire_len != wire_bytes) return KAZ_SIGN_ERROR_DER;
 
     unsigned char *p = der;
 

@@ -300,8 +300,8 @@ test-p12: $(BIN_DIR)/test_p12_$(LEVEL)
 	@echo "========================================"
 	@$(BIN_DIR)/test_p12_$(LEVEL)
 
-# Run all extension tests (SHA3 + Detached + DER + X509 + P12)
-test-extensions: test-sha3 test-detached test-der test-x509 test-p12
+# Run all extension tests (SHA3 + Detached + DER + KazWire + X509 + P12)
+test-extensions: test-sha3 test-detached test-der test-kazwire test-x509 test-p12
 
 # CI target: run all tests for all levels
 ci: test-all

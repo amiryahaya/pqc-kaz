@@ -10,8 +10,8 @@ VERSION_MINOR=1
 VERSION_PATCH=0
 VERSION=$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH)
 
-CC=gcc
-CFLAGS=-O3 -Wall -g
+CC ?= gcc
+CFLAGS=-Wall -Wextra -Wpedantic -Wformat=2 -O2 -g -fstack-protector-strong -D_FORTIFY_SOURCE=2
 LDFLAGS=-lm
 
 # Version flags

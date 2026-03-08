@@ -92,7 +92,7 @@ static void run_pubkey_wire_roundtrip(kaz_sign_level_t level, const char *label)
 
     /* Decode */
     kaz_sign_level_t decoded_level;
-    size_t pk_len;
+    size_t pk_len = params->public_key_bytes;
     memset(pk_out, 0, params->public_key_bytes);
     ret = kaz_sign_pubkey_from_wire(wire, out_len, &decoded_level, pk_out, &pk_len);
     if (ret != KAZ_SIGN_SUCCESS) {
@@ -188,7 +188,7 @@ static void run_privkey_wire_roundtrip(kaz_sign_level_t level, const char *label
 
     /* Decode */
     kaz_sign_level_t decoded_level;
-    size_t sk_len;
+    size_t sk_len = params->secret_key_bytes;
     memset(sk_out, 0, params->secret_key_bytes);
     ret = kaz_sign_privkey_from_wire(wire, out_len, &decoded_level, sk_out, &sk_len);
     if (ret != KAZ_SIGN_SUCCESS) {
@@ -298,7 +298,7 @@ static void run_sig_wire_roundtrip(kaz_sign_level_t level, const char *label)
 
     /* Decode */
     kaz_sign_level_t decoded_level;
-    size_t sig_decoded_len;
+    size_t sig_decoded_len = params->signature_overhead;
     memset(sig_out, 0, params->signature_overhead);
     ret = kaz_sign_sig_from_wire(wire, out_len, &decoded_level, sig_out, &sig_decoded_len);
     if (ret != KAZ_SIGN_SUCCESS) {
@@ -426,7 +426,7 @@ static void test_invalid_magic(void)
     unsigned char fake_wire[] = { 0xFF, 0xFF, KAZ_WIRE_SIGN_128, KAZ_WIRE_TYPE_PUB, KAZ_WIRE_VERSION };
     kaz_sign_level_t level;
     unsigned char pk[128];
-    size_t pk_len;
+    size_t pk_len = sizeof(pk);
 
     /* Pad to expected size */
     const kaz_sign_level_params_t *params = kaz_sign_get_level_params(KAZ_LEVEL_128);
@@ -489,7 +489,7 @@ static void test_wrong_type(void)
     /* Try to decode as privkey -- should fail (wrong type) */
     kaz_sign_level_t level;
     unsigned char sk_out[128];
-    size_t sk_len;
+    size_t sk_len = sizeof(sk_out);
     ret = kaz_sign_privkey_from_wire(wire, out_len, &level, sk_out, &sk_len);
     if (ret != KAZ_SIGN_ERROR_INVALID) {
         char buf[128];
@@ -546,7 +546,7 @@ static void test_truncated_wire(void)
     unsigned char short_wire[] = { KAZ_WIRE_MAGIC_HI, KAZ_WIRE_MAGIC_LO };
     kaz_sign_level_t level;
     unsigned char pk[128];
-    size_t pk_len;
+    size_t pk_len = sizeof(pk);
 
     int ret = kaz_sign_pubkey_from_wire(short_wire, sizeof(short_wire), &level, pk, &pk_len);
     if (ret != KAZ_SIGN_ERROR_INVALID) {

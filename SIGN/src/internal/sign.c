@@ -466,9 +466,6 @@ static int init_runtime_params(kaz_runtime_params_t *rp, kaz_sign_level_t level)
 
     /* Initialize hash function - always SHA-256 for JCAJCE alignment */
     rp->hash_md = EVP_sha256();
-    if (level != KAZ_LEVEL_128 && level != KAZ_LEVEL_192 && level != KAZ_LEVEL_256) {
-        goto cleanup;
-    }
 
     rp->hash_ctx = EVP_MD_CTX_new();
     if (!rp->hash_ctx) goto cleanup;
@@ -1858,12 +1855,12 @@ static int level_to_wire_alg(kaz_sign_level_t level) {
     }
 }
 
-static kaz_sign_level_t wire_alg_to_level(int alg) {
+static int wire_alg_to_level(int alg) {
     switch (alg) {
         case KAZ_WIRE_SIGN_128: return KAZ_LEVEL_128;
         case KAZ_WIRE_SIGN_192: return KAZ_LEVEL_192;
         case KAZ_WIRE_SIGN_256: return KAZ_LEVEL_256;
-        default: return (kaz_sign_level_t)-1;
+        default: return 0; /* 0 is not a valid level */
     }
 }
 
@@ -1886,9 +1883,10 @@ static int wire_validate_header(const unsigned char *wire, size_t wire_len,
     if (wire[4] != KAZ_WIRE_VERSION)
         return KAZ_SIGN_ERROR_INVALID;
 
-    kaz_sign_level_t lvl = wire_alg_to_level(wire[2]);
-    if ((int)lvl == -1)
+    int lvl_int = wire_alg_to_level(wire[2]);
+    if (lvl_int == 0)
         return KAZ_SIGN_ERROR_INVALID;
+    kaz_sign_level_t lvl = (kaz_sign_level_t)lvl_int;
 
     *level = lvl;
     return KAZ_SIGN_SUCCESS;
@@ -1945,6 +1943,9 @@ int kaz_sign_pubkey_from_wire(const unsigned char *wire, size_t wire_len,
     size_t expected = KAZ_WIRE_HEADER_LEN + params->public_key_bytes;
     if (wire_len != expected)
         return KAZ_SIGN_ERROR_INVALID;
+
+    if (*pk_len < params->public_key_bytes)
+        return KAZ_SIGN_ERROR_BUFFER;
 
     *level = lvl;
     *pk_len = params->public_key_bytes;
@@ -2004,6 +2005,9 @@ int kaz_sign_privkey_from_wire(const unsigned char *wire, size_t wire_len,
     if (wire_len != expected)
         return KAZ_SIGN_ERROR_INVALID;
 
+    if (*sk_len < params->secret_key_bytes)
+        return KAZ_SIGN_ERROR_BUFFER;
+
     *level = lvl;
     *sk_len = params->secret_key_bytes;
     memcpy(sk, wire + KAZ_WIRE_HEADER_LEN, params->secret_key_bytes);
@@ -2061,6 +2065,9 @@ int kaz_sign_sig_from_wire(const unsigned char *wire, size_t wire_len,
     size_t expected = KAZ_WIRE_HEADER_LEN + params->signature_overhead;
     if (wire_len != expected)
         return KAZ_SIGN_ERROR_INVALID;
+
+    if (*sig_len < params->signature_overhead)
+        return KAZ_SIGN_ERROR_BUFFER;
 
     *level = lvl;
     *sig_len = params->signature_overhead;

@@ -487,19 +487,17 @@ int kaz_kem_encapsulate(unsigned char *ct, unsigned long long *ctlen,
     const kaz_kem_params_t *p = g_state.params;
 
     ctx = BN_CTX_new();
-    e1 = BN_new();
-    e2 = BN_new();
+    /* e1, e2, M are assigned by bytes_to_bn() below — no pre-alloc needed */
     b1 = BN_secure_new();
     b2 = BN_secure_new();
     B1 = BN_new();
     B2 = BN_new();
-    M = BN_new();
     ENCAP = BN_new();
     tmp = BN_new();
     tmp2 = BN_new();
     lowerbound = BN_new();
 
-    if (!ctx || !e1 || !e2 || !b1 || !b2 || !B1 || !B2 || !M || !ENCAP ||
+    if (!ctx || !b1 || !b2 || !B1 || !B2 || !ENCAP ||
         !tmp || !tmp2 || !lowerbound) {
         ret = KAZ_KEM_ERROR_MEMORY;
         goto cleanup;
@@ -601,8 +599,6 @@ int kaz_kem_decapsulate(unsigned char *ss, unsigned long long *sslen,
     BIGNUM *ENCAP = NULL, *DECAP = NULL;
     BIGNUM *tmp = NULL;
 
-    (void)ctlen;  /* Unused but kept for API compatibility */
-
     if (!ss || !sslen || !ct || !sk) {
         return KAZ_KEM_ERROR_INVALID_PARAM;
     }
@@ -613,24 +609,28 @@ int kaz_kem_decapsulate(unsigned char *ss, unsigned long long *sslen,
 
     const kaz_kem_params_t *p = g_state.params;
 
+    /* Validate ciphertext length: ENCAP || B1 || B2 */
+    size_t expected_ctlen = p->general_bytes + 2 * p->ephemeral_public_bytes;
+    if ((size_t)ctlen < expected_ctlen) {
+        return KAZ_KEM_ERROR_INVALID_PARAM;
+    }
+
     ctx = BN_CTX_new();
+    /* a1, a2 use secure memory for private key material */
     a1 = BN_secure_new();
     a2 = BN_secure_new();
-    B1 = BN_new();
-    B2 = BN_new();
-    ENCAP = BN_new();
+    /* ENCAP, B1, B2 are assigned by bytes_to_bn() below — no pre-alloc */
     DECAP = BN_new();
     tmp = BN_new();
 
-    if (!ctx || !a1 || !a2 || !B1 || !B2 || !ENCAP || !DECAP || !tmp) {
+    if (!ctx || !a1 || !a2 || !DECAP || !tmp) {
         ret = KAZ_KEM_ERROR_MEMORY;
         goto cleanup;
     }
 
-    /* Import private key */
-    a1 = bytes_to_bn(sk, p->privatekey_bytes);
-    a2 = bytes_to_bn(sk + p->privatekey_bytes, p->privatekey_bytes);
-    if (!a1 || !a2) {
+    /* Import private key into pre-allocated secure BIGNUMs */
+    if (!BN_bin2bn(sk, (int)p->privatekey_bytes, a1) ||
+        !BN_bin2bn(sk + p->privatekey_bytes, (int)p->privatekey_bytes, a2)) {
         ret = KAZ_KEM_ERROR_OPENSSL;
         goto cleanup;
     }

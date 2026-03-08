@@ -40,9 +40,9 @@ extern "C" {
  * Security level enumeration for runtime selection
  */
 typedef enum {
-    KAZ_LEVEL_128 = 128,    /* 128-bit security (SHA3-256) */
-    KAZ_LEVEL_192 = 192,    /* 192-bit security (SHA3-384) */
-    KAZ_LEVEL_256 = 256     /* 256-bit security (SHA3-512) */
+    KAZ_LEVEL_128 = 128,    /* 128-bit security (SHA-256) */
+    KAZ_LEVEL_192 = 192,    /* 192-bit security (SHA-256) */
+    KAZ_LEVEL_256 = 256     /* 256-bit security (SHA-256) */
 } kaz_sign_level_t;
 
 /**
@@ -111,7 +111,7 @@ const kaz_sign_level_params_t *kaz_sign_get_level_params(kaz_sign_level_t level)
 #define KAZ_SIGN_S2BYTES           54
 #define KAZ_SIGN_S3BYTES           54
 
-/* Hash function: SHA3-256 */
+/* Hash function: SHA-256 (all levels use SHA-256 with zero-padding) */
 #define KAZ_SIGN_HASH_ALG          "SHA-256"
 
 /* ============================================================================
@@ -141,7 +141,7 @@ const kaz_sign_level_params_t *kaz_sign_get_level_params(kaz_sign_level_t level)
 #define KAZ_SIGN_S2BYTES           88
 #define KAZ_SIGN_S3BYTES           88
 
-/* Hash function: SHA3-384 */
+/* Hash function: SHA-256 (zero-padded to 48 bytes) */
 #define KAZ_SIGN_HASH_ALG          "SHA-256"
 
 /* ============================================================================
@@ -172,7 +172,7 @@ const kaz_sign_level_params_t *kaz_sign_get_level_params(kaz_sign_level_t level)
 #define KAZ_SIGN_S2BYTES           118
 #define KAZ_SIGN_S3BYTES           118
 
-/* Hash function: SHA3-512 */
+/* Hash function: SHA-256 (zero-padded to 64 bytes) */
 #define KAZ_SIGN_HASH_ALG          "SHA-256"
 
 #endif /* KAZ_SECURITY_LEVEL */
@@ -204,8 +204,6 @@ const kaz_sign_level_params_t *kaz_sign_get_level_params(kaz_sign_level_t level)
 #define KAZ_WIRE_TYPE_SIG_ATT  0x11
 
 #define KAZ_WIRE_HEADER_LEN    5
-#define KAZ_WIRE_PAYLOAD_MARKER 0x50
-#define KAZ_WIRE_PAYLOAD_VER    0x01
 
 /* ============================================================================
  * Error Codes
