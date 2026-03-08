@@ -162,8 +162,8 @@ static void test_hkdf_extract_basic(void)
         return;
     }
 
-    if (prk_len != 64) {
-        TEST_FAIL("PRK length should be 64 (SHA-512)");
+    if (prk_len != 32) {
+        TEST_FAIL("PRK length should be 32 (SHA-256)");
         return;
     }
 
