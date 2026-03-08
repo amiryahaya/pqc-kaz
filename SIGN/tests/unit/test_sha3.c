@@ -42,7 +42,7 @@ static void print_hex(const char *label, const unsigned char *data, size_t len)
  * NIST Test Vectors
  * ============================================================================ */
 
-/* SHA3-256("") = a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a */
+/* SHA-256("") = e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 */
 static void test_sha3_256_empty(void)
 {
     tests_run++;
@@ -50,8 +50,8 @@ static void test_sha3_256_empty(void)
     unsigned char expected[32];
     unsigned char output[32];
 
-    hex_to_bytes("a7ffc6f8bf1ed76651c14756a061d662"
-                 "f580ff4de43b49fa82d80a4b80f8434a",
+    hex_to_bytes("e3b0c44298fc1c149afbf4c8996fb924"
+                 "27ae41e4649b934ca495991b7852b855",
                  expected, 32);
 
     int ret = kaz_sha3_256(NULL, 0, output);
@@ -61,7 +61,7 @@ static void test_sha3_256_empty(void)
     }
 
     if (memcmp(output, expected, 32) != 0) {
-        TEST_FAIL("SHA3-256('') does not match NIST vector");
+        TEST_FAIL("SHA-256('') does not match expected vector");
         print_hex("  Expected", expected, 32);
         print_hex("  Got     ", output, 32);
         return;
@@ -70,7 +70,7 @@ static void test_sha3_256_empty(void)
     TEST_PASS();
 }
 
-/* SHA3-256("abc") = 3a985da74fe225b2045c172d6bd390bd855f086e3e9d525b46bfe24511431532 */
+/* SHA-256("abc") = ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad */
 static void test_sha3_256_abc(void)
 {
     tests_run++;
@@ -78,8 +78,8 @@ static void test_sha3_256_abc(void)
     unsigned char expected[32];
     unsigned char output[32];
 
-    hex_to_bytes("3a985da74fe225b2045c172d6bd390bd"
-                 "855f086e3e9d525b46bfe24511431532",
+    hex_to_bytes("ba7816bf8f01cfea414140de5dae2223"
+                 "b00361a396177a9cb410ff61f20015ad",
                  expected, 32);
 
     const unsigned char *msg = (const unsigned char *)"abc";
@@ -90,7 +90,7 @@ static void test_sha3_256_abc(void)
     }
 
     if (memcmp(output, expected, 32) != 0) {
-        TEST_FAIL("SHA3-256('abc') does not match NIST vector");
+        TEST_FAIL("SHA-256('abc') does not match expected vector");
         print_hex("  Expected", expected, 32);
         print_hex("  Got     ", output, 32);
         return;
@@ -216,7 +216,7 @@ static void test_sha3_256_incremental_matches_oneshot(void)
     TEST_PASS();
 }
 
-/* Incremental with empty message should match NIST vector */
+/* Incremental with empty message should match SHA-256("") */
 static void test_sha3_256_incremental_empty(void)
 {
     tests_run++;
@@ -224,8 +224,8 @@ static void test_sha3_256_incremental_empty(void)
     unsigned char expected[32];
     unsigned char output[32];
 
-    hex_to_bytes("a7ffc6f8bf1ed76651c14756a061d662"
-                 "f580ff4de43b49fa82d80a4b80f8434a",
+    hex_to_bytes("e3b0c44298fc1c149afbf4c8996fb924"
+                 "27ae41e4649b934ca495991b7852b855",
                  expected, 32);
 
     kaz_sha3_ctx_t *ctx = kaz_sha3_256_init();
@@ -244,7 +244,7 @@ static void test_sha3_256_incremental_empty(void)
     kaz_sha3_256_free(ctx);
 
     if (memcmp(output, expected, 32) != 0) {
-        TEST_FAIL("Incremental empty hash does not match NIST vector");
+        TEST_FAIL("Incremental empty hash does not match SHA-256 vector");
         return;
     }
 

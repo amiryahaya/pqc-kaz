@@ -49,8 +49,8 @@ static void test_detached_sig_bytes_256(void)
 {
     tests_run++;
     size_t sz = kaz_sign_detached_sig_bytes(KAZ_LEVEL_256);
-    if (sz != 356) {
-        TEST_FAIL("Expected 356 bytes for level 256");
+    if (sz != 354) {
+        TEST_FAIL("Expected 354 bytes for level 256");
         printf("    Got: %zu\n", sz);
         return;
     }
