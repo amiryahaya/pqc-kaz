@@ -20,11 +20,11 @@ import KazSignNative
 /// Security level for KAZ-SIGN operations
 /// Note: Size constants must be kept in sync with include/kaz/sign.h
 public enum SecurityLevel: Int, CaseIterable, Sendable {
-    /// 128-bit security (SHA3-256)
+    /// 128-bit security (SHA-256)
     case level128 = 128
-    /// 192-bit security (SHA3-384)
+    /// 192-bit security (SHA-256)
     case level192 = 192
-    /// 256-bit security (SHA3-512)
+    /// 256-bit security (SHA-256)
     case level256 = 256
 
     /// Secret key size in bytes
@@ -41,7 +41,7 @@ public enum SecurityLevel: Int, CaseIterable, Sendable {
         switch self {
         case .level128: return 54
         case .level192: return 88
-        case .level256: return 119
+        case .level256: return 118
         }
     }
 
@@ -51,16 +51,16 @@ public enum SecurityLevel: Int, CaseIterable, Sendable {
         switch self {
         case .level128: return 162  // S1(54) + S2(54) + S3(54)
         case .level192: return 264  // S1(88) + S2(88) + S3(88)
-        case .level256: return 357  // S1(119) + S2(119) + S3(119)
+        case .level256: return 354  // S1(118) + S2(118) + S3(118)
         }
     }
 
     /// Hash output size in bytes
     public var hashBytes: Int {
         switch self {
-        case .level128: return 32  // SHA3-256
-        case .level192: return 48  // SHA3-384
-        case .level256: return 64  // SHA3-512
+        case .level128: return 32  // SHA-256
+        case .level192: return 48  // SHA-256 (truncated)
+        case .level256: return 64  // SHA-256 (zero-padded)
         }
     }
 
@@ -523,11 +523,11 @@ public final class KazSigner: @unchecked Sendable {
         return result == 0
     }
 
-    // MARK: - SHA3-256
+    // MARK: - SHA-256
 
-    /// Compute SHA3-256 hash of data (static, always available)
+    /// Compute SHA-256 hash of data (static, always available)
     /// - Parameter data: The data to hash
-    /// - Returns: 32-byte SHA3-256 digest
+    /// - Returns: 32-byte SHA-256 digest
     public static func sha3_256(_ data: Data) -> Data {
         var output = Data(count: 32)
 
@@ -541,7 +541,7 @@ public final class KazSigner: @unchecked Sendable {
             }
         }
 
-        // SHA3-256 should not fail under normal conditions; return empty data on error
+        // SHA-256 should not fail under normal conditions; return empty data on error
         if result != 0 {
             return Data()
         }

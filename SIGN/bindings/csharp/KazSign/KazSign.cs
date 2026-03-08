@@ -17,7 +17,7 @@
  *   byte[] sig = signer.SignDetached(data, secretKey);
  *   bool ok = signer.VerifyDetached(data, sig, publicKey);
  *
- *   // SHA3-256
+ *   // SHA-256
  *   byte[] hash = KazSigner.Sha3_256(data);
  *
  *   // DER encoding, X.509 certificates, PKCS#12 keystores
@@ -33,11 +33,11 @@ namespace Antrapol.Kaz.Sign
     /// </summary>
     public enum SecurityLevel
     {
-        /// <summary>128-bit security (SHA3-256)</summary>
+        /// <summary>128-bit security (SHA-256)</summary>
         Level128 = 128,
-        /// <summary>192-bit security (SHA3-384)</summary>
+        /// <summary>192-bit security (SHA-256)</summary>
         Level192 = 192,
-        /// <summary>256-bit security (SHA3-512)</summary>
+        /// <summary>256-bit security (SHA-256)</summary>
         Level256 = 256
     }
 
@@ -88,7 +88,7 @@ namespace Antrapol.Kaz.Sign
         {
             SecurityLevel.Level128 => 54,
             SecurityLevel.Level192 => 88,
-            SecurityLevel.Level256 => 119,
+            SecurityLevel.Level256 => 118,
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
 
@@ -98,16 +98,16 @@ namespace Antrapol.Kaz.Sign
         {
             SecurityLevel.Level128 => 162,  // S1(54) + S2(54) + S3(54)
             SecurityLevel.Level192 => 264,  // S1(88) + S2(88) + S3(88)
-            SecurityLevel.Level256 => 357,  // S1(119) + S2(119) + S3(119)
+            SecurityLevel.Level256 => 354,  // S1(118) + S2(118) + S3(118)
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
 
         /// <summary>Get hash output size in bytes for the given security level</summary>
         public static int GetHashBytes(SecurityLevel level) => level switch
         {
-            SecurityLevel.Level128 => 32,  // SHA3-256
-            SecurityLevel.Level192 => 48,  // SHA3-384
-            SecurityLevel.Level256 => 64,  // SHA3-512
+            SecurityLevel.Level128 => 32,  // SHA-256
+            SecurityLevel.Level192 => 48,  // SHA-256 (truncated)
+            SecurityLevel.Level256 => 64,  // SHA-256 (zero-padded)
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
     }
@@ -240,11 +240,11 @@ namespace Antrapol.Kaz.Sign
             byte[] msg, ulong msglen, byte[] pk);
 
         // ============================================================
-        // SHA3-256 API (v3.0+)
+        // SHA-256 API (v3.0+)
         // ============================================================
 
         /// <summary>
-        /// Compute SHA3-256 hash of a message in one shot.
+        /// Compute SHA-256 hash of a message in one shot.
         /// </summary>
         [DllImport(LibName, EntryPoint = "kaz_sha3_256")]
         public static extern int Sha3_256(byte[] msg, ulong msglen, byte[] output);
@@ -638,10 +638,10 @@ namespace Antrapol.Kaz.Sign
         }
 
         /// <summary>
-        /// Compute SHA3-256 hash of data.
+        /// Compute SHA-256 hash of data.
         /// </summary>
         /// <param name="data">Data to hash</param>
-        /// <returns>32-byte SHA3-256 hash</returns>
+        /// <returns>32-byte SHA-256 hash</returns>
         public static byte[] Sha3_256(byte[] data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
