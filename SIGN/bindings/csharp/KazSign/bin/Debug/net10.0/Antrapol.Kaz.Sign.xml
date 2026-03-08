@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Antrapol.Kaz.Sign</name>
+    </assembly>
+    <members>
+        <member name="T:Antrapol.Kaz.Sign.SecurityLevel">
+            <summary>
+            Security level for KAZ-SIGN operations
+            </summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.SecurityLevel.Level128">
+            <summary>128-bit security (SHA-256)</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.SecurityLevel.Level192">
+            <summary>192-bit security (SHA-384)</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.SecurityLevel.Level256">
+            <summary>256-bit security (SHA-512)</summary>
+        </member>
+        <member name="T:Antrapol.Kaz.Sign.KazSignError">
+            <summary>
+            Error codes returned by KAZ-SIGN operations
+            </summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.Success">
+            <summary>Operation successful</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.MemoryError">
+            <summary>Memory allocation failed</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.RngError">
+            <summary>Random number generation failed</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.InvalidParameter">
+            <summary>Invalid parameter</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.VerificationFailed">
+            <summary>Signature verification failed</summary>
+        </member>
+        <member name="T:Antrapol.Kaz.Sign.KazSignParameters">
+            <summary>
+            Parameters for each security level
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSignParameters.GetSecretKeyBytes(Antrapol.Kaz.Sign.SecurityLevel)">
+            <summary>Get secret key size in bytes for the given security level</summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSignParameters.GetPublicKeyBytes(Antrapol.Kaz.Sign.SecurityLevel)">
+            <summary>Get public key size in bytes for the given security level</summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSignParameters.GetSignatureOverhead(Antrapol.Kaz.Sign.SecurityLevel)">
+            <summary>Get signature overhead in bytes for the given security level</summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSignParameters.GetHashBytes(Antrapol.Kaz.Sign.SecurityLevel)">
+            <summary>Get hash output size in bytes for the given security level</summary>
+        </member>
+        <member name="T:Antrapol.Kaz.Sign.NativeMethods">
+            <summary>
+            Native P/Invoke declarations for KAZ-SIGN library
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.InitLevel(System.Int32)">
+            <summary>
+            Initialize the library for a specific security level.
+            Can be called multiple times with different levels.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.ClearLevel(System.Int32)">
+            <summary>
+            Clear resources for a specific security level.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.ClearAll">
+            <summary>
+            Clear resources for all security levels.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.KeyPairEx(System.Int32,System.Byte[],System.Byte[])">
+            <summary>
+            Generate a key pair for a specific security level.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.SignEx(System.Int32,System.Byte[],System.UInt64@,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Sign a message with a specific security level.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.VerifyEx(System.Int32,System.Byte[],System.UInt64@,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Verify a signature with a specific security level.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.HashEx(System.Int32,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Hash a message with the hash function for a specific security level.
+            </summary>
+        </member>
+        <member name="T:Antrapol.Kaz.Sign.KazSignException">
+            <summary>
+            Exception thrown when a KAZ-SIGN operation fails
+            </summary>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.KazSignException.ErrorCode">
+            <summary>The error code returned by the native library</summary>
+        </member>
+        <member name="T:Antrapol.Kaz.Sign.KazSigner">
+            <summary>
+            KAZ-SIGN digital signature operations with runtime security level selection.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.#ctor(Antrapol.Kaz.Sign.SecurityLevel,System.Boolean)">
+            <summary>
+            Create a new KazSigner with the specified security level.
+            </summary>
+            <param name="level">Security level (128, 192, or 256)</param>
+            <param name="autoInitialize">If true, automatically initialize for this level</param>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.KazSigner.Level">
+            <summary>The security level being used</summary>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.KazSigner.SecretKeyBytes">
+            <summary>Size of secret key in bytes</summary>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.KazSigner.PublicKeyBytes">
+            <summary>Size of public key in bytes</summary>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.KazSigner.SignatureOverhead">
+            <summary>Signature overhead in bytes (excluding message)</summary>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.KazSigner.HashBytes">
+            <summary>Hash output size in bytes</summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.Initialize">
+            <summary>
+            Initialize the library for this security level.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.IsInitialized">
+            <summary>
+            Check if the library is initialized for this level.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.GenerateKeyPair(System.Byte[]@,System.Byte[]@)">
+            <summary>
+            Generate a new key pair.
+            </summary>
+            <param name="publicKey">Output: public verification key</param>
+            <param name="secretKey">Output: secret signing key</param>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.Sign(System.Byte[],System.Byte[])">
+            <summary>
+            Sign a message.
+            </summary>
+            <param name="message">Message to sign</param>
+            <param name="secretKey">Secret signing key</param>
+            <returns>Signature (includes the message)</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.Verify(System.Byte[],System.Byte[],System.Byte[]@)">
+            <summary>
+            Verify a signature and extract the message.
+            </summary>
+            <param name="signature">Signature to verify (includes the message)</param>
+            <param name="publicKey">Public verification key</param>
+            <param name="message">Output: extracted message if valid</param>
+            <returns>True if signature is valid, false otherwise</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.Hash(System.Byte[])">
+            <summary>
+            Hash a message using the appropriate hash function for this security level.
+            </summary>
+            <param name="message">Message to hash</param>
+            <returns>Hash value</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.GetVersion">
+            <summary>
+            Get the library version string.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.GetVersionNumber">
+            <summary>
+            Get the library version number.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.Dispose">
+            <summary>
+            Clear resources for this security level.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.ClearAll">
+            <summary>
+            Clear all security level resources. Call when completely done with KAZ-SIGN.
+            </summary>
+        </member>
+    </members>
+</doc>

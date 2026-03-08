@@ -1,0 +1,31 @@
+{
+  "object" : {
+    "artifacts" : [
+      {
+        "kind" : {
+          "xcframework" : {
+
+          }
+        },
+        "packageRef" : {
+          "identity" : "swift",
+          "kind" : "root",
+          "location" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift",
+          "name" : "swift"
+        },
+        "path" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework",
+        "source" : {
+          "type" : "local"
+        },
+        "targetName" : "KazSignNative"
+      }
+    ],
+    "dependencies" : [
+
+    ],
+    "prebuilts" : [
+
+    ]
+  },
+  "version" : 7
+}

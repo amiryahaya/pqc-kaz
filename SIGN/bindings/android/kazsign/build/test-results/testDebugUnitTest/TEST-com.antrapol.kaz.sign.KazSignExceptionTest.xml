@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.antrapol.kaz.sign.KazSignExceptionTest" tests="31" skipped="0" failures="0" errors="0" timestamp="2026-01-05T02:51:38" hostname="Mac.lan" time="0.003">
+  <properties/>
+  <testcase name="fromValue returns RNG_ERROR for -2" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.001"/>
+  <testcase name="UNKNOWN error includes original code for debugging" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromErrorCode creates exception for VERIFICATION_FAILED" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception defaults to UNKNOWN error code" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromErrorCode creates exception for SUCCESS" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromErrorCode creates exception for MEMORY_ERROR" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception stores message correctly" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromErrorCode creates exception for INVALID_PARAMETER" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.001"/>
+  <testcase name="ErrorCode has six entries" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception is throwable" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception with long message" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception stores error code correctly" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns UNKNOWN for -99" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception with special characters in message" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns INVALID_PARAMETER for -3" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns UNKNOWN for unmapped negative value" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns UNKNOWN for large negative value" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns VERIFICATION_FAILED for -4" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="ErrorCode has correct values" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromErrorCode creates exception for RNG_ERROR" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns MEMORY_ERROR for -1" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns UNKNOWN for unmapped positive value" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns UNKNOWN for large positive value" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="all error codes have descriptive messages" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromValue returns SUCCESS for 0" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception can be thrown and caught" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception with empty message" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception preserves error code when thrown" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception with unicode in message" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="fromErrorCode creates exception for UNKNOWN with original code in message" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <testcase name="exception preserves message when thrown" classname="com.antrapol.kaz.sign.KazSignExceptionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

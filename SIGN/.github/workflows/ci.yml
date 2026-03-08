@@ -1,0 +1,321 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  # ==========================================================================
+  # Build and Test on Ubuntu
+  # ==========================================================================
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        level: [128, 192, 256]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev
+
+    - name: Build and test (Level ${{ matrix.level }})
+      run: |
+        make test LEVEL=${{ matrix.level }}
+
+    - name: Run KDF tests (Level ${{ matrix.level }})
+      run: |
+        make test-kdf LEVEL=${{ matrix.level }}
+
+  # ==========================================================================
+  # Build and Test on macOS
+  # ==========================================================================
+  test-macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        level: [128, 192, 256]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        brew install openssl@3
+
+    - name: Build and test (Level ${{ matrix.level }})
+      run: |
+        make test LEVEL=${{ matrix.level }}
+
+    - name: Run KDF tests (Level ${{ matrix.level }})
+      run: |
+        make test-kdf LEVEL=${{ matrix.level }}
+
+  # ==========================================================================
+  # Security Testing
+  # ==========================================================================
+  security-tests:
+    runs-on: ubuntu-latest
+    needs: [test-ubuntu]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev
+
+    - name: Run fuzz corpus tests
+      run: |
+        make fuzz-corpus LEVEL=128
+
+    - name: Run quick fuzz tests
+      run: |
+        make fuzz-quick LEVEL=128
+
+  # ==========================================================================
+  # Static Analysis
+  # ==========================================================================
+  static-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev clang-tools
+
+    - name: Run scan-build
+      run: |
+        scan-build --status-bugs make test LEVEL=128
+
+  # ==========================================================================
+  # Memory Safety (AddressSanitizer)
+  # ==========================================================================
+  memory-safety:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev
+
+    - name: Build with AddressSanitizer
+      run: |
+        make clean
+        CFLAGS="-fsanitize=address -fno-omit-frame-pointer -g" \
+        LDFLAGS="-fsanitize=address" \
+        make test LEVEL=128
+
+    - name: Run ASAN tests
+      run: |
+        ASAN_OPTIONS=detect_leaks=1 ./build/bin/test_sign_128
+
+  # ==========================================================================
+  # Benchmarks (Optional - only on main branch)
+  # ==========================================================================
+  benchmarks:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    needs: [test-ubuntu, test-macos]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev
+
+    - name: Run benchmarks
+      run: |
+        make benchmark LEVEL=128 BENCH_ITERATIONS=100
+        make benchmark LEVEL=192 BENCH_ITERATIONS=100
+        make benchmark LEVEL=256 BENCH_ITERATIONS=100
+
+  # ==========================================================================
+  # Version Check
+  # ==========================================================================
+  version-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Verify version consistency
+      run: |
+        VERSION_FILE=$(cat VERSION | tr -d '[:space:]')
+        VERSION_HEADER=$(grep 'KAZ_SIGN_VERSION_STRING' include/kaz/sign.h | grep -o '"[^"]*"' | tr -d '"')
+
+        echo "VERSION file: $VERSION_FILE"
+        echo "Header version: $VERSION_HEADER"
+
+        if [ "$VERSION_FILE" != "$VERSION_HEADER" ]; then
+          echo "ERROR: Version mismatch!"
+          exit 1
+        fi
+
+        echo "Version check passed: $VERSION_FILE"
+
+  # ==========================================================================
+  # Build Shared Libraries - Linux x86_64
+  # ==========================================================================
+  build-linux-x64:
+    runs-on: ubuntu-latest
+    needs: [test-ubuntu]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev
+
+    - name: Build shared libraries
+      run: |
+        make shared-all
+
+    - name: List built libraries
+      run: |
+        ls -la build/lib/
+
+    - name: Upload Linux x64 libraries
+      uses: actions/upload-artifact@v4
+      with:
+        name: libkazsign-linux-x64
+        path: build/lib/*.so
+        retention-days: 90
+
+  # ==========================================================================
+  # Build Shared Libraries - Linux arm64
+  # ==========================================================================
+  build-linux-arm64:
+    runs-on: ubuntu-24.04-arm
+    needs: [test-ubuntu]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev
+
+    - name: Build shared libraries
+      run: |
+        make shared-all
+
+    - name: List built libraries
+      run: |
+        ls -la build/lib/
+
+    - name: Upload Linux arm64 libraries
+      uses: actions/upload-artifact@v4
+      with:
+        name: libkazsign-linux-arm64
+        path: build/lib/*.so
+        retention-days: 90
+
+  # ==========================================================================
+  # Build Shared Libraries - macOS (Universal Binary)
+  # ==========================================================================
+  build-macos:
+    runs-on: macos-latest
+    needs: [test-macos]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        brew install openssl@3
+
+    - name: Build shared libraries
+      run: |
+        make shared-all
+
+    - name: List built libraries
+      run: |
+        ls -la build/lib/
+        file build/lib/*.dylib
+
+    - name: Upload macOS libraries
+      uses: actions/upload-artifact@v4
+      with:
+        name: libkazsign-macos
+        path: build/lib/*.dylib
+        retention-days: 90
+
+  # ==========================================================================
+  # Create Release (on version tag)
+  # ==========================================================================
+  release:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build-linux-x64, build-linux-arm64, build-macos]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download Linux x64 libraries
+      uses: actions/download-artifact@v4
+      with:
+        name: libkazsign-linux-x64
+        path: artifacts/linux-x64
+
+    - name: Download Linux arm64 libraries
+      uses: actions/download-artifact@v4
+      with:
+        name: libkazsign-linux-arm64
+        path: artifacts/linux-arm64
+
+    - name: Download macOS libraries
+      uses: actions/download-artifact@v4
+      with:
+        name: libkazsign-macos
+        path: artifacts/macos
+
+    - name: Create release archives
+      run: |
+        cd artifacts
+        tar -czvf libkazsign-linux-x64.tar.gz -C linux-x64 .
+        tar -czvf libkazsign-linux-arm64.tar.gz -C linux-arm64 .
+        tar -czvf libkazsign-macos.tar.gz -C macos .
+        ls -la
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          artifacts/libkazsign-linux-x64.tar.gz
+          artifacts/libkazsign-linux-arm64.tar.gz
+          artifacts/libkazsign-macos.tar.gz
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

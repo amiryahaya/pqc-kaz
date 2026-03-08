@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/android/kazsign/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/amirrudinyahaya/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/android/kazsign/.cxx/RelWithDebInfo/465j201g/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/amirrudinyahaya/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/android/kazsign/.cxx/RelWithDebInfo/465j201g/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "kazsign::@6890427a1f51a3e7e1df": {
+      "artifactName": "kazsign",
+      "abi": "x86_64",
+      "output": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/android/kazsign/build/intermediates/cxx/RelWithDebInfo/465j201g/obj/x86_64/libkazsign.so",
+      "runtimeFiles": []
+    }
+  }
+}

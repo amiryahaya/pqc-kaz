@@ -1,0 +1,33 @@
+# Build artifacts
+build/
+dist/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation
+*.md
+LICENSE
+docs/
+
+# Test files
+tests/
+benchmarks/
+tools/
+
+# Bindings (not needed for native library build)
+bindings/
+
+# KAT files
+*.req
+*.rsp
+
+# CI/CD
+.github/

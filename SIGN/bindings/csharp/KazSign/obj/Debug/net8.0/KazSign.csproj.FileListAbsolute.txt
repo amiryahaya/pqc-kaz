@@ -1,0 +1,13 @@
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/bin/Debug/net8.0/KazSign.deps.json
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/bin/Debug/net8.0/KazSign.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/bin/Debug/net8.0/KazSign.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/bin/Debug/net8.0/KazSign.xml
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/KazSign.GeneratedMSBuildEditorConfig.editorconfig
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/KazSign.AssemblyInfoInputs.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/KazSign.AssemblyInfo.cs
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/KazSign.csproj.CoreCompileInputs.cache
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/KazSign.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/refint/KazSign.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/KazSign.xml
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/KazSign.pdb
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign/obj/Debug/net8.0/ref/KazSign.dll

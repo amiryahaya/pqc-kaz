@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.antrapol.kaz.sign.SecurityLevelTest" tests="33" skipped="0" failures="0" errors="0" timestamp="2026-01-05T02:51:38" hostname="Mac.lan" time="0.002">
+  <properties/>
+  <testcase name="SecurityLevel has three levels" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="all levels have positive key sizes" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="higher levels have larger secret keys" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="fromValue throws for value 512" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="fromValue throws for invalid value 64" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="SecurityLevel values are correct" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="algorithm names contain level value" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="fromValue returns Level 128 for value 128" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="fromValue throws for close but invalid value 127" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="fromValue returns Level 192 for value 192" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="fromValue throws for negative value" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="higher levels have larger public keys" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 128 has correct signature overhead" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="fromValue returns Level 256 for value 256" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="hash sizes match expected SHA variants" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 256 has correct hash size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 192 has correct algorithm name" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 192 has correct signature overhead" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 128 has correct hash size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 256 has correct algorithm name" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 256 has correct secret key size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.001"/>
+  <testcase name="all levels have non-empty algorithm names" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 256 has correct public key size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="higher levels have larger signature overhead" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 192 has correct hash size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="fromValue throws for invalid value 0" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="higher levels have larger hash sizes" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 128 has correct secret key size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 192 has correct secret key size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 128 has correct public key size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 256 has correct signature overhead" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 192 has correct public key size" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <testcase name="Level 128 has correct algorithm name" classname="com.antrapol.kaz.sign.SecurityLevelTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

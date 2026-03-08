@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Multi-platform support: Console, WinUI 3, .NET MAUI -->
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <!-- Add Windows-specific TFM for WinUI 3 -->
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+
+    <!-- Support for all platforms -->
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+
+    <!-- Package metadata -->
+    <PackageId>Antrapol.Kaz.Sign</PackageId>
+    <RootNamespace>Antrapol.Kaz.Sign</RootNamespace>
+    <AssemblyName>Antrapol.Kaz.Sign</AssemblyName>
+    <Version>2.1.0</Version>
+    <Authors>Antrapol</Authors>
+    <Company>Antrapol</Company>
+    <Description>C# bindings for KAZ-SIGN post-quantum digital signature algorithm. Compatible with .NET, WinUI 3, and .NET MAUI.</Description>
+    <PackageTags>cryptography;post-quantum;digital-signature;pqc;winui;maui;antrapol</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <!-- Build settings -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- Include native libraries in the package -->
+  <ItemGroup>
+    <!-- Unified library with runtime level selection (preferred) -->
+    <!-- macOS ARM64 (Apple Silicon) -->
+    <None Include="../../../build/lib/libkazsign.dylib" Pack="true" PackagePath="runtimes/osx-arm64/native" Condition="Exists('../../../build/lib/libkazsign.dylib')" Link="runtimes/osx-arm64/native/libkazsign.dylib" />
+    <!-- macOS x64 (Intel) -->
+    <None Include="../../../build/lib/libkazsign.dylib" Pack="true" PackagePath="runtimes/osx-x64/native" Condition="Exists('../../../build/lib/libkazsign.dylib')" Link="runtimes/osx-x64/native/libkazsign.dylib" />
+
+    <!-- Linux x64 -->
+    <None Include="../../../build/lib/libkazsign.so" Pack="true" PackagePath="runtimes/linux-x64/native" Condition="Exists('../../../build/lib/libkazsign.so')" Link="runtimes/linux-x64/native/libkazsign.so" />
+    <!-- Linux ARM64 -->
+    <None Include="../../../build/lib/libkazsign.so" Pack="true" PackagePath="runtimes/linux-arm64/native" Condition="Exists('../../../build/lib/libkazsign.so')" Link="runtimes/linux-arm64/native/libkazsign.so" />
+
+    <!-- Windows x64 -->
+    <None Include="../../../build/lib/kazsign.dll" Pack="true" PackagePath="runtimes/win-x64/native" Condition="Exists('../../../build/lib/kazsign.dll')" Link="runtimes/win-x64/native/kazsign.dll" />
+    <!-- Windows ARM64 -->
+    <None Include="../../../build/lib/kazsign.dll" Pack="true" PackagePath="runtimes/win-arm64/native" Condition="Exists('../../../build/lib/kazsign.dll')" Link="runtimes/win-arm64/native/kazsign.dll" />
+
+    <!-- Legacy per-level libraries (fallback) -->
+    <!-- macOS -->
+    <None Include="../../../build/lib/libkazsign_128.dylib" Pack="true" PackagePath="runtimes/osx-arm64/native" Condition="Exists('../../../build/lib/libkazsign_128.dylib')" />
+    <None Include="../../../build/lib/libkazsign_192.dylib" Pack="true" PackagePath="runtimes/osx-arm64/native" Condition="Exists('../../../build/lib/libkazsign_192.dylib')" />
+    <None Include="../../../build/lib/libkazsign_256.dylib" Pack="true" PackagePath="runtimes/osx-arm64/native" Condition="Exists('../../../build/lib/libkazsign_256.dylib')" />
+
+    <!-- Linux -->
+    <None Include="../../../build/lib/libkazsign_128.so" Pack="true" PackagePath="runtimes/linux-x64/native" Condition="Exists('../../../build/lib/libkazsign_128.so')" />
+    <None Include="../../../build/lib/libkazsign_192.so" Pack="true" PackagePath="runtimes/linux-x64/native" Condition="Exists('../../../build/lib/libkazsign_192.so')" />
+    <None Include="../../../build/lib/libkazsign_256.so" Pack="true" PackagePath="runtimes/linux-x64/native" Condition="Exists('../../../build/lib/libkazsign_256.so')" />
+
+    <!-- Windows -->
+    <None Include="../../../build/lib/kazsign_128.dll" Pack="true" PackagePath="runtimes/win-x64/native" Condition="Exists('../../../build/lib/kazsign_128.dll')" />
+    <None Include="../../../build/lib/kazsign_192.dll" Pack="true" PackagePath="runtimes/win-x64/native" Condition="Exists('../../../build/lib/kazsign_192.dll')" />
+    <None Include="../../../build/lib/kazsign_256.dll" Pack="true" PackagePath="runtimes/win-x64/native" Condition="Exists('../../../build/lib/kazsign_256.dll')" />
+  </ItemGroup>
+
+</Project>

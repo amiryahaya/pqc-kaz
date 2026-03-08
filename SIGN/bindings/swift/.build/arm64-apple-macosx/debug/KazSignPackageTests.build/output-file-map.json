@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/master.swiftdeps"
+  },
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.d",
+    "object": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.dia"
+  }
+}

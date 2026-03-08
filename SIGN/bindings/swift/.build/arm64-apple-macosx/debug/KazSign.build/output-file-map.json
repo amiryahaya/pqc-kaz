@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/master.swiftdeps"
+  },
+  "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Sources/KazSign/KazSign.swift": {
+    "dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.d",
+    "object": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.swift.o",
+    "swiftmodule": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign~partial.swiftmodule",
+    "swift-dependencies": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.swiftdeps",
+    "diagnostics": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.dia"
+  }
+}

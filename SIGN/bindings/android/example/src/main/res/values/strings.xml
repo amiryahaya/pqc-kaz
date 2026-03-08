@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KAZ-SIGN Example</string>
+    <string name="title_security_level">Security Level</string>
+    <string name="btn_generate_keys">Generate Key Pair</string>
+    <string name="btn_sign">Sign Message</string>
+    <string name="btn_verify">Verify Signature</string>
+    <string name="btn_clear">Clear</string>
+    <string name="hint_message">Enter message to sign</string>
+    <string name="label_public_key">Public Key:</string>
+    <string name="label_secret_key">Secret Key:</string>
+    <string name="label_signature">Signature:</string>
+    <string name="label_result">Result:</string>
+    <string name="label_version">Version:</string>
+</resources>

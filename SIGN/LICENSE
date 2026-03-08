@@ -1,0 +1,58 @@
+NIST Software License
+
+This software was developed at the National Institute of Standards and
+Technology (NIST) by employees of the Federal Government in the course
+of their official duties. Pursuant to title 17 Section 105 of the
+United States Code, this software is not subject to copyright protection
+and is in the public domain.
+
+NIST assumes no responsibility whatsoever for its use by other parties,
+and makes no guarantees, expressed or implied, about its quality,
+reliability, or any other characteristic.
+
+We would appreciate acknowledgment if the software is used.
+
+--------------------------------------------------------------------------------
+
+DISCLAIMER
+
+This software is provided by NIST as a public service. You may use, copy,
+and distribute copies of the software in any medium, provided that you
+keep intact this entire notice. You may improve, modify, and create
+derivative works of the software or any portion of the software, and you
+may copy and distribute such modifications or works. Modified works
+should carry a notice stating that you changed the software and should
+note the date and nature of any such change.
+
+Please explicitly acknowledge the National Institute of Standards and
+Technology as the source of the software.
+
+--------------------------------------------------------------------------------
+
+LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL NIST BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT
+LIMITED TO DIRECT, INDIRECT, SPECIAL, OR CONSEQUENTIAL DAMAGES, ARISING
+OUT OF, RESULTING FROM, OR IN ANY WAY CONNECTED WITH THIS SOFTWARE,
+WHETHER OR NOT BASED UPON WARRANTY, CONTRACT, TORT, OR OTHERWISE, WHETHER
+OR NOT INJURY WAS SUSTAINED BY PERSONS OR PROPERTY OR OTHERWISE, AND
+WHETHER OR NOT LOSS WAS SUSTAINED FROM, OR AROSE OUT OF THE RESULTS OF,
+OR USE OF, THE SOFTWARE OR SERVICES PROVIDED HEREUNDER.
+
+--------------------------------------------------------------------------------
+
+Additional Terms for Modified Versions
+
+This implementation includes modifications and enhancements to the original
+NIST reference implementation. These modifications are also released under
+the same public domain terms as the original NIST software.
+
+Modifications include:
+- Unified multi-level security implementation (128, 192, 256-bit)
+- OpenSSL BIGNUM constant-time backend
+- HKDF key derivation function (RFC 5869)
+- Comprehensive test suite and security hardening
+- Fuzz testing and timing analysis infrastructure
+
+The authors of these modifications disclaim all copyright interest and
+dedicate their contributions to the public domain.

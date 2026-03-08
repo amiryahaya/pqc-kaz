@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.antrapol.kaz.sign.VerificationResultTest" tests="36" skipped="0" failures="0" errors="0" timestamp="2026-01-05T02:51:38" hostname="Mac.lan" time="0.003">
+  <properties/>
+  <testcase name="toString includes message length when present" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.001"/>
+  <testcase name="getMessageAsString handles empty message" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="all levels work with invalid result" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.001"/>
+  <testcase name="VerificationResult stores message correctly" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="getMessageAsHex is lowercase" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="getMessageAsHex handles empty message" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="toString includes isValid true" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="all levels work with valid result" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResults with different levels are not equal" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResults with null messages are equal" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="identical VerificationResults are equal" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResult stores isValid correctly when true" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="toString includes isValid false" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResult with message vs null are not equal" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="getMessageAsString handles UTF-8 characters" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="getMessageAsString handles emoji" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="getMessageAsString returns string when valid" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResult stores level correctly" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResult is not equal to null" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="toString includes zero message length when null" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="invalid verification typically has null message" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResult equals itself" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResults with different isValid are not equal" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="getMessageAsHex returns null when invalid" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResults with null messages have same hashCode" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="getMessageAsHex returns hex when valid" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResult stores null message correctly" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResult stores isValid correctly when false" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="getMessageAsString returns null when invalid" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="toString includes level" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="valid verification has message" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="identical VerificationResults have same hashCode" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="VerificationResults with different messages are not equal" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="securityLevel returns Level 128" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="securityLevel returns Level 192" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <testcase name="securityLevel returns Level 256" classname="com.antrapol.kaz.sign.VerificationResultTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

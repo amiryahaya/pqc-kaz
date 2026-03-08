@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Antrapol.Kaz.Sign/2.1.0": {
+        "runtime": {
+          "Antrapol.Kaz.Sign.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Antrapol.Kaz.Sign/2.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
