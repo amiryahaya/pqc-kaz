@@ -205,7 +205,7 @@ data class VerificationResult(
 dependencies {
     implementation(project(":kazsign"))
     // or from Maven (when published)
-    // implementation("com.pqc:kazsign:2.1.0")
+    // implementation("com.pqc:kazsign:2.0.0")
 }
 ```
 

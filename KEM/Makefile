@@ -1,12 +1,12 @@
 # KAZ-KEM Unified Build System
-# Version 2.1.0
+# Version 2.0.0
 # Production-ready OpenSSL-based implementation
 # Supports runtime security level selection
 # ============================================================================
 
 # Version information
 VERSION_MAJOR=2
-VERSION_MINOR=1
+VERSION_MINOR=0
 VERSION_PATCH=0
 VERSION=$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH)
 

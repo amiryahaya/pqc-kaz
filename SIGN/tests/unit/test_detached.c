@@ -25,8 +25,8 @@ static void test_detached_sig_bytes_128(void)
 {
     tests_run++;
     size_t sz = kaz_sign_detached_sig_bytes(KAZ_LEVEL_128);
-    if (sz != 57) {
-        TEST_FAIL("Expected 57 bytes for level 128");
+    if (sz != 162) {
+        TEST_FAIL("Expected 162 bytes for level 128");
         printf("    Got: %zu\n", sz);
         return;
     }
@@ -37,8 +37,8 @@ static void test_detached_sig_bytes_192(void)
 {
     tests_run++;
     size_t sz = kaz_sign_detached_sig_bytes(KAZ_LEVEL_192);
-    if (sz != 81) {
-        TEST_FAIL("Expected 81 bytes for level 192");
+    if (sz != 264) {
+        TEST_FAIL("Expected 264 bytes for level 192");
         printf("    Got: %zu\n", sz);
         return;
     }
@@ -49,8 +49,8 @@ static void test_detached_sig_bytes_256(void)
 {
     tests_run++;
     size_t sz = kaz_sign_detached_sig_bytes(KAZ_LEVEL_256);
-    if (sz != 105) {
-        TEST_FAIL("Expected 105 bytes for level 256");
+    if (sz != 354) {
+        TEST_FAIL("Expected 354 bytes for level 256");
         printf("    Got: %zu\n", sz);
         return;
     }

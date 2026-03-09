@@ -44,8 +44,8 @@ class CrossLevelValidationTest {
         val signer = createSigner(SecurityLevel.LEVEL_128)
         val keyPair = signer.generateKeyPair()
 
-        assertEquals(98, keyPair.secretKey.size)
-        assertEquals(49, keyPair.publicKey.size)
+        assertEquals(32, keyPair.secretKey.size)
+        assertEquals(54, keyPair.publicKey.size)
     }
 
     @Test
@@ -53,8 +53,8 @@ class CrossLevelValidationTest {
         val signer = createSigner(SecurityLevel.LEVEL_192)
         val keyPair = signer.generateKeyPair()
 
-        assertEquals(146, keyPair.secretKey.size)
-        assertEquals(73, keyPair.publicKey.size)
+        assertEquals(50, keyPair.secretKey.size)
+        assertEquals(88, keyPair.publicKey.size)
     }
 
     @Test
@@ -62,8 +62,8 @@ class CrossLevelValidationTest {
         val signer = createSigner(SecurityLevel.LEVEL_256)
         val keyPair = signer.generateKeyPair()
 
-        assertEquals(194, keyPair.secretKey.size)
-        assertEquals(97, keyPair.publicKey.size)
+        assertEquals(64, keyPair.secretKey.size)
+        assertEquals(118, keyPair.publicKey.size)
     }
 
     // ========================================================================
@@ -77,7 +77,7 @@ class CrossLevelValidationTest {
         val message = "Test".toByteArray()
 
         val signResult = signer.sign(message, keyPair.secretKey)
-        assertEquals(57, signResult.overhead)
+        assertEquals(162, signResult.overhead)
     }
 
     @Test
@@ -87,7 +87,7 @@ class CrossLevelValidationTest {
         val message = "Test".toByteArray()
 
         val signResult = signer.sign(message, keyPair.secretKey)
-        assertEquals(81, signResult.overhead)
+        assertEquals(264, signResult.overhead)
     }
 
     @Test
@@ -97,7 +97,7 @@ class CrossLevelValidationTest {
         val message = "Test".toByteArray()
 
         val signResult = signer.sign(message, keyPair.secretKey)
-        assertEquals(105, signResult.overhead)
+        assertEquals(354, signResult.overhead)
     }
 
     // ========================================================================
@@ -140,7 +140,7 @@ class CrossLevelValidationTest {
         val keyPair192 = signer192.generateKeyPair()
         val message = "Test".toByteArray()
 
-        // Should throw because 192 secret key is 146 bytes, but 128 expects 98
+        // Should throw because 192 secret key is 50 bytes, but 128 expects 32
         signer128.sign(message, keyPair192.secretKey)
     }
 
@@ -152,7 +152,7 @@ class CrossLevelValidationTest {
         val keyPair256 = signer256.generateKeyPair()
         val message = "Test".toByteArray()
 
-        // Should throw because 256 secret key is 194 bytes, but 128 expects 98
+        // Should throw because 256 secret key is 64 bytes, but 128 expects 32
         signer128.sign(message, keyPair256.secretKey)
     }
 
@@ -164,7 +164,7 @@ class CrossLevelValidationTest {
         val keyPair128 = signer128.generateKeyPair()
         val message = "Test".toByteArray()
 
-        // Should throw because 128 secret key is 98 bytes, but 192 expects 146
+        // Should throw because 128 secret key is 32 bytes, but 192 expects 50
         signer192.sign(message, keyPair128.secretKey)
     }
 
@@ -176,7 +176,7 @@ class CrossLevelValidationTest {
         val keyPair128 = signer128.generateKeyPair()
         val message = "Test".toByteArray()
 
-        // Should throw because 128 secret key is 98 bytes, but 256 expects 194
+        // Should throw because 128 secret key is 32 bytes, but 256 expects 64
         signer256.sign(message, keyPair128.secretKey)
     }
 
@@ -195,7 +195,7 @@ class CrossLevelValidationTest {
 
         val signResult = signer128.sign(message, keyPair128.secretKey)
 
-        // Should throw because 192 public key is 73 bytes, but 128 expects 49
+        // Should throw because 192 public key is 88 bytes, but 128 expects 54
         signer128.verify(signResult.signature, keyPair192.publicKey)
     }
 
@@ -210,7 +210,7 @@ class CrossLevelValidationTest {
 
         val signResult = signer192.sign(message, keyPair192.secretKey)
 
-        // Should throw because 256 public key is 97 bytes, but 192 expects 73
+        // Should throw because 256 public key is 118 bytes, but 192 expects 88
         signer192.verify(signResult.signature, keyPair256.publicKey)
     }
 

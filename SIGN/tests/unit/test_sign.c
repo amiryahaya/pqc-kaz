@@ -222,7 +222,7 @@ void test_api_version(void)
 
     ASSERT(version != NULL, "Version string should not be NULL");
     ASSERT(strlen(version) > 0, "Version string should not be empty");
-    ASSERT(version_num >= 20000, "Version number should be at least 2.0.0");
+    ASSERT(version_num >= 40000, "Version number should be at least 4.0.0");
 
     /* Verify version matches constants */
     ASSERT_EQ(version_num, KAZ_SIGN_VERSION_NUMBER, "Version number mismatch");
@@ -693,9 +693,9 @@ void test_sec_corrupted_signature_s2(void)
     TEST_PASS();
 }
 
-void test_sec_corrupted_signature_s2_counter(void)
+void test_sec_corrupted_signature_s3(void)
 {
-    TEST_START("Corrupted S2 counter detection");
+    TEST_START("Corrupted S3 component detection");
 
     unsigned char pk[KAZ_SIGN_PUBLICKEYBYTES];
     unsigned char sk[KAZ_SIGN_SECRETKEYBYTES];
@@ -712,11 +712,11 @@ void test_sec_corrupted_signature_s2_counter(void)
     ret = kaz_sign_signature(sig, &siglen, msg, msglen, sk);
     ASSERT_EQ(ret, KAZ_SIGN_SUCCESS, "Signing failed");
 
-    /* Corrupt last byte of S2 counter (8-byte big-endian counter) */
-    sig[KAZ_SIGN_S1BYTES + KAZ_SIGN_S2BYTES - 1] ^= 0x01;
+    /* Corrupt S3 component (third part of signature, after S1+S2) */
+    sig[KAZ_SIGN_S1BYTES + KAZ_SIGN_S2BYTES + KAZ_SIGN_S3BYTES / 2] ^= 0x01;
 
     ret = kaz_sign_verify(recovered, &recovered_len, sig, siglen, pk);
-    ASSERT_EQ(ret, KAZ_SIGN_ERROR_VERIFY, "Should detect S2 counter corruption");
+    ASSERT_EQ(ret, KAZ_SIGN_ERROR_VERIFY, "Should detect S3 corruption");
 
     TEST_PASS();
 }
@@ -913,23 +913,44 @@ void test_runtime_level_params(void)
     ASSERT(params192 != NULL, "Level 192 params should exist");
     ASSERT(params256 != NULL, "Level 256 params should exist");
 
-    /* Verify level 128: SK=98, PK=49, hash=32 */
+    /* Verify level 128: SK=32, PK=54, hash=32, v=54, s=16, t=16, s1=s2=s3=54 */
     ASSERT_EQ(params128->level, 128, "Level 128 level mismatch");
-    ASSERT_EQ(params128->secret_key_bytes, 98, "Level 128 SK size mismatch");
-    ASSERT_EQ(params128->public_key_bytes, 49, "Level 128 PK size mismatch");
+    ASSERT_EQ(params128->secret_key_bytes, 32, "Level 128 SK size mismatch");
+    ASSERT_EQ(params128->public_key_bytes, 54, "Level 128 PK size mismatch");
     ASSERT_EQ(params128->hash_bytes, 32, "Level 128 hash size mismatch");
+    ASSERT_EQ(params128->v_bytes, 54, "Level 128 v_bytes mismatch");
+    ASSERT_EQ(params128->s_bytes, 16, "Level 128 s_bytes mismatch");
+    ASSERT_EQ(params128->t_bytes, 16, "Level 128 t_bytes mismatch");
+    ASSERT_EQ(params128->s1_bytes, 54, "Level 128 s1_bytes mismatch");
+    ASSERT_EQ(params128->s2_bytes, 54, "Level 128 s2_bytes mismatch");
+    ASSERT_EQ(params128->s3_bytes, 54, "Level 128 s3_bytes mismatch");
+    ASSERT_EQ(params128->signature_overhead, 162, "Level 128 sig overhead mismatch");
 
-    /* Verify level 192: SK=146, PK=73, hash=48 */
+    /* Verify level 192: SK=50, PK=88, hash=48, v=88, s=25, t=25, s1=s2=s3=88 */
     ASSERT_EQ(params192->level, 192, "Level 192 level mismatch");
-    ASSERT_EQ(params192->secret_key_bytes, 146, "Level 192 SK size mismatch");
-    ASSERT_EQ(params192->public_key_bytes, 73, "Level 192 PK size mismatch");
+    ASSERT_EQ(params192->secret_key_bytes, 50, "Level 192 SK size mismatch");
+    ASSERT_EQ(params192->public_key_bytes, 88, "Level 192 PK size mismatch");
     ASSERT_EQ(params192->hash_bytes, 48, "Level 192 hash size mismatch");
+    ASSERT_EQ(params192->v_bytes, 88, "Level 192 v_bytes mismatch");
+    ASSERT_EQ(params192->s_bytes, 25, "Level 192 s_bytes mismatch");
+    ASSERT_EQ(params192->t_bytes, 25, "Level 192 t_bytes mismatch");
+    ASSERT_EQ(params192->s1_bytes, 88, "Level 192 s1_bytes mismatch");
+    ASSERT_EQ(params192->s2_bytes, 88, "Level 192 s2_bytes mismatch");
+    ASSERT_EQ(params192->s3_bytes, 88, "Level 192 s3_bytes mismatch");
+    ASSERT_EQ(params192->signature_overhead, 264, "Level 192 sig overhead mismatch");
 
-    /* Verify level 256: SK=194, PK=97, hash=64 */
+    /* Verify level 256: SK=64, PK=118, hash=64, v=118, s=32, t=32, s1=s2=s3=118 */
     ASSERT_EQ(params256->level, 256, "Level 256 level mismatch");
-    ASSERT_EQ(params256->secret_key_bytes, 194, "Level 256 SK size mismatch");
-    ASSERT_EQ(params256->public_key_bytes, 97, "Level 256 PK size mismatch");
+    ASSERT_EQ(params256->secret_key_bytes, 64, "Level 256 SK size mismatch");
+    ASSERT_EQ(params256->public_key_bytes, 118, "Level 256 PK size mismatch");
     ASSERT_EQ(params256->hash_bytes, 64, "Level 256 hash size mismatch");
+    ASSERT_EQ(params256->v_bytes, 118, "Level 256 v_bytes mismatch");
+    ASSERT_EQ(params256->s_bytes, 32, "Level 256 s_bytes mismatch");
+    ASSERT_EQ(params256->t_bytes, 32, "Level 256 t_bytes mismatch");
+    ASSERT_EQ(params256->s1_bytes, 118, "Level 256 s1_bytes mismatch");
+    ASSERT_EQ(params256->s2_bytes, 118, "Level 256 s2_bytes mismatch");
+    ASSERT_EQ(params256->s3_bytes, 118, "Level 256 s3_bytes mismatch");
+    ASSERT_EQ(params256->signature_overhead, 354, "Level 256 sig overhead mismatch");
 
     /* Invalid level should return NULL */
     ASSERT(kaz_sign_get_level_params((kaz_sign_level_t)64) == NULL, "Invalid level should return NULL");
@@ -1091,7 +1112,7 @@ void test_runtime_cross_level_isolation(void)
 
 void test_runtime_hash_different_levels(void)
 {
-    TEST_START("Hash output differs by level");
+    TEST_START("Hash output by level (SHA-256, zero-padded)");
 
     unsigned char msg[] = "Hash test message";
     unsigned long long msglen = sizeof(msg) - 1;
@@ -1106,10 +1127,14 @@ void test_runtime_hash_different_levels(void)
     ret = kaz_sign_hash_ex(KAZ_LEVEL_256, msg, msglen, hash256);
     ASSERT_EQ(ret, KAZ_SIGN_SUCCESS, "Hash 256 failed");
 
-    /* Hashes should be non-zero */
+    /* All levels use SHA-256, so first 32 bytes should match (digest at front, trailing zeros) */
     ASSERT(!is_zero(hash128, 32), "Hash 128 should not be zero");
-    ASSERT(!is_zero(hash192, 48), "Hash 192 should not be zero");
-    ASSERT(!is_zero(hash256, 64), "Hash 256 should not be zero");
+    ASSERT_MEM_EQ(hash128, hash192, 32, "SHA-256 core should match between 128 and 192");
+    ASSERT_MEM_EQ(hash128, hash256, 32, "SHA-256 core should match between 128 and 256");
+
+    /* Level 192 and 256 are zero-padded beyond 32 bytes (trailing zeros, matches Java) */
+    ASSERT(is_zero(hash192 + 32, 16), "Hash 192 padding should be zero");
+    ASSERT(is_zero(hash256 + 32, 32), "Hash 256 padding should be zero");
 
     TEST_PASS();
 }
@@ -1259,7 +1284,7 @@ int main(int argc, char *argv[])
     test_sec_wrong_public_key();
     test_sec_corrupted_signature_s1();
     test_sec_corrupted_signature_s2();
-    test_sec_corrupted_signature_s2_counter();
+    test_sec_corrupted_signature_s3();
     test_sec_corrupted_message();
     test_sec_truncated_signature();
     test_sec_random_signature();

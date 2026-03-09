@@ -70,53 +70,53 @@ class SignatureResultTest {
 
     @Test
     fun `overhead is calculated correctly for Level 128`() {
-        // Level 128 overhead is 57 bytes
+        // Level 128 overhead is 162 bytes (S1+S2+S3 = 3*54)
         val messageSize = 50
-        val signatureSize = messageSize + 57
+        val signatureSize = messageSize + 162
         val result = SignatureResult(
             ByteArray(signatureSize),
             ByteArray(messageSize),
             128
         )
-        assertEquals(57, result.overhead)
+        assertEquals(162, result.overhead)
     }
 
     @Test
     fun `overhead is calculated correctly for Level 192`() {
-        // Level 192 overhead is 81 bytes
+        // Level 192 overhead is 264 bytes (S1+S2+S3 = 3*88)
         val messageSize = 100
-        val signatureSize = messageSize + 81
+        val signatureSize = messageSize + 264
         val result = SignatureResult(
             ByteArray(signatureSize),
             ByteArray(messageSize),
             192
         )
-        assertEquals(81, result.overhead)
+        assertEquals(264, result.overhead)
     }
 
     @Test
     fun `overhead is calculated correctly for Level 256`() {
-        // Level 256 overhead is 105 bytes
+        // Level 256 overhead is 354 bytes (S1+S2+S3 = 3*118)
         val messageSize = 75
-        val signatureSize = messageSize + 105
+        val signatureSize = messageSize + 354
         val result = SignatureResult(
             ByteArray(signatureSize),
             ByteArray(messageSize),
             256
         )
-        assertEquals(105, result.overhead)
+        assertEquals(354, result.overhead)
     }
 
     @Test
     fun `overhead with empty message equals signature size`() {
-        val signatureSize = 57
+        val signatureSize = 162
         val result = SignatureResult(ByteArray(signatureSize), ByteArray(0), 128)
         assertEquals(signatureSize, result.overhead)
     }
 
     @Test
     fun `overhead calculation handles various message sizes`() {
-        val overheads = listOf(57, 81, 105)
+        val overheads = listOf(162, 264, 354)
         val levels = listOf(128, 192, 256)
         val messageSizes = listOf(0, 1, 10, 100, 1000, 10000)
 

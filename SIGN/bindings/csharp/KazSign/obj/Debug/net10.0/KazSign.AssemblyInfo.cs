@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("C# bindings for KAZ-SIGN post-quantum digital signature algorithm. Compatible wit" +
     "h .NET, WinUI 3, and .NET MAUI."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2.1.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.1.0+d6eccfda331b95a2b8b939a048c7aa046e688c82")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.1.0+d0eb6ec2df556e576d83f00feb63807174cd0813")]
 [assembly: System.Reflection.AssemblyProductAttribute("Antrapol.Kaz.Sign")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Antrapol.Kaz.Sign")]
 [assembly: System.Reflection.AssemblyVersionAttribute("2.1.0.0")]

@@ -1,6 +1,6 @@
 /*
  * KAZ-KEM Comprehensive Test Suite
- * Version 2.1.0 - Runtime Security Level Support
+ * Version 2.0.0 - Runtime Security Level Support
  *
  * Industry-grade testing framework for KEM implementation
  * Tests all security levels (128, 192, 256) in a single run

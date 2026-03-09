@@ -1,6 +1,6 @@
 /*
  * KAZ-KEM API Header
- * Version 2.1.0
+ * Version 2.0.0
  *
  * Post-quantum Key Encapsulation Mechanism
  * Supports Security Levels: 128, 192, 256 (runtime selectable)
@@ -174,7 +174,7 @@ extern void kaz_kem_cleanup_full(void);
 
 /**
  * Get version string at runtime.
- * Returns: Pointer to version string (e.g., "2.1.0")
+ * Returns: Pointer to version string (e.g., "2.0.0")
  * Note: The returned string is statically allocated and should not be freed.
  */
 extern const char* kaz_kem_version(void);

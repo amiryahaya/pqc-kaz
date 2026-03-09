@@ -1,6 +1,6 @@
 /*
  * KAZ-SIGN Android Wrapper
- * Version 3.0.0
+ * Version 4.0.0
  *
  * PKCS#12 keystore contents data class for KAZ-SIGN.
  */

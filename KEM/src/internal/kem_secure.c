@@ -1,6 +1,6 @@
 /*
  * KAZ-KEM Secure Implementation
- * Version 2.1.0
+ * Version 2.0.0
  *
  * Production-hardened implementation with runtime security level selection using:
  * - OpenSSL BIGNUM with constant-time operations
@@ -328,7 +328,7 @@ const char* kaz_kem_version(void)
 #ifdef KAZ_KEM_VERSION
     return KAZ_KEM_VERSION;
 #else
-    return "2.1.0";
+    return "2.0.0";
 #endif
 }
 

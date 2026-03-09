@@ -1,6 +1,6 @@
 /*
  * KAZ-KEM Performance Benchmark Suite
- * Version 2.1.0
+ * Version 2.0.0
  * Industry-grade performance measurement and statistical analysis
  * Supports runtime security level selection
  */

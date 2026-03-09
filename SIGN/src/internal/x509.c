@@ -9,9 +9,9 @@
  * and a custom signature algorithm. All DER is built manually.
  *
  * Algorithm OIDs (enterprise arc 62395):
- *   KAZ-SIGN-128: 1.3.6.1.4.1.62395.1.2.1
- *   KAZ-SIGN-192: 1.3.6.1.4.1.62395.1.2.2
- *   KAZ-SIGN-256: 1.3.6.1.4.1.62395.1.2.3
+ *   KAZ-SIGN-128: 1.3.6.1.4.1.62395.2.2.1
+ *   KAZ-SIGN-192: 1.3.6.1.4.1.62395.2.2.2
+ *   KAZ-SIGN-256: 1.3.6.1.4.1.62395.2.2.3
  */
 
 #include <stdio.h>
@@ -26,13 +26,13 @@
  * OID Definitions
  * ============================================================================
  *
- * Algorithm OID prefix: 1.3.6.1.4.1.62395.1.2
- *   Value bytes: 2B 06 01 04 01 83 E7 3B 01 02 (10 bytes) + level byte
+ * Algorithm OID prefix: 1.3.6.1.4.1.62395.2.2
+ *   Value bytes: 2B 06 01 04 01 83 E7 3B 02 02 (10 bytes) + level byte
  *   Full value: 11 bytes, TLV: 13 bytes
  */
 
 static const unsigned char OID_PREFIX_X509[] = {
-    0x2B, 0x06, 0x01, 0x04, 0x01, 0x83, 0xE7, 0x3B, 0x01, 0x02
+    0x2B, 0x06, 0x01, 0x04, 0x01, 0x83, 0xE7, 0x3B, 0x02, 0x02
 };
 #define OID_PREFIX_X509_LEN  10
 #define OID_VALUE_X509_LEN   11   /* prefix + 1 level byte */
