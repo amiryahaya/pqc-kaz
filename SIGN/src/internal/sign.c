@@ -217,6 +217,7 @@ static int bn_import(BIGNUM *bn, const unsigned char *buf, size_t buf_size)
  */
 static int sample_in_range(BIGNUM *result, const BIGNUM *lower, const BIGNUM *upper, BN_CTX *ctx)
 {
+    (void)ctx;  /* reserved for future use */
     int ret = -1;
     BIGNUM *range = NULL;
     BIGNUM *r = NULL;
