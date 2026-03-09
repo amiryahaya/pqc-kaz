@@ -524,9 +524,10 @@ int kaz_sign_hash_ex(kaz_sign_level_t level,
 
     EVP_MD_CTX_free(hash_ctx);
 
-    /* Zero-pad output: leading zeros, SHA-256 digest at end (big-endian, Java-compatible) */
+    /* Zero-pad output: SHA-256 digest at front, trailing zeros (matches Java exactly:
+     * System.arraycopy(digest, 0, buf, 0, len); new BigInteger(1, buf)) */
     memset(hash, 0, params->hash_bytes);
-    memcpy(hash + params->hash_bytes - 32, sha256_buf, 32);
+    memcpy(hash, sha256_buf, 32);
     kaz_secure_zero(sha256_buf, sizeof(sha256_buf));
 
     return KAZ_SIGN_SUCCESS;
