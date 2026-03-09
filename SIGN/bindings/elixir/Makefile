@@ -51,11 +51,11 @@ NIF_SO = $(PRIV_DIR)/kaz_sign_nif.$(SO_EXT)
 
 # Source files
 NIF_SRC = c_src/kaz_sign_nif.c
-KAZ_SRC_FILES = $(KAZ_SRC)/sign.c $(KAZ_SRC)/nist_wrapper.c $(KAZ_SRC)/kdf.c $(KAZ_SRC)/security.c
+KAZ_SRC_FILES = $(KAZ_SRC)/sign.c $(KAZ_SRC)/nist_wrapper.c $(KAZ_SRC)/kdf.c $(KAZ_SRC)/security.c $(KAZ_SRC)/sha3.c $(KAZ_SRC)/detached.c $(KAZ_SRC)/der.c $(KAZ_SRC)/x509.c $(KAZ_SRC)/p12.c
 
 # Object files
 NIF_OBJ = c_src/kaz_sign_nif.o
-KAZ_OBJ = c_src/sign.o c_src/nist_wrapper.o c_src/kdf.o c_src/security.o
+KAZ_OBJ = c_src/sign.o c_src/nist_wrapper.o c_src/kdf.o c_src/security.o c_src/sha3.o c_src/detached.o c_src/der.o c_src/x509.o c_src/p12.o
 
 .PHONY: all clean
 
@@ -80,6 +80,21 @@ c_src/kdf.o: $(KAZ_SRC)/kdf.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 c_src/security.o: $(KAZ_SRC)/security.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+c_src/sha3.o: $(KAZ_SRC)/sha3.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+c_src/detached.o: $(KAZ_SRC)/detached.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+c_src/der.o: $(KAZ_SRC)/der.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+c_src/x509.o: $(KAZ_SRC)/x509.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+c_src/p12.o: $(KAZ_SRC)/p12.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
