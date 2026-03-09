@@ -120,10 +120,6 @@ Both libraries provide bindings for multiple platforms:
 | Kotlin / Android | [`KEM/bindings/android/`](KEM/bindings/android/) | [`SIGN/bindings/android/`](SIGN/bindings/android/) |
 | Elixir (NIF) | [`KEM/bindings/elixir/`](KEM/bindings/elixir/) | [`SIGN/bindings/elixir/`](SIGN/bindings/elixir/) |
 
-## Java Reference Implementation
-
-The Java reference implementation is available at [kaz-pqc-core-v2.0](https://github.com/AntRapol/kaz-pqc-core-v2.0). The C implementations have been verified for full interoperability with Java across all security levels.
-
 ## Project Structure
 
 ```
@@ -154,7 +150,7 @@ PQC-KAZ/
 
 ## Acknowledgements
 
-The KAZ algorithm was invented and designed by [Antrapolation Technology Sdn Bhd](https://antrapol.com), a Malaysian cybersecurity company. This C implementation is inspired by their original Java reference implementation ([kaz-pqc-core-v2.0](https://github.com/AntRapol/kaz-pqc-core-v2.0)).
+This C library and its native bindings were developed based on the Java reference implementation by [Antrapolation Technology Sdn Bhd](https://antrapol.com), a Malaysian cybersecurity company.
 
 ## License
 
