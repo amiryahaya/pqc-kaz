@@ -6,6 +6,9 @@ description = "Rust bindings for KAZ-SIGN post-quantum digital signature algorit
 license = "MIT"
 publish = false
 
+[dependencies]
+zeroize = "1"
+
 [build-dependencies]
 cc = "1"
 pkg-config = "0.3"

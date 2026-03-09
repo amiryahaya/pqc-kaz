@@ -18,7 +18,13 @@ pub mod ffi;
 
 use std::ffi::{CStr, CString};
 use std::fmt;
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::mem::ManuallyDrop;
+use std::sync::Mutex;
+
+use zeroize::Zeroize;
+
+// Global mutex to serialize access since the C library uses global state.
+static SIGN_LOCK: Mutex<()> = Mutex::new(());
 
 // ---------------------------------------------------------------------------
 // SecurityLevel
@@ -151,7 +157,7 @@ pub type Result<T> = std::result::Result<T, KazSignError>;
 
 /// A KAZ-SIGN public key.
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct PublicKey(pub Vec<u8>);
+pub struct PublicKey(Vec<u8>);
 
 impl PublicKey {
     /// Return the raw key bytes.
@@ -166,14 +172,21 @@ impl AsRef<[u8]> for PublicKey {
     }
 }
 
-/// A KAZ-SIGN secret key.
-#[derive(Debug, Clone)]
-pub struct SecretKey(pub Vec<u8>);
+/// A KAZ-SIGN secret key. Zeroized on drop.
+pub struct SecretKey(Vec<u8>);
 
 impl SecretKey {
     /// Return the raw key bytes.
     pub fn as_bytes(&self) -> &[u8] {
         &self.0
+    }
+
+    /// Consume the key, returning the inner bytes.
+    ///
+    /// **Warning:** The caller is responsible for zeroizing the returned vector.
+    pub fn into_inner(self) -> Vec<u8> {
+        let mut md = ManuallyDrop::new(self);
+        std::mem::take(&mut md.0)
     }
 }
 
@@ -185,18 +198,19 @@ impl AsRef<[u8]> for SecretKey {
 
 impl Drop for SecretKey {
     fn drop(&mut self) {
-        // Best-effort zeroize
-        for b in self.0.iter_mut() {
-            unsafe { std::ptr::write_volatile(b, 0) };
-        }
+        self.0.zeroize();
+    }
+}
+
+impl fmt::Debug for SecretKey {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "SecretKey([REDACTED; {} bytes])", self.0.len())
     }
 }
 
 // ---------------------------------------------------------------------------
 // KazSign
 // ---------------------------------------------------------------------------
-
-static CLEAR_ALL_REGISTERED: AtomicBool = AtomicBool::new(false);
 
 /// Main handle for KAZ-SIGN operations at a specific security level.
 pub struct KazSign {
@@ -208,14 +222,9 @@ impl KazSign {
     ///
     /// This initialises the underlying C library for the specified level.
     pub fn new(level: SecurityLevel) -> Result<Self> {
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe { ffi::kaz_sign_init_level(level.as_raw()) };
         KazSignError::from_code(rc)?;
-
-        // Register a cleanup-on-exit handler once
-        if !CLEAR_ALL_REGISTERED.swap(true, Ordering::SeqCst) {
-            // Best-effort: ignore errors from atexit-like registration
-        }
-
         Ok(Self { level })
     }
 
@@ -233,6 +242,7 @@ impl KazSign {
         let mut pk = vec![0u8; pk_len];
         let mut sk = vec![0u8; sk_len];
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_keypair_ex(self.level.as_raw(), pk.as_mut_ptr(), sk.as_mut_ptr())
         };
@@ -251,6 +261,7 @@ impl KazSign {
         let mut sig = vec![0u8; max_sig];
         let mut siglen: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_signature_ex(
                 self.level.as_raw(),
@@ -271,6 +282,7 @@ impl KazSign {
         let mut msg = vec![0u8; sig.len()];
         let mut msglen: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_verify_ex(
                 self.level.as_raw(),
@@ -294,6 +306,7 @@ impl KazSign {
         let mut sig = vec![0u8; max_sig];
         let mut siglen: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_detached_ex(
                 self.level.as_raw(),
@@ -311,6 +324,7 @@ impl KazSign {
 
     /// Verify a detached signature.
     pub fn verify_detached(&self, sig: &[u8], msg: &[u8], pk: &PublicKey) -> Result<()> {
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_verify_detached_ex(
                 self.level.as_raw(),
@@ -331,6 +345,7 @@ impl KazSign {
         let hash_len = self.level.hash_bytes();
         let mut hash = vec![0u8; hash_len];
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_hash_ex(
                 self.level.as_raw(),
@@ -350,6 +365,7 @@ impl KazSign {
         let mut der = vec![0u8; pk.as_bytes().len() + 128];
         let mut derlen: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_pubkey_to_der(
                 self.level.as_raw(),
@@ -368,6 +384,7 @@ impl KazSign {
         let pk_len = self.level.public_key_bytes();
         let mut pk = vec![0u8; pk_len];
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_pubkey_from_der(
                 self.level.as_raw(),
@@ -385,6 +402,7 @@ impl KazSign {
         let mut der = vec![0u8; sk.as_bytes().len() + 128];
         let mut derlen: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_privkey_to_der(
                 self.level.as_raw(),
@@ -403,6 +421,7 @@ impl KazSign {
         let sk_len = self.level.secret_key_bytes();
         let mut sk = vec![0u8; sk_len];
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_privkey_from_der(
                 self.level.as_raw(),
@@ -428,6 +447,7 @@ impl KazSign {
         let mut csr = vec![0u8; 4096];
         let mut csrlen: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_generate_csr(
                 self.level.as_raw(),
@@ -445,6 +465,7 @@ impl KazSign {
 
     /// Verify a CSR.
     pub fn verify_csr(&self, csr: &[u8]) -> Result<()> {
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_verify_csr(self.level.as_raw(), csr.as_ptr(), csr.len() as u64)
         };
@@ -465,6 +486,7 @@ impl KazSign {
         let mut cert = vec![0u8; 8192];
         let mut certlen: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_issue_certificate(
                 self.level.as_raw(),
@@ -489,6 +511,7 @@ impl KazSign {
         let pk_len = self.level.public_key_bytes();
         let mut pk = vec![0u8; pk_len];
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_cert_extract_pubkey(
                 self.level.as_raw(),
@@ -503,6 +526,7 @@ impl KazSign {
 
     /// Verify an X.509 certificate against the issuer's public key.
     pub fn verify_certificate(&self, cert: &[u8], issuer_pk: &PublicKey) -> Result<()> {
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_verify_certificate(
                 self.level.as_raw(),
@@ -530,6 +554,7 @@ impl KazSign {
         let mut p12 = vec![0u8; 8192];
         let mut p12len: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_create_p12(
                 self.level.as_raw(),
@@ -562,6 +587,7 @@ impl KazSign {
         let mut cert = vec![0u8; 8192];
         let mut certlen: u64 = 0;
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_load_p12(
                 self.level.as_raw(),
@@ -584,8 +610,9 @@ impl KazSign {
     /// Encode a public key to wire format (includes level tag).
     pub fn pubkey_to_wire(&self, pk: &PublicKey) -> Result<Vec<u8>> {
         let mut out = vec![0u8; pk.as_bytes().len() + 16];
-        let mut out_len: usize = 0;
+        let mut out_len: usize = out.len();
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_pubkey_to_wire(
                 self.level.as_raw(),
@@ -604,8 +631,9 @@ impl KazSign {
     pub fn pubkey_from_wire(wire: &[u8]) -> Result<(SecurityLevel, PublicKey)> {
         let mut level: ffi::KazSignLevel = 0;
         let mut pk = vec![0u8; 256];
-        let mut pk_len: usize = 0;
+        let mut pk_len: usize = pk.len();
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_pubkey_from_wire(
                 wire.as_ptr(),
@@ -624,8 +652,9 @@ impl KazSign {
     /// Encode a secret key to wire format (includes level tag).
     pub fn privkey_to_wire(&self, sk: &SecretKey) -> Result<Vec<u8>> {
         let mut out = vec![0u8; sk.as_bytes().len() + 16];
-        let mut out_len: usize = 0;
+        let mut out_len: usize = out.len();
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_privkey_to_wire(
                 self.level.as_raw(),
@@ -644,8 +673,9 @@ impl KazSign {
     pub fn privkey_from_wire(wire: &[u8]) -> Result<(SecurityLevel, SecretKey)> {
         let mut level: ffi::KazSignLevel = 0;
         let mut sk = vec![0u8; 256];
-        let mut sk_len: usize = 0;
+        let mut sk_len: usize = sk.len();
 
+        let _lock = SIGN_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_sign_privkey_from_wire(
                 wire.as_ptr(),
@@ -664,6 +694,7 @@ impl KazSign {
 
 impl Drop for KazSign {
     fn drop(&mut self) {
+        let _lock = SIGN_LOCK.lock().unwrap();
         unsafe {
             ffi::kaz_sign_clear_level(self.level.as_raw());
         }
@@ -758,6 +789,7 @@ pub fn version_number() -> i32 {
 /// Clear all initialised levels. Called automatically when individual
 /// `KazSign` instances are dropped, but can be called explicitly if needed.
 pub fn clear_all() {
+    let _lock = SIGN_LOCK.lock().unwrap();
     unsafe {
         ffi::kaz_sign_clear_all();
     }

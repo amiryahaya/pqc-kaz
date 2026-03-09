@@ -203,21 +203,25 @@ impl KazKem {
 
     /// Returns the public key size in bytes (from the C library).
     pub fn public_key_bytes(&self) -> usize {
+        let _lock = KEM_LOCK.lock().unwrap();
         unsafe { ffi::kaz_kem_publickey_bytes() }
     }
 
     /// Returns the private key size in bytes (from the C library).
     pub fn private_key_bytes(&self) -> usize {
+        let _lock = KEM_LOCK.lock().unwrap();
         unsafe { ffi::kaz_kem_privatekey_bytes() }
     }
 
     /// Returns the ciphertext size in bytes (from the C library).
     pub fn ciphertext_bytes(&self) -> usize {
+        let _lock = KEM_LOCK.lock().unwrap();
         unsafe { ffi::kaz_kem_ciphertext_bytes() }
     }
 
     /// Returns the shared secret size in bytes (from the C library).
     pub fn shared_secret_bytes(&self) -> usize {
+        let _lock = KEM_LOCK.lock().unwrap();
         unsafe { ffi::kaz_kem_shared_secret_bytes() }
     }
 
@@ -229,8 +233,8 @@ impl KazKem {
     ///
     /// Returns an error if key generation fails.
     pub fn keypair(&self) -> Result<(Vec<u8>, SecretVec)> {
-        let pk_len = self.public_key_bytes();
-        let sk_len = self.private_key_bytes();
+        let pk_len = self.level.public_key_bytes();
+        let sk_len = self.level.private_key_bytes();
 
         let mut pk = vec![0u8; pk_len];
         let mut sk = vec![0u8; sk_len];
@@ -257,7 +261,7 @@ impl KazKem {
     ///
     /// Returns an error if encapsulation fails.
     pub fn encapsulate(&self, ss: &[u8], pk: &[u8]) -> Result<Vec<u8>> {
-        let ct_len = self.ciphertext_bytes();
+        let ct_len = self.level.ciphertext_bytes();
         let mut ct = vec![0u8; ct_len];
         let mut ctlen: u64 = 0;
 
@@ -292,7 +296,7 @@ impl KazKem {
     ///
     /// Returns an error if decapsulation fails.
     pub fn decapsulate(&self, ct: &[u8], sk: &[u8]) -> Result<SecretVec> {
-        let ss_len = self.shared_secret_bytes();
+        let ss_len = self.level.shared_secret_bytes();
         let mut ss = vec![0u8; ss_len];
         let mut sslen: u64 = 0;
 
@@ -326,6 +330,7 @@ impl KazKem {
         let mut out = vec![0u8; pk.len() + 16];
         let mut out_len: usize = out.len();
 
+        let _lock = KEM_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_kem_pubkey_to_wire(
                 self.level as i32,
@@ -351,6 +356,7 @@ impl KazKem {
         let mut pk = vec![0u8; 512]; // large enough for any level
         let mut pk_len: usize = pk.len();
 
+        let _lock = KEM_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_kem_pubkey_from_wire(
                 wire.as_ptr(),
@@ -380,6 +386,7 @@ impl KazKem {
         let mut out = vec![0u8; sk.len() + 16];
         let mut out_len: usize = out.len();
 
+        let _lock = KEM_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_kem_privkey_to_wire(
                 self.level as i32,
@@ -405,6 +412,7 @@ impl KazKem {
         let mut sk = vec![0u8; 512];
         let mut sk_len: usize = sk.len();
 
+        let _lock = KEM_LOCK.lock().unwrap();
         let rc = unsafe {
             ffi::kaz_kem_privkey_from_wire(
                 wire.as_ptr(),
@@ -447,9 +455,8 @@ impl SecretVec {
     ///
     /// **Warning:** The caller is responsible for zeroizing the returned vector.
     pub fn into_inner(self) -> Vec<u8> {
-        let bytes = self.0.clone();
-        // self will be dropped and zeroized
-        bytes
+        let mut md = std::mem::ManuallyDrop::new(self);
+        std::mem::take(&mut md.0)
     }
 
     /// Returns the length of the secret.

@@ -33,7 +33,6 @@ fn main() {
         .include(&include_dir)
         .include(&internal_dir)
         .include(&openssl_include)
-        .define("KAZ_SECURITY_LEVEL", "128")
         .flag("-std=c11")
         .flag("-O2");
 
