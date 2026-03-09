@@ -1,6 +1,6 @@
 /*
  * KAZ-SIGN C# Wrapper
- * Version 3.0.0
+ * Version 4.0.0
  *
  * P/Invoke bindings for the KAZ-SIGN post-quantum digital signature library.
  * Supports runtime security level selection (128, 192, and 256).
@@ -74,31 +74,32 @@ namespace Antrapol.Kaz.Sign
     /// </summary>
     public static class KazSignParameters
     {
-        /// <summary>Get secret key size in bytes for the given security level</summary>
+        /// <summary>Get secret key size in bytes for the given security level (s || t)</summary>
         public static int GetSecretKeyBytes(SecurityLevel level) => level switch
         {
-            SecurityLevel.Level128 => 98,
-            SecurityLevel.Level192 => 146,
-            SecurityLevel.Level256 => 194,
+            SecurityLevel.Level128 => 32,   // s(16) + t(16)
+            SecurityLevel.Level192 => 50,   // s(25) + t(25)
+            SecurityLevel.Level256 => 64,   // s(32) + t(32)
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
 
-        /// <summary>Get public key size in bytes for the given security level</summary>
+        /// <summary>Get public key size in bytes for the given security level (v)</summary>
         public static int GetPublicKeyBytes(SecurityLevel level) => level switch
         {
-            SecurityLevel.Level128 => 49,
-            SecurityLevel.Level192 => 73,
-            SecurityLevel.Level256 => 97,
+            SecurityLevel.Level128 => 54,
+            SecurityLevel.Level192 => 88,
+            SecurityLevel.Level256 => 118,
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
 
         /// <summary>Get signature overhead in bytes for the given security level</summary>
-        /// <remarks>Values must match KAZ_SIGN_SIGNATURE_OVERHEAD in kaz/sign.h</remarks>
+        /// <remarks>Values must match KAZ_SIGN_SIGNATURE_OVERHEAD in kaz/sign.h.
+        /// Signature = S1 || S2 || S3 (3 equal-size components)</remarks>
         public static int GetSignatureOverhead(SecurityLevel level) => level switch
         {
-            SecurityLevel.Level128 => 57,   // v1(26) + v2(23) + hash(32) - 24
-            SecurityLevel.Level192 => 81,   // v1(34) + v2(39) + hash(48) - 40
-            SecurityLevel.Level256 => 105,  // v1(42) + v2(55) + hash(64) - 56
+            SecurityLevel.Level128 => 162,  // 3 * 54
+            SecurityLevel.Level192 => 264,  // 3 * 88
+            SecurityLevel.Level256 => 354,  // 3 * 118
             _ => throw new ArgumentException($"Invalid security level: {level}")
         };
 

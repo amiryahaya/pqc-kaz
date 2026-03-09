@@ -40,28 +40,28 @@ defmodule KazSignTest do
     test "returns correct sizes for level 128" do
       {:ok, sizes} = KazSign.get_sizes(128)
 
-      assert sizes.public_key == 49
-      assert sizes.private_key == 98
+      assert sizes.public_key == 54
+      assert sizes.private_key == 32
       assert sizes.hash == 32
-      assert sizes.signature_overhead == 57
+      assert sizes.signature_overhead == 162
     end
 
     test "returns correct sizes for level 192" do
       {:ok, sizes} = KazSign.get_sizes(192)
 
-      assert sizes.public_key == 73
-      assert sizes.private_key == 146
+      assert sizes.public_key == 88
+      assert sizes.private_key == 50
       assert sizes.hash == 48
-      assert sizes.signature_overhead == 81
+      assert sizes.signature_overhead == 264
     end
 
     test "returns correct sizes for level 256" do
       {:ok, sizes} = KazSign.get_sizes(256)
 
-      assert sizes.public_key == 97
-      assert sizes.private_key == 194
+      assert sizes.public_key == 118
+      assert sizes.private_key == 64
       assert sizes.hash == 64
-      assert sizes.signature_overhead == 105
+      assert sizes.signature_overhead == 354
     end
   end
 
@@ -72,24 +72,24 @@ defmodule KazSignTest do
 
       assert is_binary(keypair.public_key)
       assert is_binary(keypair.private_key)
-      assert byte_size(keypair.public_key) == 49
-      assert byte_size(keypair.private_key) == 98
+      assert byte_size(keypair.public_key) == 54
+      assert byte_size(keypair.private_key) == 32
     end
 
     test "generates keypair for level 192" do
       :ok = KazSign.init()
       {:ok, keypair} = KazSign.keypair(192)
 
-      assert byte_size(keypair.public_key) == 73
-      assert byte_size(keypair.private_key) == 146
+      assert byte_size(keypair.public_key) == 88
+      assert byte_size(keypair.private_key) == 50
     end
 
     test "generates keypair for level 256" do
       :ok = KazSign.init()
       {:ok, keypair} = KazSign.keypair(256)
 
-      assert byte_size(keypair.public_key) == 97
-      assert byte_size(keypair.private_key) == 194
+      assert byte_size(keypair.public_key) == 118
+      assert byte_size(keypair.private_key) == 64
     end
 
     test "generates different keypairs each time" do
@@ -111,7 +111,7 @@ defmodule KazSignTest do
       {:ok, signature} = KazSign.sign(128, message, keypair.private_key)
 
       assert is_binary(signature)
-      assert byte_size(signature) == 57 + byte_size(message)
+      assert byte_size(signature) == 162 + byte_size(message)
 
       {:ok, recovered} = KazSign.verify(128, signature, keypair.public_key)
       assert recovered == message

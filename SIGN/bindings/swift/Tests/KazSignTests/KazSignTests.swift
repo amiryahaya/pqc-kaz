@@ -1,6 +1,6 @@
 /*
  * KAZ-SIGN Swift Unit Tests
- * Version 3.0.0
+ * Version 4.0.0
  *
  * Comprehensive test suite covering all security levels and functionality.
  */
@@ -13,31 +13,31 @@ final class KazSignTests: XCTestCase {
     // MARK: - Version Tests
 
     func testVersion() {
-        XCTAssertEqual(KazSigner.version, "3.0.0")
-        XCTAssertEqual(KazSigner.versionNumber, 30000)
+        XCTAssertEqual(KazSigner.version, "4.0.0")
+        XCTAssertEqual(KazSigner.versionNumber, 40000)
     }
 
     // MARK: - Security Level Tests
 
     func testSecurityLevelParameters() {
         // Level 128
-        XCTAssertEqual(SecurityLevel.level128.secretKeyBytes, 98)
-        XCTAssertEqual(SecurityLevel.level128.publicKeyBytes, 49)
-        XCTAssertEqual(SecurityLevel.level128.signatureOverhead, 57)
+        XCTAssertEqual(SecurityLevel.level128.secretKeyBytes, 32)
+        XCTAssertEqual(SecurityLevel.level128.publicKeyBytes, 54)
+        XCTAssertEqual(SecurityLevel.level128.signatureOverhead, 162)
         XCTAssertEqual(SecurityLevel.level128.hashBytes, 32)
         XCTAssertEqual(SecurityLevel.level128.algorithmName, "KAZ-SIGN-128")
 
         // Level 192
-        XCTAssertEqual(SecurityLevel.level192.secretKeyBytes, 146)
-        XCTAssertEqual(SecurityLevel.level192.publicKeyBytes, 73)
-        XCTAssertEqual(SecurityLevel.level192.signatureOverhead, 81)
+        XCTAssertEqual(SecurityLevel.level192.secretKeyBytes, 50)
+        XCTAssertEqual(SecurityLevel.level192.publicKeyBytes, 88)
+        XCTAssertEqual(SecurityLevel.level192.signatureOverhead, 264)
         XCTAssertEqual(SecurityLevel.level192.hashBytes, 48)
         XCTAssertEqual(SecurityLevel.level192.algorithmName, "KAZ-SIGN-192")
 
         // Level 256
-        XCTAssertEqual(SecurityLevel.level256.secretKeyBytes, 194)
-        XCTAssertEqual(SecurityLevel.level256.publicKeyBytes, 97)
-        XCTAssertEqual(SecurityLevel.level256.signatureOverhead, 105)
+        XCTAssertEqual(SecurityLevel.level256.secretKeyBytes, 64)
+        XCTAssertEqual(SecurityLevel.level256.publicKeyBytes, 118)
+        XCTAssertEqual(SecurityLevel.level256.signatureOverhead, 354)
         XCTAssertEqual(SecurityLevel.level256.hashBytes, 64)
         XCTAssertEqual(SecurityLevel.level256.algorithmName, "KAZ-SIGN-256")
     }

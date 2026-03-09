@@ -72,9 +72,9 @@ class KazSignerInstrumentedTest {
     @Test
     fun testLevel128Properties() {
         val signer = KazSigner(SecurityLevel.LEVEL_128)
-        assertEquals(98, signer.secretKeyBytes)
-        assertEquals(49, signer.publicKeyBytes)
-        assertEquals(57, signer.signatureOverhead)
+        assertEquals(32, signer.secretKeyBytes)
+        assertEquals(54, signer.publicKeyBytes)
+        assertEquals(162, signer.signatureOverhead)
         assertEquals(32, signer.hashBytes)
         assertEquals("KAZ-SIGN-128", signer.algorithmName)
         signer.close()
@@ -102,9 +102,9 @@ class KazSignerInstrumentedTest {
     @Test
     fun testLevel192Properties() {
         val signer = KazSigner(SecurityLevel.LEVEL_192)
-        assertEquals(146, signer.secretKeyBytes)
-        assertEquals(73, signer.publicKeyBytes)
-        assertEquals(81, signer.signatureOverhead)
+        assertEquals(50, signer.secretKeyBytes)
+        assertEquals(88, signer.publicKeyBytes)
+        assertEquals(264, signer.signatureOverhead)
         assertEquals(48, signer.hashBytes)
         assertEquals("KAZ-SIGN-192", signer.algorithmName)
         signer.close()
@@ -132,9 +132,9 @@ class KazSignerInstrumentedTest {
     @Test
     fun testLevel256Properties() {
         val signer = KazSigner(SecurityLevel.LEVEL_256)
-        assertEquals(194, signer.secretKeyBytes)
-        assertEquals(97, signer.publicKeyBytes)
-        assertEquals(105, signer.signatureOverhead)
+        assertEquals(64, signer.secretKeyBytes)
+        assertEquals(118, signer.publicKeyBytes)
+        assertEquals(354, signer.signatureOverhead)
         assertEquals(64, signer.hashBytes)
         assertEquals("KAZ-SIGN-256", signer.algorithmName)
         signer.close()
@@ -149,8 +149,8 @@ class KazSignerInstrumentedTest {
         val signer = KazSigner(SecurityLevel.LEVEL_128)
         val keyPair = signer.generateKeyPair()
 
-        assertEquals(49, keyPair.publicKey.size)
-        assertEquals(98, keyPair.secretKey.size)
+        assertEquals(54, keyPair.publicKey.size)
+        assertEquals(32, keyPair.secretKey.size)
         assertEquals(128, keyPair.level)
 
         signer.close()
@@ -178,8 +178,8 @@ class KazSignerInstrumentedTest {
         val signer = KazSigner(SecurityLevel.LEVEL_192)
         val keyPair = signer.generateKeyPair()
 
-        assertEquals(73, keyPair.publicKey.size)
-        assertEquals(146, keyPair.secretKey.size)
+        assertEquals(88, keyPair.publicKey.size)
+        assertEquals(50, keyPair.secretKey.size)
         assertEquals(192, keyPair.level)
 
         signer.close()
@@ -194,8 +194,8 @@ class KazSignerInstrumentedTest {
         val signer = KazSigner(SecurityLevel.LEVEL_256)
         val keyPair = signer.generateKeyPair()
 
-        assertEquals(97, keyPair.publicKey.size)
-        assertEquals(194, keyPair.secretKey.size)
+        assertEquals(118, keyPair.publicKey.size)
+        assertEquals(64, keyPair.secretKey.size)
         assertEquals(256, keyPair.level)
 
         signer.close()
@@ -213,7 +213,7 @@ class KazSignerInstrumentedTest {
 
         val signResult = signer.sign(message, keyPair.secretKey)
         assertNotNull(signResult.signature)
-        assertEquals(message.size + 57, signResult.signature.size)
+        assertEquals(message.size + 162, signResult.signature.size)
 
         val verifyResult = signer.verify(signResult.signature, keyPair.publicKey)
         assertTrue(verifyResult.isValid)
@@ -282,7 +282,7 @@ class KazSignerInstrumentedTest {
 
         val signResult = signer.sign(message, keyPair.secretKey)
         assertNotNull(signResult.signature)
-        assertEquals(message.size + 81, signResult.signature.size)
+        assertEquals(message.size + 264, signResult.signature.size)
 
         val verifyResult = signer.verify(signResult.signature, keyPair.publicKey)
         assertTrue(verifyResult.isValid)
@@ -303,7 +303,7 @@ class KazSignerInstrumentedTest {
 
         val signResult = signer.sign(message, keyPair.secretKey)
         assertNotNull(signResult.signature)
-        assertEquals(message.size + 105, signResult.signature.size)
+        assertEquals(message.size + 354, signResult.signature.size)
 
         val verifyResult = signer.verify(signResult.signature, keyPair.publicKey)
         assertTrue(verifyResult.isValid)
@@ -532,7 +532,7 @@ class KazSignerInstrumentedTest {
         val keyPair = signer.generateKeyPair()
 
         // Try to sign with wrong key size
-        val wrongSizeKey = ByteArray(16) // Should be 98
+        val wrongSizeKey = ByteArray(16) // Should be 32
         signer.sign("Test".toByteArray(), wrongSizeKey)
     }
 
@@ -544,7 +544,7 @@ class KazSignerInstrumentedTest {
         val signResult = signer.sign("Test".toByteArray(), keyPair.secretKey)
 
         // Try to verify with wrong key size
-        val wrongSizeKey = ByteArray(32) // Should be 49
+        val wrongSizeKey = ByteArray(32) // Should be 54
         signer.verify(signResult.signature, wrongSizeKey)
     }
 

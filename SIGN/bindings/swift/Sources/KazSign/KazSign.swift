@@ -1,6 +1,6 @@
 /*
  * KAZ-SIGN Swift Wrapper
- * Version 3.0.0
+ * Version 4.0.0
  *
  * Post-quantum digital signature library for iOS and macOS.
  * Supports security levels 128, 192, and 256 at runtime.
@@ -27,31 +27,32 @@ public enum SecurityLevel: Int, CaseIterable, Sendable {
     /// 256-bit security (SHA-512)
     case level256 = 256
 
-    /// Secret key size in bytes
+    /// Secret key size in bytes (s || t)
     public var secretKeyBytes: Int {
         switch self {
-        case .level128: return 98
-        case .level192: return 146
-        case .level256: return 194
+        case .level128: return 32   // s(16) + t(16)
+        case .level192: return 50   // s(25) + t(25)
+        case .level256: return 64   // s(32) + t(32)
         }
     }
 
-    /// Public key size in bytes
+    /// Public key size in bytes (v)
     public var publicKeyBytes: Int {
         switch self {
-        case .level128: return 49
-        case .level192: return 73
-        case .level256: return 97
+        case .level128: return 54
+        case .level192: return 88
+        case .level256: return 118
         }
     }
 
     /// Signature overhead in bytes (excluding message)
     /// NOTE: These values must match KAZ_SIGN_SIGNATURE_OVERHEAD in kaz/sign.h
+    /// Signature = S1 || S2 || S3 (3 equal-size components)
     public var signatureOverhead: Int {
         switch self {
-        case .level128: return 57   // v1(26) + v2(23) + hash(32) - 24
-        case .level192: return 81   // v1(34) + v2(39) + hash(48) - 40
-        case .level256: return 105  // v1(42) + v2(55) + hash(64) - 56
+        case .level128: return 162  // 3 * 54
+        case .level192: return 264  // 3 * 88
+        case .level256: return 354  // 3 * 118
         }
     }
 
