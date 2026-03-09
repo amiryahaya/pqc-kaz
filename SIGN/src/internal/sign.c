@@ -918,7 +918,6 @@ int kaz_sign_verify_ex(kaz_sign_level_t level,
     BIGNUM *V_S1 = NULL, *S1_S2 = NULL, *g2_S3 = NULL;
     BIGNUM *g1g2 = NULL;
     BIGNUM *LHS = NULL, *RHS = NULL;
-    BIGNUM *tmp = NULL;
     unsigned char *hash_buf = NULL;
     unsigned long long extracted_msglen;
     int ret = KAZ_SIGN_ERROR_VERIFY;
@@ -972,11 +971,10 @@ int kaz_sign_verify_ex(kaz_sign_level_t level,
     g1g2 = BN_new();
     LHS = BN_new();
     RHS = BN_new();
-    tmp = BN_new();
 
     if (!V || !S1 || !S2 || !S3 || !hashInt ||
         !V_S1 || !S1_S2 || !g2_S3 || !g1g2 ||
-        !LHS || !RHS || !tmp) {
+        !LHS || !RHS) {
         ret = KAZ_SIGN_ERROR_MEMORY;
         goto cleanup;
     }
@@ -1070,7 +1068,6 @@ cleanup:
     BN_free(g1g2);
     BN_free(LHS);
     BN_free(RHS);
-    BN_free(tmp);
 
     return ret;
 }
