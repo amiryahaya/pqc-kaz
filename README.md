@@ -152,6 +152,10 @@ PQC-KAZ/
 
 **This implementation has NOT been externally audited. Use for research and prototyping only.**
 
+## Acknowledgements
+
+The KAZ algorithm was invented and designed by [Antrapolation Technology Sdn Bhd](https://antrapol.com), a Malaysian cybersecurity company. This C implementation is inspired by their original Java reference implementation ([kaz-pqc-core-v2.0](https://github.com/AntRapol/kaz-pqc-core-v2.0)).
+
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
