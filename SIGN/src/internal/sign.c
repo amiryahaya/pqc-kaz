@@ -265,6 +265,9 @@ static int bn_next_probable_prime(BIGNUM *result, const BIGNUM *start, BN_CTX *c
 
     if (!BN_copy(result, start)) return -1;
 
+    /* Java's nextProbablePrime returns strictly greater than start */
+    if (!BN_add_word(result, 1)) return -1;
+
     /* Make odd if even */
     if (!BN_is_odd(result)) {
         if (!BN_add_word(result, 1)) return -1;
@@ -370,7 +373,7 @@ static int init_runtime_params(kaz_runtime_params_t *rp, kaz_sign_level_t level)
 cleanup:
     if (ret != KAZ_SIGN_SUCCESS) {
         BN_free(rp->N); rp->N = NULL;
-        BN_free(rp->phiN); rp->phiN = NULL;
+        BN_clear_free(rp->phiN); rp->phiN = NULL;
         BN_free(rp->g1); rp->g1 = NULL;
         BN_free(rp->g2); rp->g2 = NULL;
         BN_free(rp->Og1N); rp->Og1N = NULL;
@@ -386,7 +389,7 @@ static void clear_runtime_params(kaz_runtime_params_t *rp)
 {
     if (rp && rp->initialized) {
         BN_free(rp->N); rp->N = NULL;
-        BN_free(rp->phiN); rp->phiN = NULL;
+        BN_clear_free(rp->phiN); rp->phiN = NULL;
         BN_free(rp->g1); rp->g1 = NULL;
         BN_free(rp->g2); rp->g2 = NULL;
         BN_free(rp->Og1N); rp->Og1N = NULL;
@@ -632,11 +635,20 @@ int kaz_sign_keypair_ex(kaz_sign_level_t level,
     if (!BN_mod_mul(v, g1_s, g2_t, rp->N, local_ctx)) goto cleanup;
 
     /* pk = v (v_bytes big-endian) */
-    if (bn_export_padded(pk, params->v_bytes, v) != 0) goto cleanup;
+    if (bn_export_padded(pk, params->v_bytes, v) != 0) {
+        ret = KAZ_SIGN_ERROR_BUFFER;
+        goto cleanup;
+    }
 
     /* sk = s (s_bytes) || t (t_bytes) big-endian */
-    if (bn_export_padded(sk, params->s_bytes, s) != 0) goto cleanup;
-    if (bn_export_padded(sk + params->s_bytes, params->t_bytes, t) != 0) goto cleanup;
+    if (bn_export_padded(sk, params->s_bytes, s) != 0) {
+        ret = KAZ_SIGN_ERROR_BUFFER;
+        goto cleanup;
+    }
+    if (bn_export_padded(sk + params->s_bytes, params->t_bytes, t) != 0) {
+        ret = KAZ_SIGN_ERROR_BUFFER;
+        goto cleanup;
+    }
 
     ret = KAZ_SIGN_SUCCESS;
 
@@ -787,16 +799,34 @@ int kaz_sign_signature_ex(kaz_sign_level_t level,
     /* lower_e2 = 2^(lOg2N - 2) */
     if (!BN_set_bit(lower_e2, rp->lOg2N - 2)) goto cleanup;
 
-    /* e1 = random in [2^(lOg1N-2), Og1N], then find next probable prime >= e1 */
-    if (sample_in_range(e1, lower_e1, rp->Og1N, local_ctx) != 0) {
-        ret = KAZ_SIGN_ERROR_RNG;
-        goto cleanup;
+    /* e1 = random in [2^(lOg1N-2), Og1N], then find next probable prime > e1.
+     * Retry if e1_inv doesn't exist (extremely unlikely since e1 is prime). */
+    {
+        int inv_ok = 0;
+        for (int retry = 0; retry < 20 && !inv_ok; retry++) {
+            if (sample_in_range(e1, lower_e1, rp->Og1N, local_ctx) != 0) {
+                ret = KAZ_SIGN_ERROR_RNG;
+                goto cleanup;
+            }
+            if (bn_next_probable_prime(e1, e1, local_ctx) != 0) {
+                ret = KAZ_SIGN_ERROR_RNG;
+                goto cleanup;
+            }
+            bn_set_secret(e1);
+
+            /* e1_inv = e1^(-1) mod phiN */
+            if (BN_mod_inverse(e1_inv, e1, rp->phiN, local_ctx)) {
+                inv_ok = 1;
+            } else {
+                ERR_clear_error();
+            }
+        }
+        if (!inv_ok) {
+            ret = KAZ_SIGN_ERROR_INVALID;
+            goto cleanup;
+        }
+        bn_set_secret(e1_inv);
     }
-    if (bn_next_probable_prime(e1, e1, local_ctx) != 0) {
-        ret = KAZ_SIGN_ERROR_RNG;
-        goto cleanup;
-    }
-    bn_set_secret(e1);
 
     /* e2 = random in [2^(lOg2N-2), Og2N] */
     if (sample_in_range(e2, lower_e2, rp->Og2N, local_ctx) != 0) {
@@ -809,15 +839,6 @@ int kaz_sign_signature_ex(kaz_sign_level_t level,
     if (!BN_mod_exp_mont_consttime(g2_e2, rp->g2, e2, rp->N, local_ctx, NULL)) goto cleanup;
     if (!BN_mod_exp_mont_consttime(g1_e1, rp->g1, e1, rp->N, local_ctx, NULL)) goto cleanup;
     if (!BN_mod_mul(S1, g2_e2, g1_e1, rp->N, local_ctx)) goto cleanup;
-
-    /* e1_inv = e1^(-1) mod phiN
-     * Guaranteed to exist since e1 is prime and doesn't divide phiN */
-    if (!BN_mod_inverse(e1_inv, e1, rp->phiN, local_ctx)) {
-        ERR_clear_error();
-        ret = KAZ_SIGN_ERROR_INVALID;
-        goto cleanup;
-    }
-    bn_set_secret(e1_inv);
 
     /* S2 = (h - s*S1) * e1^(-1) mod phiN */
     /* tmp = s * S1 mod phiN */
@@ -837,10 +858,19 @@ int kaz_sign_signature_ex(kaz_sign_level_t level,
     if (!BN_mod_sub(S3, S3, tmp2, rp->phiN, local_ctx)) goto cleanup;
 
     /* Output: S1(s1_bytes) || S2(s2_bytes) || S3(s3_bytes) || message */
-    if (bn_export_padded(sig, params->s1_bytes, S1) != 0) goto cleanup;
-    if (bn_export_padded(sig + params->s1_bytes, params->s2_bytes, S2) != 0) goto cleanup;
+    if (bn_export_padded(sig, params->s1_bytes, S1) != 0) {
+        ret = KAZ_SIGN_ERROR_BUFFER;
+        goto cleanup;
+    }
+    if (bn_export_padded(sig + params->s1_bytes, params->s2_bytes, S2) != 0) {
+        ret = KAZ_SIGN_ERROR_BUFFER;
+        goto cleanup;
+    }
     if (bn_export_padded(sig + params->s1_bytes + params->s2_bytes,
-                         params->s3_bytes, S3) != 0) goto cleanup;
+                         params->s3_bytes, S3) != 0) {
+        ret = KAZ_SIGN_ERROR_BUFFER;
+        goto cleanup;
+    }
 
     /* Copy message after signature components */
     if (msg != NULL && msglen > 0) {
