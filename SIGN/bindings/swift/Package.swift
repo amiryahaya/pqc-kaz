@@ -20,7 +20,11 @@ let package = Package(
         .target(
             name: "KazSign",
             dependencies: ["KazSignNative"],
-            path: "Sources/KazSign"
+            path: "Sources/KazSign",
+            linkerSettings: [
+                .unsafeFlags(["-L/opt/homebrew/opt/openssl@3/lib"]),
+                .linkedLibrary("crypto"),
+            ]
         ),
         // Native library (XCFramework)
         .binaryTarget(

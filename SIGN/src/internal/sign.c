@@ -674,6 +674,10 @@ int kaz_sign_hash_ex(kaz_sign_level_t level,
         return KAZ_SIGN_ERROR_INVALID;
     }
 
+    if (hash == NULL) {
+        return KAZ_SIGN_ERROR_INVALID;
+    }
+
     /* Initialize if needed */
     if (!rp->initialized) {
         int ret = init_runtime_params(rp, level);
@@ -692,18 +696,12 @@ int kaz_sign_hash_ex(kaz_sign_level_t level,
         return KAZ_SIGN_ERROR_MEMORY;
     }
 
-    if (EVP_DigestInit_ex(hash_ctx, rp->hash_md, NULL) != 1) {
-        EVP_MD_CTX_free(hash_ctx);
-        return KAZ_SIGN_ERROR_INVALID;
-    }
-
-    /* Guard against truncation on 32-bit platforms */
-    if (msglen > (unsigned long long)SIZE_MAX) {
-        EVP_MD_CTX_free(hash_ctx);
-        return KAZ_SIGN_ERROR_INVALID;
-    }
-
     if (msg == NULL && msglen > 0) {
+        EVP_MD_CTX_free(hash_ctx);
+        return KAZ_SIGN_ERROR_INVALID;
+    }
+
+    if (EVP_DigestInit_ex(hash_ctx, rp->hash_md, NULL) != 1) {
         EVP_MD_CTX_free(hash_ctx);
         return KAZ_SIGN_ERROR_INVALID;
     }
@@ -1029,7 +1027,7 @@ int kaz_sign_signature_ex(kaz_sign_level_t level,
     }
 
     bn_set_secret(SK_bn);
-    BN_set_word(two, 2);
+    if (!BN_set_word(two, 2)) goto cleanup;
 
     /* Parse sk = SK || V1 || V2 */
     if (bn_import(SK_bn, sk, params->sk_bytes) != 0) {
@@ -1343,7 +1341,7 @@ int kaz_sign_verify_ex(kaz_sign_level_t level,
         goto cleanup;
     }
 
-    BN_set_word(two, 2);
+    if (!BN_set_word(two, 2)) { ret = KAZ_SIGN_ERROR_MEMORY; goto cleanup; }
 
     /* Parse pk = V1 || V2 */
     if (bn_import(V1, pk, params->v1_bytes) != 0) {
@@ -1410,8 +1408,8 @@ int kaz_sign_verify_ex(kaz_sign_level_t level,
     /* V2divQ = V2 / Q (must be exact — reject malformed public keys) */
     {
         BIGNUM *v2_rem = BN_new();
-        if (!v2_rem) goto cleanup;
-        if (!BN_div(V2divQ, v2_rem, V2, rp->Q, local_ctx)) { BN_free(v2_rem); goto cleanup; }
+        if (!v2_rem) { ret = KAZ_SIGN_ERROR_MEMORY; goto cleanup; }
+        if (!BN_div(V2divQ, v2_rem, V2, rp->Q, local_ctx)) { BN_free(v2_rem); ret = KAZ_SIGN_ERROR_INVALID; goto cleanup; }
         if (!BN_is_zero(v2_rem)) { BN_free(v2_rem); ret = KAZ_SIGN_ERROR_VERIFY; goto cleanup; }
         BN_free(v2_rem);
     }

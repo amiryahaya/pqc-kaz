@@ -989,6 +989,7 @@ extension Data {
 
     /// Initialize Data from hexadecimal string
     public init?(hexString: String) {
+        guard hexString.count % 2 == 0 else { return nil }
         let len = hexString.count / 2
         var data = Data(capacity: len)
         var index = hexString.startIndex

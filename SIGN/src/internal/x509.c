@@ -771,7 +771,13 @@ int kaz_sign_verify_csr(kaz_sign_level_t level,
     size_t bs_len;
     size_t bs_hdr = x509_der_read_length(p + 1, remain - 1, &bs_len);
     if (bs_hdr == 0 || bs_len < 1) return KAZ_SIGN_ERROR_X509;
-    p += 1 + bs_hdr;
+    {
+        size_t bs_advance = 1 + bs_hdr;
+        if (bs_advance > remain || bs_len > remain - bs_advance)
+            return KAZ_SIGN_ERROR_X509;
+        p += bs_advance;
+        remain -= bs_advance;
+    }
     /* unused bits byte */
     if (p[0] != 0x00) return KAZ_SIGN_ERROR_X509;
     p++;
@@ -894,7 +900,7 @@ int kaz_sign_issue_certificate(kaz_sign_level_t level,
 
     /* signature AlgorithmIdentifier */
     unsigned char algid_buf[ALGID_X509_LEN];
-    x509_write_algorithm_id(algid_buf, level);
+    if (x509_write_algorithm_id(algid_buf, level) == 0) return KAZ_SIGN_ERROR_X509;
 
     /* validity */
     unsigned char validity_buf[64];
@@ -1173,7 +1179,13 @@ int kaz_sign_verify_certificate(kaz_sign_level_t level,
     size_t bs_len;
     size_t bs_hdr = x509_der_read_length(p + 1, remain - 1, &bs_len);
     if (bs_hdr == 0 || bs_len < 1) return KAZ_SIGN_ERROR_X509;
-    p += 1 + bs_hdr;
+    {
+        size_t bs_advance = 1 + bs_hdr;
+        if (bs_advance > remain || bs_len > remain - bs_advance)
+            return KAZ_SIGN_ERROR_X509;
+        p += bs_advance;
+        remain -= bs_advance;
+    }
     if (p[0] != 0x00) return KAZ_SIGN_ERROR_X509;
     p++;
     const unsigned char *sig_data = p;

@@ -1,6 +1,6 @@
 /*
  * KAZ-SIGN Swift Unit Tests
- * Version 2.1.0
+ * Version 3.0.0
  *
  * Comprehensive test suite covering all security levels and functionality.
  */
@@ -13,8 +13,8 @@ final class KazSignTests: XCTestCase {
     // MARK: - Version Tests
 
     func testVersion() {
-        XCTAssertEqual(KazSigner.version, "2.1.0")
-        XCTAssertEqual(KazSigner.versionNumber, 20100)
+        XCTAssertEqual(KazSigner.version, "3.0.0")
+        XCTAssertEqual(KazSigner.versionNumber, 30000)
     }
 
     // MARK: - Security Level Tests

@@ -190,6 +190,13 @@ int kaz_sign_detached_prehashed_ex(kaz_sign_level_t level,
         return ret;
     }
 
+    /* Guard: inner signing must produce at least signature_overhead bytes */
+    if (full_siglen < (unsigned long long)params->signature_overhead) {
+        kaz_secure_zero(full_sig, params->signature_overhead + params->hash_bytes);
+        free(full_sig);
+        return KAZ_SIGN_ERROR_INVALID;
+    }
+
     /* Extract only S1||S2 (discard the embedded hash portion) */
     memcpy(sig, full_sig, params->signature_overhead);
     *siglen = params->signature_overhead;
