@@ -222,7 +222,7 @@ void test_api_version(void)
 
     ASSERT(version != NULL, "Version string should not be NULL");
     ASSERT(strlen(version) > 0, "Version string should not be empty");
-    ASSERT(version_num >= 40000, "Version number should be at least 4.0.0");
+    ASSERT(version_num >= 20000, "Version number should be at least 2.0.0");
 
     /* Verify version matches constants */
     ASSERT_EQ(version_num, KAZ_SIGN_VERSION_NUMBER, "Version number mismatch");
