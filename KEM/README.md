@@ -1,10 +1,10 @@
 # KAZ-KEM: Organized Implementation
 
-**Version**: 1.0.0
-**Release Date**: 2025-11-20
+**Version**: 2.0.0
+**Release Date**: 2026-03-09
 **Status**: Stable
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](./VERSION)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](./VERSION)
 [![License](https://img.shields.io/badge/license-NIST-green.svg)](./LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey.svg)](./README.md)
 

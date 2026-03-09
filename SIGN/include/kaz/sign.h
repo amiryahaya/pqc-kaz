@@ -1,6 +1,6 @@
 /*
  * KAZ-SIGN: Post-Quantum Digital Signature Algorithm
- * Version 4.0.0
+ * Version 2.0.0
  *
  * Unified implementation supporting security levels 128, 192, and 256
  * Uses OpenSSL BIGNUM with constant-time operations
@@ -24,13 +24,13 @@ extern "C" {
  * Version Information
  * ============================================================================ */
 
-#define KAZ_SIGN_VERSION_MAJOR     4
+#define KAZ_SIGN_VERSION_MAJOR     2
 #define KAZ_SIGN_VERSION_MINOR     0
 #define KAZ_SIGN_VERSION_PATCH     0
-#define KAZ_SIGN_VERSION_STRING    "4.0.0"
+#define KAZ_SIGN_VERSION_STRING    "2.0.0"
 
 /* Version as single integer: (major * 10000) + (minor * 100) + patch */
-#define KAZ_SIGN_VERSION_NUMBER    40000
+#define KAZ_SIGN_VERSION_NUMBER    20000
 
 /* ============================================================================
  * Runtime level selection

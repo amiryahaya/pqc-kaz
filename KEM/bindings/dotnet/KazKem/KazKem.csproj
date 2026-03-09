@@ -10,7 +10,7 @@
     <PackageId>Antrapol.Kaz.Kem</PackageId>
     <RootNamespace>Antrapol.Kaz.Kem</RootNamespace>
     <AssemblyName>Antrapol.Kaz.Kem</AssemblyName>
-    <Version>2.1.0</Version>
+    <Version>2.0.0</Version>
     <Authors>Antrapol</Authors>
     <Company>Antrapol</Company>
     <Description>KAZ-KEM Post-Quantum Key Encapsulation Mechanism for .NET</Description>

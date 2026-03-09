@@ -14,14 +14,14 @@
 #define KAZ_KEM_VERSION_MAJOR 2
 #endif
 #ifndef KAZ_KEM_VERSION_MINOR
-#define KAZ_KEM_VERSION_MINOR 1
+#define KAZ_KEM_VERSION_MINOR 0
 #endif
 #ifndef KAZ_KEM_VERSION_PATCH
 #define KAZ_KEM_VERSION_PATCH 0
 #endif
 
 /* Version string */
-#define KAZ_KEM_VERSION_STRING "2.1.0"
+#define KAZ_KEM_VERSION_STRING "2.0.0"
 
 /* Version as a single number for comparison */
 #define KAZ_KEM_VERSION_NUMBER ((KAZ_KEM_VERSION_MAJOR << 16) | \
@@ -29,7 +29,7 @@
                                  (KAZ_KEM_VERSION_PATCH))
 
 /* Release date */
-#define KAZ_KEM_RELEASE_DATE "2025-11-30"
+#define KAZ_KEM_RELEASE_DATE "2026-03-09"
 
 /* Build information */
 #define KAZ_KEM_BUILD_TYPE "release"

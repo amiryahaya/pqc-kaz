@@ -27,7 +27,7 @@ Add to your `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.pqc:kazkem:2.1.0")
+    implementation("com.pqc:kazkem:2.0.0")
 }
 ```
 
@@ -91,7 +91,7 @@ val kem192 = KazKem.initialize(SecurityLevel.LEVEL_192)
 val kem256 = KazKem.initialize(SecurityLevel.LEVEL_256)
 
 // Get library version
-val version = KazKem.version  // e.g., "2.1.0"
+val version = KazKem.version  // e.g., "2.0.0"
 ```
 
 #### Static Properties
@@ -753,7 +753,7 @@ NIST-developed software license. All code is provided "AS IS" by NIST as a publi
 
 ## Version History
 
-- **2.1.0**: Initial Android release
+- **2.0.0**: Initial Android release
   - Support for arm64-v8a and x86_64
   - Three security levels (128/192/256)
   - Thread-safe API

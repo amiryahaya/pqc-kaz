@@ -25,7 +25,7 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/pqc-kaz/KazKem.git", from: "2.1.0")
+    .package(url: "https://github.com/pqc-kaz/KazKem.git", from: "2.0.0")
 ]
 ```
 
@@ -96,7 +96,7 @@ let kem192 = try KazKem.initialize(level: .level192)
 let kem256 = try KazKem.initialize(level: .level256)
 
 // Get library version
-let version = KazKem.version  // "2.1.0"
+let version = KazKem.version  // "2.0.0"
 ```
 
 #### Static Properties
@@ -1212,7 +1212,7 @@ NIST-developed software license. All code is provided "AS IS" by NIST as a publi
 
 ## Version History
 
-- **2.1.0**: Initial release
+- **2.0.0**: Initial release
   - Support for iOS, macOS, tvOS, watchOS
   - Three security levels (128/192/256)
   - Thread-safe API

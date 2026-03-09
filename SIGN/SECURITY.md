@@ -1,6 +1,6 @@
 # KAZ-SIGN Security Considerations
 
-**Version 2.1.0**
+**Version 2.0.0**
 
 ## Production Readiness Status
 

@@ -19,7 +19,7 @@
     <PackageId>Antrapol.Kaz.Sign</PackageId>
     <RootNamespace>Antrapol.Kaz.Sign</RootNamespace>
     <AssemblyName>Antrapol.Kaz.Sign</AssemblyName>
-    <Version>2.1.0</Version>
+    <Version>2.0.0</Version>
     <Authors>Antrapol</Authors>
     <Company>Antrapol</Company>
     <Description>C# bindings for KAZ-SIGN post-quantum digital signature algorithm. Compatible with .NET, WinUI 3, and .NET MAUI.</Description>

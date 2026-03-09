@@ -1,12 +1,12 @@
 # KAZ-SIGN
 
 [![CI](https://github.com/USER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/USER/REPO/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)]()
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)]()
 [![License](https://img.shields.io/badge/license-NIST-green.svg)](LICENSE)
 
 A post-quantum digital signature algorithm implementation supporting NIST security levels 128, 192, and 256.
 
-**Version 2.1.0** - Runtime security level selection with multi-platform bindings.
+**Version 2.0.0** - Runtime security level selection with multi-platform bindings.
 
 ## Features
 
