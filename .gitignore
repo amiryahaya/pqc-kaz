@@ -1,0 +1,15 @@
+# Java reference implementations (separate repos)
+kaz-pqc-*/
+
+# Build artifacts
+build/
+*.o
+*.so
+*.dylib
+*.dSYM/
+
+# KAT output files
+PQCsignKAT_*.req
+PQCsignKAT_*.rsp
+PQCkemKAT_*.req
+PQCkemKAT_*.rsp
