@@ -19,9 +19,9 @@
 /Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/KazSign.AssemblyInfoInputs.cache
 /Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/KazSign.AssemblyInfo.cs
 /Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/KazSign.csproj.CoreCompileInputs.cache
-/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/KazSign.sourcelink.json
 /Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/Antrapol.Kaz.Sign.dll
 /Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/refint/Antrapol.Kaz.Sign.dll
 /Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/Antrapol.Kaz.Sign.xml
 /Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/Antrapol.Kaz.Sign.pdb
 /Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/ref/Antrapol.Kaz.Sign.dll
+/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign/obj/Debug/net10.0/KazSign.sourcelink.json

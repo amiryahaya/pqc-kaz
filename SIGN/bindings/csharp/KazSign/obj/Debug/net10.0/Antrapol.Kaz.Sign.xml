@@ -38,19 +38,37 @@
         <member name="F:Antrapol.Kaz.Sign.KazSignError.VerificationFailed">
             <summary>Signature verification failed</summary>
         </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.DerError">
+            <summary>DER encoding/decoding failed</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.X509Error">
+            <summary>X.509 certificate operation failed</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.P12Error">
+            <summary>PKCS#12 operation failed</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.HashError">
+            <summary>Hash operation failed</summary>
+        </member>
+        <member name="F:Antrapol.Kaz.Sign.KazSignError.BufferError">
+            <summary>Buffer too small</summary>
+        </member>
         <member name="T:Antrapol.Kaz.Sign.KazSignParameters">
             <summary>
             Parameters for each security level
+            Note: Size constants must be kept in sync with include/kaz/sign.h
             </summary>
         </member>
         <member name="M:Antrapol.Kaz.Sign.KazSignParameters.GetSecretKeyBytes(Antrapol.Kaz.Sign.SecurityLevel)">
-            <summary>Get secret key size in bytes for the given security level</summary>
+            <summary>Get secret key size in bytes for the given security level (s || t)</summary>
         </member>
         <member name="M:Antrapol.Kaz.Sign.KazSignParameters.GetPublicKeyBytes(Antrapol.Kaz.Sign.SecurityLevel)">
-            <summary>Get public key size in bytes for the given security level</summary>
+            <summary>Get public key size in bytes for the given security level (v)</summary>
         </member>
         <member name="M:Antrapol.Kaz.Sign.KazSignParameters.GetSignatureOverhead(Antrapol.Kaz.Sign.SecurityLevel)">
             <summary>Get signature overhead in bytes for the given security level</summary>
+            <remarks>Values must match KAZ_SIGN_SIGNATURE_OVERHEAD in kaz/sign.h.
+            Signature = S1 || S2 || S3 (3 equal-size components)</remarks>
         </member>
         <member name="M:Antrapol.Kaz.Sign.KazSignParameters.GetHashBytes(Antrapol.Kaz.Sign.SecurityLevel)">
             <summary>Get hash output size in bytes for the given security level</summary>
@@ -96,6 +114,81 @@
             Hash a message with the hash function for a specific security level.
             </summary>
         </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.DetachedSigBytes(System.Int32)">
+            <summary>
+            Get the detached signature size for a security level.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.DetachedEx(System.Int32,System.Byte[],System.UInt64@,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Create a detached signature (signature does not include the message).
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.VerifyDetachedEx(System.Int32,System.Byte[],System.UInt64,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Verify a detached signature.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.Sha3_256(System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Compute SHA-256 hash of a message in one shot.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.PubKeyToDer(System.Int32,System.Byte[],System.Byte[],System.UInt64@)">
+            <summary>
+            Encode a public key to DER format.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.PubKeyFromDer(System.Int32,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Decode a public key from DER format.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.PrivKeyToDer(System.Int32,System.Byte[],System.Byte[],System.UInt64@)">
+            <summary>
+            Encode a private key to DER format.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.PrivKeyFromDer(System.Int32,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Decode a private key from DER format.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.GenerateCsr(System.Int32,System.Byte[],System.Byte[],System.String,System.Byte[],System.UInt64@)">
+            <summary>
+            Generate a PKCS#10 Certificate Signing Request (CSR).
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.VerifyCsr(System.Int32,System.Byte[],System.UInt64)">
+            <summary>
+            Verify a PKCS#10 CSR self-signature.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.IssueCertificate(System.Int32,System.Byte[],System.Byte[],System.String,System.Byte[],System.UInt64,System.UInt64,System.Int32,System.Byte[],System.UInt64@)">
+            <summary>
+            Issue an X.509 certificate by signing a CSR.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.CertExtractPubKey(System.Int32,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Extract the public key from an X.509 certificate.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.VerifyCertificate(System.Int32,System.Byte[],System.UInt64,System.Byte[])">
+            <summary>
+            Verify an X.509 certificate signature against an issuer public key.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.CreateP12(System.Int32,System.Byte[],System.Byte[],System.Byte[],System.UInt64,System.String,System.String,System.Byte[],System.UInt64@)">
+            <summary>
+            Create a PKCS#12 keystore containing a key pair and optional certificate.
+            </summary>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.NativeMethods.LoadP12(System.Int32,System.Byte[],System.UInt64,System.String,System.Byte[],System.Byte[],System.Byte[],System.UInt64@)">
+            <summary>
+            Load a key pair and certificate from a PKCS#12 keystore.
+            </summary>
+        </member>
         <member name="T:Antrapol.Kaz.Sign.KazSignException">
             <summary>
             Exception thrown when a KAZ-SIGN operation fails
@@ -103,6 +196,20 @@
         </member>
         <member name="P:Antrapol.Kaz.Sign.KazSignException.ErrorCode">
             <summary>The error code returned by the native library</summary>
+        </member>
+        <member name="T:Antrapol.Kaz.Sign.P12Contents">
+            <summary>
+            Contents loaded from a PKCS#12 keystore
+            </summary>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.P12Contents.SecretKey">
+            <summary>Secret signing key</summary>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.P12Contents.PublicKey">
+            <summary>Public verification key</summary>
+        </member>
+        <member name="P:Antrapol.Kaz.Sign.P12Contents.Certificate">
+            <summary>DER-encoded certificate, or null if not present</summary>
         </member>
         <member name="T:Antrapol.Kaz.Sign.KazSigner">
             <summary>
@@ -171,6 +278,122 @@
             </summary>
             <param name="message">Message to hash</param>
             <returns>Hash value</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.SignDetached(System.Byte[],System.Byte[])">
+            <summary>
+            Create a detached signature (signature does not include the message).
+            </summary>
+            <param name="data">Data to sign</param>
+            <param name="secretKey">Secret signing key</param>
+            <returns>Detached signature</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.VerifyDetached(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Verify a detached signature.
+            </summary>
+            <param name="data">Original data that was signed</param>
+            <param name="signature">Detached signature to verify</param>
+            <param name="publicKey">Public verification key</param>
+            <returns>True if signature is valid, false otherwise</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.Sha3_256(System.Byte[])">
+            <summary>
+            Compute SHA-256 hash of data.
+            </summary>
+            <param name="data">Data to hash</param>
+            <returns>32-byte SHA-256 hash</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.PublicKeyToDer(System.Byte[])">
+            <summary>
+            Encode a public key to DER format.
+            </summary>
+            <param name="publicKey">Raw public key</param>
+            <returns>DER-encoded public key</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.PublicKeyFromDer(System.Byte[])">
+            <summary>
+            Decode a public key from DER format.
+            </summary>
+            <param name="der">DER-encoded public key</param>
+            <returns>Raw public key</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.PrivateKeyToDer(System.Byte[])">
+            <summary>
+            Encode a private key to DER format.
+            </summary>
+            <param name="secretKey">Raw secret key</param>
+            <returns>DER-encoded private key</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.PrivateKeyFromDer(System.Byte[])">
+            <summary>
+            Decode a private key from DER format.
+            </summary>
+            <param name="der">DER-encoded private key</param>
+            <returns>Raw secret key</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.GenerateCsr(System.Byte[],System.Byte[],System.String,System.String,System.String)">
+            <summary>
+            Generate a PKCS#10 Certificate Signing Request (CSR).
+            </summary>
+            <param name="secretKey">Secret signing key</param>
+            <param name="publicKey">Public key</param>
+            <param name="cn">Common Name (CN)</param>
+            <param name="org">Organization (O), or null to omit</param>
+            <param name="ou">Organizational Unit (OU), or null to omit</param>
+            <returns>DER-encoded CSR</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.VerifyCsr(System.Byte[])">
+            <summary>
+            Verify a PKCS#10 CSR self-signature.
+            </summary>
+            <param name="csr">DER-encoded CSR</param>
+            <returns>True if the CSR signature is valid, false otherwise</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.IssueCertificate(System.Byte[],System.Byte[],System.String,System.Byte[],System.UInt64,System.Int32)">
+            <summary>
+            Issue an X.509 certificate by signing a CSR.
+            </summary>
+            <param name="issuerSk">Issuer secret key</param>
+            <param name="issuerPk">Issuer public key</param>
+            <param name="issuerName">Issuer distinguished name (e.g., "CN=Root CA")</param>
+            <param name="csr">DER-encoded CSR from the subject</param>
+            <param name="serial">Certificate serial number</param>
+            <param name="days">Validity period in days</param>
+            <returns>DER-encoded certificate</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.VerifyCertificate(System.Byte[],System.Byte[])">
+            <summary>
+            Verify an X.509 certificate signature against an issuer public key.
+            </summary>
+            <param name="cert">DER-encoded certificate</param>
+            <param name="issuerPk">Issuer public key</param>
+            <returns>True if the certificate signature is valid, false otherwise</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.ExtractPublicKey(System.Byte[])">
+            <summary>
+            Extract the public key from an X.509 certificate.
+            </summary>
+            <param name="cert">DER-encoded certificate</param>
+            <returns>Extracted public key</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.CreateP12(System.Byte[],System.Byte[],System.Byte[],System.String,System.String)">
+            <summary>
+            Create a PKCS#12 keystore containing a key pair and optional certificate.
+            </summary>
+            <param name="secretKey">Secret key</param>
+            <param name="publicKey">Public key</param>
+            <param name="cert">DER-encoded certificate, or null</param>
+            <param name="password">Password to protect the keystore</param>
+            <param name="name">Friendly name for the key entry</param>
+            <returns>PKCS#12 data</returns>
+        </member>
+        <member name="M:Antrapol.Kaz.Sign.KazSigner.LoadP12(System.Byte[],System.String)">
+            <summary>
+            Load a key pair and certificate from a PKCS#12 keystore.
+            </summary>
+            <param name="p12">PKCS#12 data</param>
+            <param name="password">Password to unlock the keystore</param>
+            <returns>Loaded key pair and optional certificate</returns>
         </member>
         <member name="M:Antrapol.Kaz.Sign.KazSigner.GetVersion">
             <summary>

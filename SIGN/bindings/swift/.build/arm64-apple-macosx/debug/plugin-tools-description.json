@@ -1,23 +1,23 @@
 {
   "builtTestProducts" : [
     {
-      "binaryPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.xctest/Contents/MacOS/KazSignPackageTests",
-      "packagePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift",
+      "binaryPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.xctest/Contents/MacOS/KazSignPackageTests",
+      "packagePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift",
       "productName" : "KazSignPackageTests"
     }
   ],
   "copyCommands" : {
-    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a" : {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a" : {
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/libKazSignNative.a"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/libKazSignNative.a"
         }
       ],
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a"
         }
       ]
     }
@@ -36,31 +36,31 @@
   "swiftCommands" : {
     "C.KazSign-arm64-apple-macosx26.0-debug.module" : {
       "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
-      "fileList" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/sources",
-      "importPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
+      "fileList" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/sources",
+      "importPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Sources/KazSign/KazSign.swift"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/Sources/KazSign/KazSign.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/sources"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "KazSign",
-      "moduleOutputPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSign.swiftmodule",
+      "moduleOutputPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSign.swiftmodule",
       "objects" : [
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.swift.o"
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -69,7 +69,7 @@
         "-enable-batch-mode",
         "-serialize-diagnostics",
         "-index-store-path",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-j14",
@@ -77,20 +77,20 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-I",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
         "-Xcc",
         "-I",
         "-Xcc",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
         "-module-cache-path",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-F",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug",
         "-emit-objc-header",
         "-emit-objc-header-path",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/include/KazSign-Swift.h",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/include/KazSign-Swift.h",
         "-swift-version",
         "5",
         "-plugin-path",
@@ -125,55 +125,55 @@
         "-package-name",
         "swift"
       ],
-      "outputFileMapPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.swift.o"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSign.swiftmodule"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSign.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Sources/KazSign/KazSign.swift"
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/Sources/KazSign/KazSign.swift"
       ],
-      "tempsPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build",
+      "tempsPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build",
       "wholeModuleOptimization" : false
     },
     "C.KazSignPackageTests-arm64-apple-macosx26.0-debug.module" : {
       "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
-      "fileList" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/sources",
-      "importPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
+      "fileList" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/sources",
+      "importPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignTests.swiftmodule"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignTests.swiftmodule"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/sources"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "KazSignPackageTests",
-      "moduleOutputPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignPackageTests.swiftmodule",
+      "moduleOutputPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignPackageTests.swiftmodule",
       "objects" : [
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.swift.o"
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -182,7 +182,7 @@
         "-enable-batch-mode",
         "-serialize-diagnostics",
         "-index-store-path",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-Xfrontend",
@@ -192,20 +192,20 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-I",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
         "-Xcc",
         "-I",
         "-Xcc",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
         "-module-cache-path",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-F",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug",
         "-emit-objc-header",
         "-emit-objc-header-path",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/include/KazSignPackageTests-Swift.h",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/include/KazSignPackageTests-Swift.h",
         "-plugin-path",
         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
         "-sdk",
@@ -238,55 +238,55 @@
         "-package-name",
         "swift"
       ],
-      "outputFileMapPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.swift.o"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignPackageTests.swiftmodule"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignPackageTests.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift"
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift"
       ],
-      "tempsPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build",
+      "tempsPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build",
       "wholeModuleOptimization" : false
     },
     "C.KazSignTests-arm64-apple-macosx26.0-debug.module" : {
       "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
-      "fileList" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/sources",
-      "importPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
+      "fileList" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/sources",
+      "importPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Tests/KazSignTests/KazSignTests.swift"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/Tests/KazSignTests/KazSignTests.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSign.swiftmodule"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSign.swiftmodule"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/libKazSignNative.a"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/sources"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "KazSignTests",
-      "moduleOutputPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignTests.swiftmodule",
+      "moduleOutputPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignTests.swiftmodule",
       "objects" : [
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/KazSignTests.swift.o"
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/KazSignTests.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -295,7 +295,7 @@
         "-enable-batch-mode",
         "-serialize-diagnostics",
         "-index-store-path",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-Xfrontend",
@@ -305,17 +305,17 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-I",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
         "-Xcc",
         "-I",
         "-Xcc",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
         "-module-cache-path",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-F",
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug",
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug",
         "-swift-version",
         "5",
         "-plugin-path",
@@ -350,22 +350,22 @@
         "-package-name",
         "swift"
       ],
-      "outputFileMapPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/KazSignTests.swift.o"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/KazSignTests.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignTests.swiftmodule"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules/KazSignTests.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Tests/KazSignTests/KazSignTests.swift"
+        "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/Tests/KazSignTests/KazSignTests.swift"
       ],
-      "tempsPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build",
+      "tempsPath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build",
       "wholeModuleOptimization" : false
     }
   },
@@ -380,16 +380,16 @@
       "-package-name",
       "swift",
       "-c",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Sources/KazSign/KazSign.swift",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/Sources/KazSign/KazSign.swift",
       "-I",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx11.0",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
       "-index-store-path",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-j14",
@@ -397,20 +397,20 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-I",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
       "-Xcc",
       "-I",
       "-Xcc",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
       "-module-cache-path",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-F",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug",
       "-emit-objc-header",
       "-emit-objc-header-path",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/include/KazSign-Swift.h",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/include/KazSign-Swift.h",
       "-swift-version",
       "5",
       "-plugin-path",
@@ -454,16 +454,16 @@
       "-package-name",
       "swift",
       "-c",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift",
       "-I",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx11.0",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
       "-index-store-path",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-Xfrontend",
@@ -473,20 +473,20 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-I",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
       "-Xcc",
       "-I",
       "-Xcc",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
       "-module-cache-path",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-F",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug",
       "-emit-objc-header",
       "-emit-objc-header-path",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/include/KazSignPackageTests-Swift.h",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/include/KazSignPackageTests-Swift.h",
       "-plugin-path",
       "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
       "-sdk",
@@ -528,16 +528,16 @@
       "-package-name",
       "swift",
       "-c",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Tests/KazSignTests/KazSignTests.swift",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/Tests/KazSignTests/KazSignTests.swift",
       "-I",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx14.0",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
       "-index-store-path",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-Xfrontend",
@@ -547,17 +547,17 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-I",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
       "-Xcc",
       "-I",
       "-Xcc",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/KazSignNative.xcframework/macos-arm64_x86_64/Headers",
       "-module-cache-path",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-F",
-      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug",
+      "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug",
       "-swift-version",
       "5",
       "-plugin-path",
@@ -613,14 +613,14 @@
 
   },
   "testEntryPointCommands" : {
-    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift" : {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift" : {
       "inputs" : [
 
       ],
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift"
         }
       ]
     }
@@ -631,7 +631,7 @@
     }
   },
   "writeCommands" : {
-    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/sources" : {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -640,12 +640,12 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Sources/KazSign/KazSign.swift"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/Sources/KazSign/KazSign.swift"
         }
       ],
-      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/sources"
+      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/sources"
     },
-    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/sources" : {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -654,12 +654,12 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.derived/runner.swift"
         }
       ],
-      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/sources"
+      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/sources"
     },
-    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.product/Objects.LinkFileList" : {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.product/Objects.LinkFileList" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -668,20 +668,20 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.swift.o"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSign.build/KazSign.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.swift.o"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.build/runner.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/KazSignTests.swift.o"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/KazSignTests.swift.o"
         }
       ],
-      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.product/Objects.LinkFileList"
+      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignPackageTests.product/Objects.LinkFileList"
     },
-    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/sources" : {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -690,12 +690,12 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/Tests/KazSignTests/KazSignTests.swift"
+          "name" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/Tests/KazSignTests/KazSignTests.swift"
         }
       ],
-      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/sources"
+      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/KazSignTests.build/sources"
     },
-    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+    "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
       "alwaysOutOfDate" : true,
       "inputs" : [
         {
@@ -707,7 +707,7 @@
           "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
         }
       ],
-      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+      "outputFilePath" : "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/swift/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
     }
   }
 }

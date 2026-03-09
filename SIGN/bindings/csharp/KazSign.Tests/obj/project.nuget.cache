@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z8GgBPbwfw8=",
+  "dgSpecHash": "qEI/jM8rP4k=",
   "success": true,
-  "projectFilePath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/combined/bindings/csharp/KazSign.Tests/KazSign.Tests.csproj",
+  "projectFilePath": "/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/csharp/KazSign.Tests/KazSign.Tests.csproj",
   "expectedPackageFiles": [
     "/Users/amirrudinyahaya/.nuget/packages/coverlet.collector/6.0.2/coverlet.collector.6.0.2.nupkg.sha512",
     "/Users/amirrudinyahaya/.nuget/packages/microsoft.codecoverage/17.12.0/microsoft.codecoverage.17.12.0.nupkg.sha512",
@@ -17,7 +17,11 @@
     "/Users/amirrudinyahaya/.nuget/packages/xunit.core/2.9.2/xunit.core.2.9.2.nupkg.sha512",
     "/Users/amirrudinyahaya/.nuget/packages/xunit.extensibility.core/2.9.2/xunit.extensibility.core.2.9.2.nupkg.sha512",
     "/Users/amirrudinyahaya/.nuget/packages/xunit.extensibility.execution/2.9.2/xunit.extensibility.execution.2.9.2.nupkg.sha512",
-    "/Users/amirrudinyahaya/.nuget/packages/xunit.runner.visualstudio/2.8.2/xunit.runner.visualstudio.2.8.2.nupkg.sha512"
+    "/Users/amirrudinyahaya/.nuget/packages/xunit.runner.visualstudio/2.8.2/xunit.runner.visualstudio.2.8.2.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.netcore.app.ref/8.0.22/microsoft.netcore.app.ref.8.0.22.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.22/microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.netcore.app.ref/9.0.11/microsoft.netcore.app.ref.9.0.11.nupkg.sha512",
+    "/Users/amirrudinyahaya/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.11/microsoft.aspnetcore.app.ref.9.0.11.nupkg.sha512"
   ],
   "logs": []
 }
