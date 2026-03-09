@@ -52,3 +52,12 @@ Mkfile.old
 dkms.conf
 
 **/.DS_Store
+
+# Build directories
+build/
+bindings/swift/.build/
+bindings/csharp/**/bin/
+bindings/csharp/**/obj/
+bindings/android/**/build/
+bindings/elixir/_build/
+bindings/elixir/deps/
