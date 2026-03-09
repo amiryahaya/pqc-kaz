@@ -119,6 +119,7 @@ Both libraries provide bindings for multiple platforms:
 | Swift / iOS / macOS | [`KEM/bindings/swift/`](KEM/bindings/swift/) | [`SIGN/bindings/swift/`](SIGN/bindings/swift/) |
 | Kotlin / Android | [`KEM/bindings/android/`](KEM/bindings/android/) | [`SIGN/bindings/android/`](SIGN/bindings/android/) |
 | Elixir (NIF) | [`KEM/bindings/elixir/`](KEM/bindings/elixir/) | [`SIGN/bindings/elixir/`](SIGN/bindings/elixir/) |
+| Rust | [`KEM/bindings/rust/`](KEM/bindings/rust/) | [`SIGN/bindings/rust/`](SIGN/bindings/rust/) |
 
 ## Project Structure
 
