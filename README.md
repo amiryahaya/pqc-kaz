@@ -109,6 +109,31 @@ kaz_sign_verify_ex(KAZ_LEVEL_128, recovered, &recovered_len,
                    sig, siglen, pk);
 ```
 
+### Usage (Rust - KAZ-KEM)
+
+```rust
+use kaz_kem::{KazKem, SecurityLevel};
+
+let kem = KazKem::new(SecurityLevel::L128).unwrap();
+let (pk, sk) = kem.keypair().unwrap();
+
+let ct = kem.encapsulate(&shared_secret, &pk).unwrap();
+let recovered = kem.decapsulate(&ct, sk.as_bytes()).unwrap();
+```
+
+### Usage (Rust - KAZ-SIGN)
+
+```rust
+use kaz_sign::{KazSign, SecurityLevel};
+
+let signer = KazSign::new(SecurityLevel::L128).unwrap();
+let (pk, sk) = signer.keypair().unwrap();
+
+let sig = signer.sign(b"hello", &sk).unwrap();
+let recovered = signer.verify(&sig, &pk).unwrap();
+assert_eq!(recovered, b"hello");
+```
+
 ## Language Bindings
 
 Both libraries provide bindings for multiple platforms:
