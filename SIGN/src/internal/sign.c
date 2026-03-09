@@ -217,13 +217,12 @@ static int bn_import(BIGNUM *bn, const unsigned char *buf, size_t buf_size)
  */
 static int sample_in_range(BIGNUM *result, const BIGNUM *lower, const BIGNUM *upper, BN_CTX *ctx)
 {
-    (void)ctx;  /* reserved for future use */
     int ret = -1;
-    BIGNUM *range = NULL;
-    BIGNUM *r = NULL;
+    BIGNUM *range, *r;
 
-    range = BN_new();
-    r = BN_new();
+    BN_CTX_start(ctx);
+    range = BN_CTX_get(ctx);
+    r = BN_CTX_get(ctx);
     if (!range || !r) goto cleanup;
 
     /* range = upper - lower */
@@ -248,8 +247,7 @@ static int sample_in_range(BIGNUM *result, const BIGNUM *lower, const BIGNUM *up
     ret = 0;
 
 cleanup:
-    BN_free(range);
-    BN_free(r);
+    BN_CTX_end(ctx);
     return ret;
 }
 
@@ -261,8 +259,6 @@ cleanup:
  */
 static int bn_next_probable_prime(BIGNUM *result, const BIGNUM *start, BN_CTX *ctx)
 {
-    (void)ctx;
-
     if (!BN_copy(result, start)) return -1;
 
     /* Java's nextProbablePrime returns strictly greater than start */
@@ -275,7 +271,7 @@ static int bn_next_probable_prime(BIGNUM *result, const BIGNUM *start, BN_CTX *c
 
     /* Search for prime */
     for (int attempts = 0; attempts < 10000; attempts++) {
-        int is_prime = BN_check_prime(result, NULL, NULL);
+        int is_prime = BN_check_prime(result, ctx, NULL);
         if (is_prime == 1) return 0;
         if (is_prime < 0) return -1;
         if (!BN_add_word(result, 2)) return -1;
@@ -512,25 +508,25 @@ int kaz_sign_hash_ex(kaz_sign_level_t level,
     /* Always SHA-256 regardless of level */
     if (EVP_DigestInit_ex(hash_ctx, EVP_sha256(), NULL) != 1) {
         EVP_MD_CTX_free(hash_ctx);
-        return KAZ_SIGN_ERROR_INVALID;
+        return KAZ_SIGN_ERROR_HASH;
     }
 
     if (msg != NULL && msglen > 0 && EVP_DigestUpdate(hash_ctx, msg, (size_t)msglen) != 1) {
         EVP_MD_CTX_free(hash_ctx);
-        return KAZ_SIGN_ERROR_INVALID;
+        return KAZ_SIGN_ERROR_HASH;
     }
 
     if (EVP_DigestFinal_ex(hash_ctx, sha256_buf, &hash_len) != 1) {
         kaz_secure_zero(sha256_buf, sizeof(sha256_buf));
         EVP_MD_CTX_free(hash_ctx);
-        return KAZ_SIGN_ERROR_INVALID;
+        return KAZ_SIGN_ERROR_HASH;
     }
 
     EVP_MD_CTX_free(hash_ctx);
 
-    /* Zero-pad output: write zeros first, then copy SHA-256 digest at the start */
+    /* Zero-pad output: leading zeros, SHA-256 digest at end (big-endian, Java-compatible) */
     memset(hash, 0, params->hash_bytes);
-    memcpy(hash, sha256_buf, 32);
+    memcpy(hash + params->hash_bytes - 32, sha256_buf, 32);
     kaz_secure_zero(sha256_buf, sizeof(sha256_buf));
 
     return KAZ_SIGN_SUCCESS;
@@ -815,6 +811,11 @@ int kaz_sign_signature_ex(kaz_sign_level_t level,
             bn_set_secret(e1);
 
             /* e1_inv = e1^(-1) mod phiN */
+            /* Verify e1 is still in a reasonable range after prime search */
+            if (BN_cmp(e1, rp->Og1N) > 0) {
+                continue; /* e1 exceeded Og1N, retry with new sample */
+            }
+
             if (BN_mod_inverse(e1_inv, e1, rp->phiN, local_ctx)) {
                 inv_ok = 1;
             } else {

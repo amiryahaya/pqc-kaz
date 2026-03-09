@@ -1127,14 +1127,15 @@ void test_runtime_hash_different_levels(void)
     ret = kaz_sign_hash_ex(KAZ_LEVEL_256, msg, msglen, hash256);
     ASSERT_EQ(ret, KAZ_SIGN_SUCCESS, "Hash 256 failed");
 
-    /* All levels use SHA-256, so first 32 bytes should match */
+    /* All levels use SHA-256; digest is at end with leading zero padding */
     ASSERT(!is_zero(hash128, 32), "Hash 128 should not be zero");
-    ASSERT_MEM_EQ(hash128, hash192, 32, "SHA-256 core should match between 128 and 192");
-    ASSERT_MEM_EQ(hash128, hash256, 32, "SHA-256 core should match between 128 and 256");
+    /* SHA-256 digest at end: hash192[16..47], hash256[32..63] */
+    ASSERT_MEM_EQ(hash128, hash192 + 16, 32, "SHA-256 core should match between 128 and 192");
+    ASSERT_MEM_EQ(hash128, hash256 + 32, 32, "SHA-256 core should match between 128 and 256");
 
-    /* Level 192 and 256 are zero-padded beyond 32 bytes */
-    ASSERT(is_zero(hash192 + 32, 16), "Hash 192 padding should be zero");
-    ASSERT(is_zero(hash256 + 32, 32), "Hash 256 padding should be zero");
+    /* Level 192 and 256 have leading zero padding (big-endian, Java-compatible) */
+    ASSERT(is_zero(hash192, 16), "Hash 192 leading padding should be zero");
+    ASSERT(is_zero(hash256, 32), "Hash 256 leading padding should be zero");
 
     TEST_PASS();
 }
