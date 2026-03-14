@@ -344,7 +344,7 @@ const char* kaz_kem_version(void)
 #ifdef KAZ_KEM_VERSION
     return KAZ_KEM_VERSION;
 #else
-    return "2.0.0";
+    return "1.0.0";
 #endif
 }
 
