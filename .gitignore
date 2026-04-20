@@ -8,6 +8,19 @@ build/
 *.dylib
 *.dSYM/
 
+# Gradle caches
+.gradle/
+
+# Android NDK / CMake build cache
+**/.cxx/
+
+# Rust build artifacts (binding crates)
+**/bindings/rust/target/
+**/bindings/rust/Cargo.lock
+
+# Claude Code local overrides
+.claude/settings.local.json
+
 # KAT output files
 PQCsignKAT_*.req
 PQCsignKAT_*.rsp

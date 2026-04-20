@@ -1,1 +1,0 @@
-com.antrapol.kaz.kem
