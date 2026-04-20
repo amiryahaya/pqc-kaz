@@ -1,5 +1,0 @@
-# ninja log v5
-1	27	1765387388332572785	CMakeFiles/kazkem.dir/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/src/internal/nist_wrapper.c.o	9999124ea7babd20
-1	58	1765387388362456192	CMakeFiles/kazkem.dir/kazkem_jni.cpp.o	af52c6b3e65f3567
-0	65	1765387388370398273	CMakeFiles/kazkem.dir/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/src/internal/kem_secure.c.o	bd3b262b7a1f8889
-66	139	1765387388429356545	/Users/amirrudinyahaya/Workspace/PQC-KAZ/KEM/bindings/android/kazkem/build/intermediates/cxx/RelWithDebInfo/5n5f363u/obj/x86_64/libkazkem.so	2a8a56fee507ab93

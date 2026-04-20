@@ -1,7 +1,0 @@
-# ninja log v5
-0	51	1765386671034698736	CMakeFiles/kazsign.dir/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/src/internal/security.c.o	d83bb80ff823905a
-0	51	1765386671034687111	CMakeFiles/kazsign.dir/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/src/internal/nist_wrapper.c.o	b15fe7e61cf4f97e
-0	63	1765386671046452776	CMakeFiles/kazsign.dir/kazsign_jni.c.o	d34efb016ecdbaa6
-0	79	1765386671063100215	CMakeFiles/kazsign.dir/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/src/internal/kdf.c.o	294855351a586ab7
-0	111	1765386671094757723	CMakeFiles/kazsign.dir/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/src/internal/sign.c.o	5c8f5a9e5048a58b
-111	176	1765386671148573525	/Users/amirrudinyahaya/Workspace/PQC-KAZ/SIGN/bindings/android/kazsign/build/intermediates/cxx/RelWithDebInfo/465j201g/obj/arm64-v8a/libkazsign.so	9824c363b72fe83f
