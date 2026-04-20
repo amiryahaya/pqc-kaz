@@ -219,6 +219,11 @@ build_kazsign() {
         "$PROJECT_DIR/src/internal/nist_wrapper.c"
         "$PROJECT_DIR/src/internal/security.c"
         "$PROJECT_DIR/src/internal/kdf.c"
+        "$PROJECT_DIR/src/internal/sha3.c"
+        "$PROJECT_DIR/src/internal/detached.c"
+        "$PROJECT_DIR/src/internal/der.c"
+        "$PROJECT_DIR/src/internal/x509.c"
+        "$PROJECT_DIR/src/internal/p12.c"
     )
 
     local OBJECTS=()
