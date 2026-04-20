@@ -122,6 +122,11 @@ endif()
 
 message(STATUS "Using OpenSSL crypto library: ${CRYPTO_LIB}")
 
+# 16KB page alignment for Android 15+ compatibility
+target_link_options(kazsign PRIVATE
+    -Wl,-z,max-page-size=16384
+)
+
 # Link libraries
 target_link_libraries(kazsign
     ${CRYPTO_LIB}

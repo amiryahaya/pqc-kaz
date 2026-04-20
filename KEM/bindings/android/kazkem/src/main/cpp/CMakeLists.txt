@@ -56,6 +56,11 @@ target_compile_options(kazkem PRIVATE
 # Find required libraries
 find_library(log-lib log)
 
+# 16KB page alignment for Android 15+ compatibility
+target_link_options(kazkem PRIVATE
+    -Wl,-z,max-page-size=16384
+)
+
 # Link libraries
 target_link_libraries(kazkem
     ${log-lib}

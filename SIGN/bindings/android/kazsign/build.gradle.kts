@@ -5,7 +5,8 @@ plugins {
 
 android {
     namespace = "com.antrapol.kaz.sign"
-    compileSdk = 34
+    compileSdk = 35
+    ndkVersion = "27.0.12077973"
 
     defaultConfig {
         minSdk = 24
